@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>RAIL-OPS - AI Shadow Block Planner</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-primary-container": "#004e3d",
+                        "background": "#f4fbf6",
+                        "on-primary-fixed": "#002118",
+                        "outline": "#6c7a74",
+                        "on-tertiary-fixed": "#151b2a",
+                        "surface-tint": "#006b54",
+                        "secondary-fixed-dim": "#c0c6db",
+                        "surface-container-lowest": "#ffffff",
+                        "outline-variant": "#bbcac2",
+                        "on-primary": "#ffffff",
+                        "primary-fixed-dim": "#3edeb4",
+                        "tertiary": "#585e70",
+                        "primary-fixed": "#63fbcf",
+                        "on-secondary-fixed-variant": "#404758",
+                        "surface-container-highest": "#dde4df",
+                        "on-error": "#ffffff",
+                        "on-tertiary": "#ffffff",
+                        "error": "#ba1a1a",
+                        "surface-bright": "#f4fbf6",
+                        "surface": "#f4fbf6",
+                        "on-tertiary-container": "#3e4455",
+                        "tertiary-fixed-dim": "#c0c6db",
+                        "primary": "#006b54",
+                        "on-background": "#161d1a",
+                        "surface-container-high": "#e2eae5",
+                        "inverse-on-surface": "#ebf3ed",
+                        "inverse-primary": "#3edeb4",
+                        "on-primary-fixed-variant": "#00513f",
+                        "surface-variant": "#dde4df",
+                        "secondary-container": "#d9dff5",
+                        "surface-dim": "#d4dcd7",
+                        "surface-container-low": "#eef5f0",
+                        "on-secondary": "#ffffff",
+                        "secondary-fixed": "#dce2f7",
+                        "on-tertiary-fixed-variant": "#404657",
+                        "tertiary-container": "#acb2c6",
+                        "on-secondary-fixed": "#141b2b",
+                        "secondary": "#575e70",
+                        "on-surface": "#161d1a",
+                        "on-error-container": "#93000a",
+                        "error-container": "#ffdad6",
+                        "inverse-surface": "#2b322f",
+                        "surface-container": "#e8f0ea",
+                        "tertiary-fixed": "#dce2f7",
+                        "on-surface-variant": "#3c4a44",
+                        "primary-container": "#14c9a0",
+                        "on-secondary-container": "#5c6274"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "xl": "32px",
+                        "gutter": "16px",
+                        "container-padding": "24px",
+                        "base": "4px",
+                        "lg": "24px",
+                        "xs": "4px",
+                        "xxl": "48px",
+                        "sm": "8px",
+                        "md": "16px"
+                    },
+                    "fontFamily": {
+                        "body-md": ["Geist"],
+                        "label-md": ["Geist"],
+                        "headline-lg": ["Geist"],
+                        "headline-sm": ["Geist"],
+                        "body-sm": ["Geist"],
+                        "body-lg": ["Geist"],
+                        "display": ["Geist"],
+                        "headline-md": ["Geist"],
+                        "headline-lg-mobile": ["Geist"]
+                    },
+                    "fontSize": {
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "600" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "headline-sm": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+                        "body-sm": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "display": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "headline-lg-mobile": ["26px", { "lineHeight": "32px", "fontWeight": "600" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { font-family: 'Geist', sans-serif; }
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+</head>
+<body class="bg-background text-on-background flex h-screen overflow-hidden">
+<!-- SideNavBar -->
+<nav class="fixed left-0 top-0 h-screen w-64 border-r border-outline-variant bg-surface-container-lowest z-30 flex flex-col py-lg hidden md:flex shadow-sm">
+<div class="px-lg mb-8 flex items-center gap-3">
+<div class="h-10 w-10 rounded-full bg-primary flex items-center justify-center text-on-primary">
+<span class="material-symbols-outlined text-[24px]">train</span>
+</div>
+<div>
+<h1 class="text-headline-sm font-headline-sm font-bold text-primary">RAIL-OPS</h1>
+<p class="text-label-md font-label-md text-on-surface-variant">TMS Engineer</p>
+</div>
+</div>
+<div class="px-4 mb-6">
+<button class="w-full bg-primary-container text-on-primary-container rounded-lg py-3 px-4 flex items-center justify-center gap-2 font-label-md hover:bg-primary-fixed transition-colors">
+<span class="material-symbols-outlined text-[18px]">add</span>
+                New Request
+            </button>
+</div>
+<ul class="flex-1 space-y-1">
+<li>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:text-primary hover:bg-surface-container transition-all duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="text-body-md font-body-md">Dashboard</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:text-primary hover:bg-surface-container transition-all duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="assignment">assignment</span>
+<span class="text-body-md font-body-md">Task Backlog</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-4 py-3 bg-primary-container/10 text-primary border-l-4 border-primary font-bold" href="#">
+<span class="material-symbols-outlined" data-icon="analytics" style="font-variation-settings: 'FILL' 1;">analytics</span>
+<span class="text-body-md font-body-md">Block Planner</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:text-primary hover:bg-surface-container transition-all duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="bar_chart">bar_chart</span>
+<span class="text-body-md font-body-md">Reports</span>
+</a>
+</li>
+</ul>
+<div class="mt-auto px-4 space-y-1">
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:text-primary hover:bg-surface-container transition-all duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="text-body-md font-body-md">Settings</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:text-primary hover:bg-surface-container transition-all duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="help_outline">help_outline</span>
+<span class="text-body-md font-body-md">Support</span>
+</a>
+</div>
+</nav>
+<!-- Main Content Area -->
+<main class="ml-0 md:ml-64 flex-1 flex flex-col h-screen relative">
+<!-- TopAppBar -->
+<header class="h-16 border-b border-outline-variant bg-surface-container-lowest shadow-sm flex items-center justify-between px-lg shrink-0">
+<h2 class="text-headline-md font-headline-md font-bold text-primary">Dashboard Overview</h2>
+<div class="flex items-center gap-4">
+<div class="hidden lg:flex gap-6 mr-4">
+<a class="text-on-surface-variant hover:text-primary transition-colors text-label-md font-label-md" href="#">Network status</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors text-label-md font-label-md" href="#">Maintenance</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors text-label-md font-label-md" href="#">Schedules</a>
+</div>
+<div class="text-label-md font-label-md text-on-surface-variant mr-4 border-r border-outline-variant pr-4">
+                    9/12/2022 - 9/8/2022
+                </div>
+<button class="text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<div class="h-8 w-8 rounded-full bg-surface-container-high overflow-hidden border border-outline-variant ml-2">
+<img class="w-full h-full object-cover" data-alt="Close up professional headshot of a duty engineer wearing a hardhat and safety vest in a bright, modern control room setting. Cinematic lighting, corporate high-integrity SaaS aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBqC9TGTCdRJXPJbIuJmpySCcGhYloiTQLsb-GOftPM_PvEkRNa0AaoViqqgp_sBugrBmgC5HUenra49W5SXm1rnlqNkVyxDrw3dru2B2gjW3-VHsteNLLkUFeA-mH7a_wTnCblQ0Bi4ueOuV8FcYLh_Fpf_yME9FQ9W7c2S9t3EdyuVLd7GGYdEPCMSDVp-rYlmNwtyNbZBdvw61znzJX0tDiYyhnKJtj0Hfi9dcHMO5OCpFb_Z1pqGw"/>
+</div>
+</div>
+</header>
+<!-- Planner Workspace -->
+<div class="flex-1 overflow-hidden flex flex-col p-lg gap-lg">
+<!-- Toolbar -->
+<div class="bg-surface-container-lowest rounded-[20px] p-lg border border-outline-variant shadow-sm flex items-center justify-between shrink-0">
+<div>
+<h3 class="text-headline-sm font-headline-sm font-bold text-on-background">AI Shadow Block Planner</h3>
+<p class="text-body-sm font-body-sm text-on-surface-variant mt-1">Optimize multi-department maintenance windows.</p>
+</div>
+<div class="flex items-center gap-6">
+<div class="flex items-center bg-surface-container rounded-lg p-1">
+<button class="px-4 py-1.5 rounded-md text-label-md font-label-md text-on-surface-variant hover:bg-surface-container-high transition-colors">Daily</button>
+<button class="px-4 py-1.5 rounded-md text-label-md font-label-md bg-surface-container-lowest text-primary shadow-sm font-bold border border-outline-variant/50">Weekly</button>
+<button class="px-4 py-1.5 rounded-md text-label-md font-label-md text-on-surface-variant hover:bg-surface-container-high transition-colors">Monthly</button>
+</div>
+<div class="flex items-center gap-3 border-l border-outline-variant pl-6">
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" id="focusToggle" type="checkbox"/>
+<div class="w-11 h-6 bg-surface-container-highest peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+<span class="ml-3 text-label-md font-label-md text-on-background font-semibold">Highlight My Crews (TMS)</span>
+</label>
+</div>
+</div>
+</div>
+<!-- Gantt Canvas Area -->
+<div class="flex-1 bg-surface-container-lowest rounded-[20px] border border-outline-variant shadow-sm overflow-hidden flex relative">
+<!-- Y-Axis (Sticky Left) -->
+<div class="w-48 border-r border-outline-variant bg-surface-container-lowest z-20 flex flex-col shrink-0">
+<div class="h-12 border-b border-outline-variant bg-surface-variant/30 flex items-center px-4 font-label-md text-on-surface-variant uppercase tracking-wider">
+                        Track Section
+                    </div>
+<div class="flex-1 overflow-y-auto hide-scrollbar py-2">
+<div class="h-16 flex items-center px-4 text-body-sm font-body-sm text-on-background border-b border-outline-variant/30 hover:bg-surface-container-low transition-colors">GWL Yard</div>
+<div class="h-16 flex items-center px-4 text-body-sm font-body-sm text-on-background border-b border-outline-variant/30 hover:bg-surface-container-low transition-colors">Sector A-4</div>
+<div class="h-16 flex items-center px-4 text-body-sm font-body-sm text-on-background border-b border-outline-variant/30 hover:bg-surface-container-low transition-colors">Km 140-145</div>
+<div class="h-16 flex items-center px-4 text-body-sm font-body-sm text-on-background border-b border-outline-variant/30 hover:bg-surface-container-low transition-colors">Junction North</div>
+<div class="h-16 flex items-center px-4 text-body-sm font-body-sm text-on-background border-b border-outline-variant/30 hover:bg-surface-container-low transition-colors">Terminal B</div>
+<div class="h-16 flex items-center px-4 text-body-sm font-body-sm text-on-background border-b border-outline-variant/30 hover:bg-surface-container-low transition-colors">Km 145-150</div>
+</div>
+</div>
+<!-- X-Axis & Grid -->
+<div class="flex-1 overflow-auto relative bg-[#F9FAFB]">
+<!-- Sticky Time Header -->
+<div class="sticky top-0 h-12 bg-surface-variant/30 border-b border-outline-variant flex z-10 w-[1200px]">
+<div class="w-24 shrink-0 flex justify-center items-center text-label-md font-label-md text-on-surface-variant border-r border-outline-variant/30">06:00</div>
+<div class="w-24 shrink-0 flex justify-center items-center text-label-md font-label-md text-on-surface-variant border-r border-outline-variant/30">08:00</div>
+<div class="w-24 shrink-0 flex justify-center items-center text-label-md font-label-md text-on-surface-variant border-r border-outline-variant/30">10:00</div>
+<div class="w-24 shrink-0 flex justify-center items-center text-label-md font-label-md text-on-surface-variant border-r border-outline-variant/30">12:00</div>
+<div class="w-24 shrink-0 flex justify-center items-center text-label-md font-label-md text-on-surface-variant border-r border-outline-variant/30">14:00</div>
+<div class="w-24 shrink-0 flex justify-center items-center text-label-md font-label-md text-on-surface-variant border-r border-outline-variant/30">16:00</div>
+<div class="w-24 shrink-0 flex justify-center items-center text-label-md font-label-md text-on-surface-variant border-r border-outline-variant/30">18:00</div>
+<div class="w-24 shrink-0 flex justify-center items-center text-label-md font-label-md text-on-surface-variant border-r border-outline-variant/30">20:00</div>
+<div class="w-24 shrink-0 flex justify-center items-center text-label-md font-label-md text-on-surface-variant border-r border-outline-variant/30">22:00</div>
+<div class="w-24 shrink-0 flex justify-center items-center text-label-md font-label-md text-on-surface-variant">00:00</div>
+</div>
+<!-- Grid Rows -->
+<div class="relative w-[1200px] py-2">
+<!-- Vertical Grid Lines -->
+<div class="absolute inset-0 flex pointer-events-none z-0">
+<div class="w-24 border-r border-outline-variant/20 h-full"></div>
+<div class="w-24 border-r border-outline-variant/20 h-full"></div>
+<div class="w-24 border-r border-outline-variant/20 h-full"></div>
+<div class="w-24 border-r border-outline-variant/20 h-full"></div>
+<div class="w-24 border-r border-outline-variant/20 h-full"></div>
+<div class="w-24 border-r border-outline-variant/20 h-full"></div>
+<div class="w-24 border-r border-outline-variant/20 h-full"></div>
+<div class="w-24 border-r border-outline-variant/20 h-full"></div>
+<div class="w-24 border-r border-outline-variant/20 h-full"></div>
+</div>
+<!-- Row 1: GWL Yard -->
+<div class="h-16 border-b border-outline-variant/30 relative z-10 group">
+<!-- TMS Block (Highlighted) -->
+<div class="absolute top-2 left-12 w-48 h-12 bg-[#E1EFFE] border border-[#3F83F8] rounded-md shadow-sm flex flex-col justify-center px-3 cursor-pointer hover:shadow-md transition-shadow" onclick="openInspector()">
+<div class="text-[10px] font-bold text-[#1A56DB] uppercase tracking-wide">TMS (Track)</div>
+<div class="text-xs text-on-surface font-medium truncate">Rail Grinding</div>
+</div>
+</div>
+<!-- Row 2: Sector A-4 -->
+<div class="h-16 border-b border-outline-variant/30 relative z-10 group">
+<!-- Non-TMS (Dimmed visually via JS/CSS logic based on toggle) -->
+<div class="task-non-tms absolute top-2 left-32 w-32 h-12 bg-[#DEF7EC] border border-[#31C48D] rounded-md shadow-sm flex flex-col justify-center px-3 opacity-50 grayscale transition-all">
+<div class="text-[10px] font-bold text-[#057A55] uppercase tracking-wide">SMMS (Signal)</div>
+<div class="text-xs text-on-surface font-medium truncate">Cable Laying</div>
+</div>
+<!-- Combined Shadow Block -->
+<div class="absolute top-2 left-[400px] w-64 h-12 bg-gradient-to-b from-[#E1EFFE] via-[#DEF7EC] to-[#FEECDC] border border-outline-variant rounded-md shadow-sm flex flex-col justify-center px-3 cursor-pointer hover:ring-2 ring-primary/30 transition-all group-hover:z-20" onclick="openInspector()">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-[#1A56DB]"></span>
+<span class="w-2 h-2 rounded-full bg-[#057A55]"></span>
+<span class="w-2 h-2 rounded-full bg-[#C27803]"></span>
+<span class="text-[10px] font-bold text-on-surface-variant uppercase tracking-wide ml-1">AI Shadow Block</span>
+</div>
+<div class="text-xs text-on-surface font-medium truncate mt-0.5">3 Depts Active | 180 mins</div>
+</div>
+</div>
+<!-- Row 3: Km 140-145 -->
+<div class="h-16 border-b border-outline-variant/30 relative z-10 group">
+<!-- TMS Block -->
+<div class="absolute top-2 left-[500px] w-[200px] h-12 bg-[#E1EFFE] border border-[#3F83F8] rounded-md shadow-sm flex flex-col justify-center px-3 cursor-pointer hover:shadow-md transition-shadow" onclick="openInspector()">
+<div class="text-[10px] font-bold text-[#1A56DB] uppercase tracking-wide">TMS (Track)</div>
+<div class="text-xs text-on-surface font-medium truncate">Ballast Cleaning</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Block Inspector Drawer (Hidden by default) -->
+<div class="fixed inset-y-0 right-0 w-[450px] bg-surface-container-lowest border-l border-outline-variant shadow-2xl z-50 transform translate-x-full transition-transform duration-300 ease-in-out flex flex-col" id="inspectorDrawer">
+<!-- Header -->
+<div class="p-lg border-b border-outline-variant flex items-center justify-between bg-surface-variant/30">
+<div>
+<h3 class="text-headline-sm font-headline-sm font-bold text-on-background">Block Details</h3>
+<p class="text-label-md font-label-md text-on-surface-variant">Sector A-4 • 12:00 - 15:00</p>
+</div>
+<button class="p-2 rounded-full hover:bg-surface-container-high transition-colors text-on-surface-variant" onclick="closeInspector()">
+<span class="material-symbols-outlined">close</span>
+</button>
+</div>
+<!-- Content -->
+<div class="flex-1 overflow-y-auto p-lg">
+<!-- Hero Metric -->
+<div class="bg-primary-container/10 border border-primary-container/30 rounded-xl p-4 mb-6 flex items-center gap-4">
+<div class="w-12 h-12 rounded-full bg-primary flex items-center justify-center text-on-primary shrink-0">
+<span class="material-symbols-outlined text-[24px]">bolt</span>
+</div>
+<div>
+<div class="text-label-md font-label-md text-primary font-bold uppercase tracking-wider">AI Optimization Score</div>
+<div class="text-headline-md font-headline-md font-bold text-on-background mt-1">Shadow Efficiency: 2.75x</div>
+</div>
+</div>
+<!-- Stepper Timeline -->
+<div class="space-y-6 relative before:absolute before:inset-0 before:ml-5 before:-translate-x-px md:before:mx-auto md:before:translate-x-0 before:h-full before:w-0.5 before:bg-gradient-to-b before:from-transparent before:via-outline-variant before:to-transparent pl-8">
+<!-- Task 1: TMS -->
+<div class="relative flex items-start gap-4">
+<div class="absolute -left-8 w-6 h-6 rounded-full bg-[#3F83F8] border-4 border-surface-container-lowest flex items-center justify-center z-10 mt-1"></div>
+<div class="flex-1 bg-surface-container-low border border-outline-variant rounded-lg p-4">
+<div class="flex items-center justify-between mb-2">
+<span class="text-[10px] font-bold text-[#1A56DB] bg-[#E1EFFE] px-2 py-0.5 rounded uppercase">TMS</span>
+<span class="text-label-md font-label-md text-on-surface-variant">12:00 - 14:30</span>
+</div>
+<h4 class="text-body-md font-body-md font-bold text-on-background">Deep Tamping &amp; Alignment</h4>
+<p class="text-body-sm font-body-sm text-on-surface-variant mt-1">Crew: Team Alpha. Equipment: Tamping Machine T-04.</p>
+</div>
+</div>
+<!-- Task 2: SMMS -->
+<div class="relative flex items-start gap-4">
+<div class="absolute -left-8 w-6 h-6 rounded-full bg-[#31C48D] border-4 border-surface-container-lowest flex items-center justify-center z-10 mt-1"></div>
+<div class="flex-1 bg-surface-container-low border border-outline-variant rounded-lg p-4">
+<div class="flex items-center justify-between mb-2">
+<span class="text-[10px] font-bold text-[#057A55] bg-[#DEF7EC] px-2 py-0.5 rounded uppercase">SMMS</span>
+<span class="text-label-md font-label-md text-on-surface-variant">12:30 - 15:00</span>
+</div>
+<h4 class="text-body-md font-body-md font-bold text-on-background">Axle Counter Calibration</h4>
+<p class="text-body-sm font-body-sm text-on-surface-variant mt-1">Simultaneous access granted behind tamping machine.</p>
+</div>
+</div>
+<!-- Task 3: TDMS -->
+<div class="relative flex items-start gap-4">
+<div class="absolute -left-8 w-6 h-6 rounded-full bg-[#FACA15] border-4 border-surface-container-lowest flex items-center justify-center z-10 mt-1"></div>
+<div class="flex-1 bg-surface-container-low border border-outline-variant rounded-lg p-4">
+<div class="flex items-center justify-between mb-2">
+<span class="text-[10px] font-bold text-[#C27803] bg-[#FEECDC] px-2 py-0.5 rounded uppercase">TDMS</span>
+<span class="text-label-md font-label-md text-on-surface-variant">13:00 - 14:00</span>
+</div>
+<h4 class="text-body-md font-body-md font-bold text-on-background">OHE Tension Check</h4>
+<p class="text-body-sm font-body-sm text-on-surface-variant mt-1">Power block required on Line 2.</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Sticky Footer (RBAC) -->
+<div class="p-lg border-t border-outline-variant bg-[#FFFBEB] flex items-center gap-3">
+<span class="material-symbols-outlined text-[#E8A33D]">lock</span>
+<span class="text-body-sm font-body-sm text-[#92400E] font-medium">Awaiting Chief Controller Approval. Engineers have view-only access.</span>
+</div>
+</div>
+<!-- Backdrop for Drawer -->
+<div class="fixed inset-0 bg-on-background/20 backdrop-blur-sm z-40 hidden opacity-0 transition-opacity duration-300" id="drawerBackdrop" onclick="closeInspector()"></div>
+<script>
+        // Toggle Logic for TMS Focus
+        const toggle = document.getElementById('focusToggle');
+        const nonTmsTasks = document.querySelectorAll('.task-non-tms');
+
+        toggle.addEventListener('change', (e) => {
+            if(e.target.checked) {
+                nonTmsTasks.forEach(task => {
+                    task.classList.add('opacity-50', 'grayscale');
+                    task.classList.remove('opacity-100', 'grayscale-0');
+                });
+            } else {
+                nonTmsTasks.forEach(task => {
+                    task.classList.remove('opacity-50', 'grayscale');
+                    task.classList.add('opacity-100', 'grayscale-0');
+                });
+            }
+        });
+
+        // Drawer Logic
+        const drawer = document.getElementById('inspectorDrawer');
+        const backdrop = document.getElementById('drawerBackdrop');
+
+        function openInspector() {
+            backdrop.classList.remove('hidden');
+            // Small delay to allow display:block to apply before animating opacity
+            setTimeout(() => {
+                backdrop.classList.remove('opacity-0');
+                drawer.classList.remove('translate-x-full');
+            }, 10);
+        }
+
+        function closeInspector() {
+            drawer.classList.add('translate-x-full');
+            backdrop.classList.add('opacity-0');
+            setTimeout(() => {
+                backdrop.classList.add('hidden');
+            }, 300);
+        }
+    </script>
+</body></html>

@@ -1,0 +1,214 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,300;0,14..32,400;0,14..32,500;0,14..32,600;0,14..32,700;0,14..32,800;1,14..32,400&display=swap');
+@import "tailwindcss";
+
+/* =============================================
+   RAIL-OPS — Trainline-inspired Design System
+   Navy + Teal brand, off-white bg, clean cards
+   ============================================= */
+:root {
+  /* ── Core Brand (Trainline-inspired teal + your navy) ── */
+  --brand-dark:     #00443C;   /* Deep teal-green — sidebar chrome */
+  --brand-mid:      #0D6B58;   /* Mid teal — hover states, accents */
+  --brand-light:    #E8F5F1;   /* Pale teal — pill bg, tag bg */
+  --brand-text:     #FFFFFF;   /* Text on brand surfaces */
+
+  /* ── Amber accent (your doc) ── */
+  --amber:          #D4820A;
+  --amber-soft:     #FEF3C7;
+
+  /* ── Page & Surface ── */
+  --page-bg:        #F5F7F6;   /* Off-white with slight green tint */
+  --surface:        #FFFFFF;
+  --surface-hover:  #F9FAFB;
+  --panel:          #F1F4F3;   /* Inner panel bg */
+
+  /* ── Borders ── */
+  --border:         #E3E8E7;
+  --border-mid:     #C8D4D1;
+
+  /* ── Text ── */
+  --text-primary:   #0D1C19;   /* Almost black */
+  --text-secondary: #4A635E;
+  --text-muted:     #7A9690;
+  --text-dim:       #A8BBB8;
+
+  /* ── Status (strict — never decorative) ── */
+  --red:            #C8321A;
+  --red-soft:       #FEF2F0;
+  --amber-status:   #B86800;
+  --amber-status-soft: #FFF8EE;
+  --green:          #157A4D;
+  --green-soft:     #ECFAF4;
+  --blue:           #1D6FA8;
+  --blue-soft:      #EBF4FC;
+
+  /* ── Layout ── */
+  --sidebar-w:      248px;
+  --header-h:       64px;
+  --radius-card:    14px;
+  --radius-btn:     9999px;
+  --radius-inner:   8px;
+
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  color: var(--text-primary);
+  background: var(--page-bg);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { background: var(--page-bg); }
+
+/* ── Shadows (Trainline-style: subtle, barely there) ── */
+.card-shadow { box-shadow: 0 1px 3px rgba(13,28,25,0.06), 0 4px 12px rgba(13,28,25,0.04); }
+.card-shadow-lg { box-shadow: 0 4px 16px rgba(13,28,25,0.08), 0 1px 4px rgba(13,28,25,0.04); }
+
+/* ── Typography ── */
+.t-heading-xl { font-size: 2.5rem; font-weight: 800; line-height: 1.1; letter-spacing: -0.03em; }
+.t-heading-lg { font-size: 1.75rem; font-weight: 700; line-height: 1.2; letter-spacing: -0.02em; }
+.t-heading-md { font-size: 1.25rem; font-weight: 700; line-height: 1.3; letter-spacing: -0.01em; }
+.t-label      { font-size: 0.75rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; }
+.t-mono       { font-variant-numeric: tabular-nums; font-feature-settings: "tnum"; }
+
+/* ── Buttons ── */
+.btn-primary {
+  background: var(--brand-dark);
+  color: #fff;
+  border: none;
+  border-radius: var(--radius-btn);
+  padding: 12px 28px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.1s;
+}
+.btn-primary:hover { background: var(--brand-mid); }
+.btn-outline {
+  background: transparent;
+  color: var(--brand-dark);
+  border: 2px solid var(--brand-dark);
+  border-radius: var(--radius-btn);
+  padding: 10px 28px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.btn-outline:hover { background: var(--brand-light); }
+
+/* ── Status Badges ── */
+.badge { display: inline-flex; align-items: center; padding: 3px 10px; border-radius: 999px; font-size: 12px; font-weight: 600; }
+.badge-critical { background: var(--red-soft);   color: var(--red); }
+.badge-high     { background: var(--amber-status-soft); color: var(--amber-status); }
+.badge-medium   { background: var(--blue-soft);  color: var(--blue); }
+.badge-low      { background: var(--panel);       color: var(--text-muted); }
+.badge-yes      { background: var(--green-soft);  color: var(--green); }
+.badge-no       { background: var(--panel);       color: var(--text-muted); }
+
+/* ── Dept Tags ── */
+.dept-tag { display: inline-flex; padding: 2px 8px; border-radius: 5px; font-size: 11px; font-weight: 700; letter-spacing: 0.04em; }
+.dept-track    { background: var(--blue-soft);  color: var(--blue); }
+.dept-signal   { background: var(--amber-status-soft); color: var(--amber-status); }
+.dept-traction { background: var(--green-soft); color: var(--green); }
+
+/* ── Pulse animation ── */
+@keyframes pulse-glow { 0%,100% { opacity:1; } 50% { opacity:.55; } }
+.pulse { animation: pulse-glow 2s cubic-bezier(.4,0,.6,1) infinite; }
+
+/* ── Table ── */
+.data-table { width: 100%; border-collapse: collapse; }
+.data-table th { padding: 13px 20px; font-size: 11px; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.06em; background: var(--panel); border-bottom: 1px solid var(--border); text-align: left; }
+.data-table td { padding: 16px 20px; font-size: 14px; color: var(--text-primary); border-bottom: 1px solid var(--border); }
+.data-table tr:last-child td { border-bottom: none; }
+.data-table tr:hover td { background: var(--surface-hover); }
+
+/* ── Card ── */
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-card);
+}
+
+/* ============================================================
+   RAIL-OPS CRM Design Tokens — Lovable-generated palette
+   ============================================================ */
+:root {
+  --mint:                  #14c9a0;
+  --mint-dark:             #0e9e7d;
+  --mint-light:            #f2fbf9;
+  --charcoal:              #111827;
+  --slate:                 #5c6274;
+  --page-background:       #f8f9fa;
+  --success:               #dcfce7;
+  --success-text:          #15803d;
+  --status-accepted:       #dcfce7;
+  --status-accepted-text:  #15803d;
+  --status-overdue:        #fee2e2;
+  --status-overdue-text:   #b91c1c;
+  --status-pending:        #fef3c7;
+  --status-pending-text:   #b45309;
+
+  /* ShadCN base tokens — required by command center dashboard components */
+  --background:            #ffffff;
+  --foreground:            #111827;
+  --card:                  #ffffff;
+  --card-foreground:       #111827;
+  --popover:               #ffffff;
+  --popover-foreground:    #111827;
+  --primary:               #111827;
+  --primary-foreground:    #ffffff;
+  --secondary:             #f9fafb;
+  --secondary-foreground:  #111827;
+  --muted:                 #f9fafb;
+  --muted-foreground:      #6B7280;
+  --accent:                #f9fafb;
+  --accent-foreground:     #111827;
+  --destructive:           #ef4444;
+  --destructive-foreground:#ffffff;
+  --input:                 #e5e7eb;
+  --ring:                  #14c9a0;
+  --radius:                0.625rem;
+}
+
+@theme inline {
+  /* RAIL-OPS brand tokens */
+  --color-mint:                  var(--mint);
+  --color-mint-dark:             var(--mint-dark);
+  --color-mint-light:            var(--mint-light);
+  --color-charcoal:              var(--charcoal);
+  --color-slate:                 var(--slate);
+  --color-page-background:       var(--page-background);
+  --color-surface:               var(--background);
+  --color-success:               var(--success);
+  --color-success-text:          var(--success-text);
+  --color-status-accepted:       var(--status-accepted);
+  --color-status-accepted-text:  var(--status-accepted-text);
+  --color-status-overdue:        var(--status-overdue);
+  --color-status-overdue-text:   var(--status-overdue-text);
+  --color-status-pending:        var(--status-pending);
+  --color-status-pending-text:   var(--status-pending-text);
+
+  /* ShadCN base tokens — required by command center dashboard components */
+  --color-background:            var(--background);
+  --color-foreground:            var(--foreground);
+  --color-card:                  var(--card);
+  --color-card-foreground:       var(--card-foreground);
+  --color-popover:               var(--popover);
+  --color-popover-foreground:    var(--popover-foreground);
+  --color-primary:               var(--primary);
+  --color-primary-foreground:    var(--primary-foreground);
+  --color-secondary:             var(--secondary);
+  --color-secondary-foreground:  var(--secondary-foreground);
+  --color-muted:                 var(--muted);
+  --color-muted-foreground:      var(--muted-foreground);
+  --color-accent:                var(--accent);
+  --color-accent-foreground:     var(--accent-foreground);
+  --color-destructive:           var(--destructive);
+  --color-destructive-foreground:var(--destructive-foreground);
+  --color-border:                var(--border);
+  --color-input:                 var(--input);
+  --color-ring:                  var(--ring);
+  --radius-sm:                   calc(var(--radius) - 4px);
+  --radius-md:                   calc(var(--radius) - 2px);
+  --radius-lg:                   var(--radius);
+  --radius-xl:                   calc(var(--radius) + 4px);
+}

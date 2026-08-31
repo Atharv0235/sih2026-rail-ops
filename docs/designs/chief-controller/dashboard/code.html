@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>RAIL-OPS Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'brand-mint': '#14C9A0',
+            'brand-mint-hover': '#10a885',
+            'brand-dark': '#1a202c',
+            'brand-gray': '#f8fafc',
+            'brand-gray-dark': '#64748b',
+          },
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+<style data-purpose="custom-styles">
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+    
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #f1f5f9; /* Soft background */
+    }
+
+    /* Custom Checkbox Styling */
+    .custom-checkbox {
+      appearance: none;
+      background-color: #fff;
+      margin: 0;
+      font: inherit;
+      color: currentColor;
+      width: 1.15em;
+      height: 1.15em;
+      border: 1px solid #cbd5e1;
+      border-radius: 0.25em;
+      display: grid;
+      place-content: center;
+      cursor: pointer;
+    }
+
+    .custom-checkbox::before {
+      content: "";
+      width: 0.65em;
+      height: 0.65em;
+      transform: scale(0);
+      transition: 120ms transform ease-in-out;
+      box-shadow: inset 1em 1em white;
+      background-color: white;
+      transform-origin: center;
+      clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
+    }
+
+    .custom-checkbox:checked {
+      background-color: #14C9A0;
+      border-color: #14C9A0;
+    }
+
+    .custom-checkbox:checked::before {
+      transform: scale(1);
+    }
+  </style>
+<!-- Feather Icons for lightweight SVGs -->
+<script src="https://unpkg.com/feather-icons"></script>
+</head>
+<body class="flex h-screen overflow-hidden bg-white text-slate-800">
+<!-- BEGIN: Sidebar -->
+<aside class="w-64 flex-shrink-0 border-r border-slate-200 flex flex-col bg-white" data-purpose="sidebar">
+<!-- Logo Area -->
+<div class="h-16 flex items-center px-6 border-b border-slate-200">
+<div class="w-8 h-8 bg-brand-mint rounded flex items-center justify-center mr-3 text-white">
+<i class="w-5 h-5" data-feather="train"></i>
+</div>
+<span class="font-bold text-lg tracking-wide">RAIL-OPS</span>
+</div>
+<!-- Search -->
+<div class="p-4">
+<div class="relative">
+<i class="absolute left-3 top-1/2 transform -translate-y-1/2 text-slate-400 w-4 h-4" data-feather="search"></i>
+<input class="w-full pl-9 pr-4 py-2 bg-slate-50 border border-slate-200 rounded-lg text-sm focus:outline-none focus:ring-1 focus:ring-brand-mint focus:border-brand-mint" placeholder="Search..." type="text"/>
+</div>
+</div>
+<!-- Navigation -->
+<nav class="flex-1 px-4 space-y-1 overflow-y-auto">
+<a class="flex items-center px-3 py-2 text-sm font-medium rounded-lg text-slate-600 hover:bg-slate-50 hover:text-slate-900 group" href="#">
+<i class="w-4 h-4 mr-3 text-slate-400 group-hover:text-slate-500" data-feather="grid"></i>
+        Dashboard
+      </a>
+<a class="flex items-center px-3 py-2 text-sm font-medium rounded-lg bg-brand-mint/10 text-brand-mint group" href="#">
+<i class="w-4 h-4 mr-3 text-brand-mint" data-feather="list"></i>
+        Task List
+      </a>
+<a class="flex items-center px-3 py-2 text-sm font-medium rounded-lg text-slate-600 hover:bg-slate-50 hover:text-slate-900 group" href="#">
+<i class="w-4 h-4 mr-3 text-slate-400 group-hover:text-slate-500" data-feather="calendar"></i>
+        Schedule
+      </a>
+<a class="flex items-center px-3 py-2 text-sm font-medium rounded-lg text-slate-600 hover:bg-slate-50 hover:text-slate-900 group" href="#">
+<i class="w-4 h-4 mr-3 text-slate-400 group-hover:text-slate-500" data-feather="map-pin"></i>
+        Live Tracking
+      </a>
+<a class="flex items-center px-3 py-2 text-sm font-medium rounded-lg text-slate-600 hover:bg-slate-50 hover:text-slate-900 group" href="#">
+<i class="w-4 h-4 mr-3 text-slate-400 group-hover:text-slate-500" data-feather="bar-chart-2"></i>
+        Reports
+      </a>
+</nav>
+</aside>
+<!-- END: Sidebar -->
+<!-- BEGIN: Main Content Area -->
+<main class="flex-1 flex flex-col h-full bg-slate-50 overflow-hidden" data-purpose="main-content">
+<!-- BEGIN: Top Header -->
+<header class="h-16 flex items-center justify-between px-8 bg-white border-b border-slate-200" data-purpose="top-header">
+<h1 class="text-xl font-semibold text-slate-800">Dashboard Overview</h1>
+<div class="flex items-center space-x-4">
+<!-- Date Range Picker -->
+<button class="flex items-center space-x-2 px-4 py-2 border border-slate-200 rounded-lg text-sm text-slate-600 hover:bg-slate-50 transition-colors">
+<i class="w-4 h-4 text-slate-400" data-feather="calendar"></i>
+<span>Aug 21, 2026 - Aug 29, 2026</span>
+<i class="w-4 h-4 text-slate-400" data-feather="chevron-down"></i>
+</button>
+<!-- Live Feed Button -->
+<button class="flex items-center space-x-2 px-4 py-2 bg-brand-mint text-white rounded-lg text-sm font-medium hover:bg-brand-mint-hover transition-colors shadow-sm">
+<i class="w-4 h-4" data-feather="radio"></i>
+<span>VIEW LIVE FEED</span>
+</button>
+<!-- User Avatar small -->
+<div class="w-8 h-8 rounded-full bg-gradient-to-tr from-orange-400 to-pink-500 flex items-center justify-center text-white font-bold text-xs">
+<!-- Placeholder avatar -->
+</div>
+</div>
+</header>
+<!-- END: Top Header -->
+<!-- BEGIN: Scrollable Content -->
+<div class="flex-1 overflow-auto p-8" data-purpose="scrollable-content">
+<div class="max-w-7xl mx-auto space-y-6">
+<!-- BEGIN: Profile Header Card -->
+<section class="bg-white rounded-xl p-6 shadow-sm border border-slate-100 flex items-center justify-between" data-purpose="profile-header">
+<div class="flex items-center space-x-6">
+<!-- Large Avatar -->
+<div class="w-20 h-20 rounded-full bg-gradient-to-tr from-orange-400 via-pink-500 to-purple-500 flex items-center justify-center shadow-inner">
+<!-- Avatar Graphic Placeholder -->
+</div>
+<!-- User Info -->
+<div>
+<div class="flex items-center space-x-3 mb-1">
+<h2 class="text-2xl font-bold text-slate-900">Chief Controller</h2>
+<span class="px-2.5 py-0.5 rounded-full bg-brand-mint/10 text-brand-mint text-xs font-semibold uppercase tracking-wide">Active Corridor</span>
+</div>
+<div class="flex items-center space-x-6 text-sm text-slate-500 mt-2">
+<div class="flex items-center space-x-1.5">
+<i class="w-4 h-4" data-feather="mail"></i>
+<span>controller@railops.gov</span>
+</div>
+<div class="flex items-center space-x-1.5">
+<i class="w-4 h-4" data-feather="phone"></i>
+<span>+91 98765 43210</span>
+</div>
+<div class="flex items-center space-x-1.5">
+<i class="w-4 h-4" data-feather="map-pin"></i>
+<span>Mumbai Central</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Duty Engineer Info Box -->
+<div class="flex items-center space-x-3 bg-slate-50 px-4 py-3 rounded-lg border border-slate-100">
+<div class="w-8 h-8 rounded-full bg-gradient-to-tr from-blue-400 to-indigo-500"></div>
+<div>
+<div class="text-sm font-semibold text-slate-800">Ravi Kumar</div>
+<div class="text-xs text-slate-500">Duty Engineer</div>
+</div>
+</div>
+</section>
+<!-- END: Profile Header Card -->
+<!-- BEGIN: KPI Grid -->
+<section class="grid grid-cols-1 md:grid-cols-4 gap-6" data-purpose="kpi-grid">
+<!-- Card 1: Total Tasks -->
+<div class="bg-white p-6 rounded-xl shadow-sm border border-slate-100 flex flex-col justify-between">
+<div>
+<div class="w-8 h-8 bg-brand-mint/10 rounded flex items-center justify-center mb-4">
+<i class="w-4 h-4 text-brand-mint" data-feather="clipboard"></i>
+</div>
+<h3 class="text-sm font-medium text-slate-500 mb-2">Total Tasks</h3>
+<div class="flex items-baseline space-x-4">
+<div>
+<div class="flex items-center space-x-1">
+<div class="w-2 h-2 rounded-full bg-brand-mint"></div>
+<span class="text-2xl font-bold text-slate-900">22.42k</span>
+</div>
+<span class="text-xs text-slate-400 uppercase tracking-wide font-medium ml-3">Accepted</span>
+</div>
+<div>
+<div class="flex items-center space-x-1">
+<div class="w-2 h-2 rounded-full bg-amber-400"></div>
+<span class="text-2xl font-bold text-slate-900">15.52k</span>
+</div>
+<span class="text-xs text-slate-400 uppercase tracking-wide font-medium ml-3">Pending</span>
+</div>
+</div>
+</div>
+<div class="flex items-center justify-between mt-6">
+<span class="flex items-center text-brand-mint text-sm font-medium">
+<i class="w-4 h-4 mr-1" data-feather="trending-up"></i> +12.5%
+              </span>
+<a class="text-brand-mint text-sm font-medium hover:underline" href="#">View more</a>
+</div>
+</div>
+<!-- Card 2: Blocks Scheduled -->
+<div class="bg-white p-6 rounded-xl shadow-sm border border-slate-100 flex flex-col justify-between">
+<div>
+<div class="w-8 h-8 bg-blue-100 rounded flex items-center justify-center mb-4">
+<i class="w-4 h-4 text-blue-500" data-feather="clock"></i>
+</div>
+<h3 class="text-sm font-medium text-slate-500 mb-2">Blocks Scheduled</h3>
+<div class="flex items-baseline space-x-4">
+<div>
+<div class="flex items-center space-x-1">
+<div class="w-2 h-2 rounded-full bg-brand-mint"></div>
+<span class="text-2xl font-bold text-slate-900">18.30k</span>
+</div>
+<span class="text-xs text-slate-400 uppercase tracking-wide font-medium ml-3">Completed</span>
+</div>
+<div>
+<div class="flex items-center space-x-1">
+<div class="w-2 h-2 rounded-full bg-blue-500"></div>
+<span class="text-2xl font-bold text-slate-900">2.84k</span>
+</div>
+<span class="text-xs text-slate-400 uppercase tracking-wide font-medium ml-3">Upcoming</span>
+</div>
+</div>
+</div>
+<div class="flex items-center justify-between mt-6">
+<span class="flex items-center text-brand-mint text-sm font-medium">
+<i class="w-4 h-4 mr-1" data-feather="trending-up"></i> +8.2%
+              </span>
+<a class="text-brand-mint text-sm font-medium hover:underline" href="#">View more</a>
+</div>
+</div>
+<!-- Card 3: Inspections -->
+<div class="bg-white p-6 rounded-xl shadow-sm border border-slate-100 flex flex-col justify-between">
+<div>
+<div class="w-8 h-8 bg-brand-mint/10 rounded flex items-center justify-center mb-4">
+<i class="w-4 h-4 text-brand-mint" data-feather="shield"></i>
+</div>
+<h3 class="text-sm font-medium text-slate-500 mb-2">Inspections</h3>
+<div class="flex items-baseline space-x-4">
+<div>
+<div class="flex items-center space-x-1">
+<div class="w-2 h-2 rounded-full bg-brand-mint"></div>
+<span class="text-2xl font-bold text-slate-900">9.14k</span>
+</div>
+<span class="text-xs text-slate-400 uppercase tracking-wide font-medium ml-3">Passed</span>
+</div>
+<div>
+<div class="flex items-center space-x-1">
+<div class="w-2 h-2 rounded-full bg-red-500"></div>
+<span class="text-2xl font-bold text-slate-900">1.20k</span>
+</div>
+<span class="text-xs text-slate-400 uppercase tracking-wide font-medium ml-3">Flagged</span>
+</div>
+</div>
+</div>
+<div class="flex items-center justify-between mt-6">
+<span class="flex items-center text-brand-mint text-sm font-medium">
+<i class="w-4 h-4 mr-1" data-feather="trending-up"></i> +4.1%
+              </span>
+<a class="text-brand-mint text-sm font-medium hover:underline" href="#">View more</a>
+</div>
+</div>
+<!-- Card 4: Critical Defects (Gradient) -->
+<div class="bg-gradient-to-br from-brand-mint to-teal-600 p-6 rounded-xl shadow-md text-white flex flex-col justify-between">
+<div>
+<div class="flex justify-between items-start mb-2">
+<h3 class="text-sm font-medium text-teal-50">Critical Defects</h3>
+<i class="w-4 h-4 text-teal-100" data-feather="alert-circle"></i>
+</div>
+<div class="text-5xl font-bold mb-1">17</div>
+<div class="text-sm text-teal-100">Require immediate attention</div>
+</div>
+<button class="w-full mt-6 py-2 bg-white/20 hover:bg-white/30 rounded-lg text-sm font-medium transition-colors backdrop-blur-sm">
+              View Details
+            </button>
+</div>
+</section>
+<!-- END: KPI Grid -->
+<!-- BEGIN: Data Table Section -->
+<section class="bg-white rounded-xl shadow-sm border border-slate-100 overflow-hidden" data-purpose="data-table-container">
+<!-- Table Tabs & Filters -->
+<div class="border-b border-slate-200">
+<div class="flex items-center px-6 pt-4 space-x-6">
+<button class="pb-3 border-b-2 border-brand-mint text-brand-mint font-medium text-sm flex items-center space-x-2">
+<span>Task Backlog</span>
+<span class="bg-brand-mint/10 text-brand-mint py-0.5 px-2 rounded-full text-xs">120</span>
+</button>
+<button class="pb-3 border-b-2 border-transparent text-slate-500 hover:text-slate-700 font-medium text-sm flex items-center space-x-2">
+<span>Active Blocks</span>
+<span class="bg-slate-100 text-slate-500 py-0.5 px-2 rounded-full text-xs">21</span>
+</button>
+<button class="pb-3 border-b-2 border-transparent text-slate-500 hover:text-slate-700 font-medium text-sm">
+<span>Photos</span>
+</button>
+<button class="pb-3 border-b-2 border-transparent text-slate-500 hover:text-slate-700 font-medium text-sm flex items-center space-x-2">
+<span>Files</span>
+<span class="bg-slate-100 text-slate-500 py-0.5 px-2 rounded-full text-xs">32</span>
+</button>
+</div>
+</div>
+<!-- Table Actions Toolbar -->
+<div class="p-4 flex items-center justify-between bg-slate-50/50">
+<div class="relative w-80">
+<i class="absolute left-3 top-1/2 transform -translate-y-1/2 text-slate-400 w-4 h-4" data-feather="search"></i>
+<input class="w-full pl-9 pr-4 py-2 bg-white border border-slate-200 rounded-lg text-sm focus:outline-none focus:ring-1 focus:ring-brand-mint focus:border-brand-mint" placeholder="Search defects, sections, leads..." type="text"/>
+</div>
+<div class="flex items-center space-x-3">
+<button class="flex items-center space-x-2 px-4 py-2 border border-slate-200 bg-white rounded-lg text-sm text-slate-700 hover:bg-slate-50 transition-colors">
+<span>Sort by Criticality</span>
+<i class="w-4 h-4 text-slate-400" data-feather="chevron-down"></i>
+</button>
+<button class="flex items-center space-x-1 px-4 py-2 border border-brand-mint text-brand-mint bg-brand-mint/5 rounded-lg text-sm font-medium hover:bg-brand-mint hover:text-white transition-colors">
+<i class="w-4 h-4" data-feather="plus"></i>
+<span>Create Block</span>
+</button>
+</div>
+</div>
+<!-- Actual Table -->
+<div class="overflow-x-auto">
+<table class="w-full text-left text-sm">
+<thead class="text-xs text-slate-400 uppercase bg-white border-b border-slate-100">
+<tr>
+<th class="px-6 py-3 font-medium w-12" scope="col">
+<input class="custom-checkbox" type="checkbox"/>
+</th>
+<th class="px-6 py-3 font-medium" scope="col">Defect ID</th>
+<th class="px-6 py-3 font-medium" scope="col">Department Lead</th>
+<th class="px-6 py-3 font-medium" scope="col">Section</th>
+<th class="px-6 py-3 font-medium" scope="col">Value</th>
+<th class="px-6 py-3 font-medium" scope="col">Status</th>
+<th class="px-6 py-3 font-medium" scope="col">Date</th>
+<th class="px-6 py-3 font-medium text-right" scope="col">Action</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-slate-100 text-slate-700">
+<!-- Row 1 -->
+<tr class="hover:bg-slate-50 transition-colors">
+<td class="px-6 py-4">
+<input class="custom-checkbox" type="checkbox"/>
+</td>
+<td class="px-6 py-4 font-medium text-slate-900">DFT-2026-0841</td>
+<td class="px-6 py-4">
+<div class="flex items-center space-x-3">
+<div class="w-8 h-8 rounded-full bg-gradient-to-tr from-pink-400 to-purple-500"></div>
+<div>
+<div class="font-medium text-slate-900">Amit Sharma</div>
+<div class="text-xs text-slate-500">a.sharma@railops.gov</div>
+</div>
+</div>
+</td>
+<td class="px-6 py-4">Mumbai - Surat</td>
+<td class="px-6 py-4">Track Alignment</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-emerald-100 text-emerald-800">
+                      Accepted
+                    </span>
+</td>
+<td class="px-6 py-4">Aug 29, 2026</td>
+<td class="px-6 py-4 text-right">
+<button class="px-3 py-1 bg-brand-mint text-white rounded text-xs font-medium hover:bg-brand-mint-hover transition-colors">Edit</button>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="hover:bg-slate-50 transition-colors">
+<td class="px-6 py-4">
+<input class="custom-checkbox" type="checkbox"/>
+</td>
+<td class="px-6 py-4 font-medium text-slate-900">DFT-2026-0839</td>
+<td class="px-6 py-4">
+<div class="flex items-center space-x-3">
+<div class="w-8 h-8 rounded-full bg-gradient-to-tr from-orange-400 to-red-500"></div>
+<div>
+<div class="font-medium text-slate-900">Priya Nair</div>
+<div class="text-xs text-slate-500">p.nair@railops.gov</div>
+</div>
+</div>
+</td>
+<td class="px-6 py-4">Pune - Solapur</td>
+<td class="px-6 py-4">Signal Failure</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800">
+                      Overdue
+                    </span>
+</td>
+<td class="px-6 py-4">Aug 27, 2026</td>
+<td class="px-6 py-4 text-right">
+<button class="px-3 py-1 bg-brand-mint text-white rounded text-xs font-medium hover:bg-brand-mint-hover transition-colors">Edit</button>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="hover:bg-slate-50 transition-colors">
+<td class="px-6 py-4">
+<input class="custom-checkbox" type="checkbox"/>
+</td>
+<td class="px-6 py-4 font-medium text-slate-900">DFT-2026-0837</td>
+<td class="px-6 py-4">
+<div class="flex items-center space-x-3">
+<div class="w-8 h-8 rounded-full bg-gradient-to-tr from-blue-400 to-cyan-500"></div>
+<div>
+<div class="font-medium text-slate-900">Rahul Verma</div>
+<div class="text-xs text-slate-500">r.verma@railops.gov</div>
+</div>
+</div>
+</td>
+<td class="px-6 py-4">Nashik - Igatpuri</td>
+<td class="px-6 py-4">Bridge Crack</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-amber-100 text-amber-800">
+                      Pending
+                    </span>
+</td>
+<td class="px-6 py-4">Aug 28, 2026</td>
+<td class="px-6 py-4 text-right">
+<button class="px-3 py-1 bg-brand-mint text-white rounded text-xs font-medium hover:bg-brand-mint-hover transition-colors">Edit</button>
+</td>
+</tr>
+<!-- Row 4 -->
+<tr class="hover:bg-slate-50 transition-colors">
+<td class="px-6 py-4">
+<input class="custom-checkbox" type="checkbox"/>
+</td>
+<td class="px-6 py-4 font-medium text-slate-900">DFT-2026-0835</td>
+<td class="px-6 py-4">
+<div class="flex items-center space-x-3">
+<div class="w-8 h-8 rounded-full bg-gradient-to-tr from-yellow-400 to-orange-500"></div>
+<div>
+<div class="font-medium text-slate-900">Sneha Iyer</div>
+<div class="text-xs text-slate-500">s.iyer@railops.gov</div>
+</div>
+</div>
+</td>
+<td class="px-6 py-4">Mumbai - Pune</td>
+<td class="px-6 py-4">Overhead Wire</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-emerald-100 text-emerald-800">
+                      Accepted
+                    </span>
+</td>
+<td class="px-6 py-4">Aug 26, 2026</td>
+<td class="px-6 py-4 text-right">
+<button class="px-3 py-1 bg-brand-mint text-white rounded text-xs font-medium hover:bg-brand-mint-hover transition-colors">Edit</button>
+</td>
+</tr>
+<!-- Row 5 -->
+<tr class="hover:bg-slate-50 transition-colors">
+<td class="px-6 py-4">
+<input class="custom-checkbox" type="checkbox"/>
+</td>
+<td class="px-6 py-4 font-medium text-slate-900">DFT-2026-0832</td>
+<td class="px-6 py-4">
+<div class="flex items-center space-x-3">
+<div class="w-8 h-8 rounded-full bg-gradient-to-tr from-indigo-400 to-purple-500"></div>
+<div>
+<div class="font-medium text-slate-900">Karan Patel</div>
+<div class="text-xs text-slate-500">k.patel@railops.gov</div>
+</div>
+</div>
+</td>
+<td class="px-6 py-4">Vadodara - Ahmedabad</td>
+<td class="px-6 py-4">Level Crossing</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-amber-100 text-amber-800">
+                      Pending
+                    </span>
+</td>
+<td class="px-6 py-4">Aug 25, 2026</td>
+<td class="px-6 py-4 text-right">
+<button class="px-3 py-1 bg-brand-mint text-white rounded text-xs font-medium hover:bg-brand-mint-hover transition-colors">Edit</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<!-- END: Data Table Section -->
+</div>
+</div>
+<!-- END: Scrollable Content -->
+</main>
+<!-- END: Main Content Area -->
+<script data-purpose="feather-icons-init">
+    feather.replace();
+  </script>
+</body></html>

@@ -1,0 +1,478 @@
+<!DOCTYPE html><html class="h-full" lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>RAIL-OPS - Live Opportunity Feed</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<style>
+        @import url('https://fonts.googleapis.com/css2?family=Geist:wght@400;600;700&display=swap');
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "surface-bright": "#f4fbf6",
+                      "outline-variant": "#bbcac2",
+                      "on-primary-fixed-variant": "#00513f",
+                      "tertiary-fixed-dim": "#c0c6db",
+                      "tertiary": "#585e70",
+                      "inverse-primary": "#3edeb4",
+                      "on-tertiary-fixed": "#151b2a",
+                      "on-secondary-fixed": "#141b2b",
+                      "on-tertiary-container": "#3e4455",
+                      "primary-fixed-dim": "#3edeb4",
+                      "on-surface": "#161d1a",
+                      "surface-container-low": "#eef5f0",
+                      "primary": "#006b54",
+                      "surface-tint": "#006b54",
+                      "surface-container-highest": "#dde4df",
+                      "tertiary-fixed": "#dce2f7",
+                      "on-background": "#161d1a",
+                      "tertiary-container": "#acb2c6",
+                      "on-primary": "#ffffff",
+                      "primary-fixed": "#63fbcf",
+                      "outline": "#6c7a74",
+                      "background": "#f4fbf6",
+                      "on-error-container": "#93000a",
+                      "surface-container-high": "#e2eae5",
+                      "on-primary-fixed": "#002118",
+                      "secondary-fixed-dim": "#c0c6db",
+                      "surface": "#f4fbf6",
+                      "surface-container-lowest": "#ffffff",
+                      "on-secondary-fixed-variant": "#404758",
+                      "on-tertiary": "#ffffff",
+                      "secondary": "#575e70",
+                      "inverse-on-surface": "#ebf3ed",
+                      "on-primary-container": "#004e3d",
+                      "secondary-container": "#d9dff5",
+                      "on-surface-variant": "#3c4a44",
+                      "on-tertiary-fixed-variant": "#404657",
+                      "surface-container": "#e8f0ea",
+                      "on-secondary-container": "#5c6274",
+                      "secondary-fixed": "#dce2f7",
+                      "surface-dim": "#d4dcd7",
+                      "error-container": "#ffdad6",
+                      "on-error": "#ffffff",
+                      "surface-variant": "#dde4df",
+                      "error": "#ba1a1a",
+                      "primary-container": "#14c9a0",
+                      "on-secondary": "#ffffff",
+                      "inverse-surface": "#2b322f"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "container-padding": "24px",
+                      "gutter": "16px",
+                      "lg": "24px",
+                      "xs": "4px",
+                      "xxl": "48px",
+                      "base": "4px",
+                      "md": "16px",
+                      "sm": "8px",
+                      "xl": "32px"
+              },
+              "fontFamily": {
+                      "body-md": [
+                              "Geist"
+                      ],
+                      "headline-lg-mobile": [
+                              "Geist"
+                      ],
+                      "headline-sm": [
+                              "Geist"
+                      ],
+                      "body-sm": [
+                              "Geist"
+                      ],
+                      "display": [
+                              "Geist"
+                      ],
+                      "headline-md": [
+                              "Geist"
+                      ],
+                      "label-md": [
+                              "Geist"
+                      ],
+                      "headline-lg": [
+                              "Geist"
+                      ],
+                      "body-lg": [
+                              "Geist"
+                      ]
+              },
+              "fontSize": {
+                      "body-md": [
+                              "16px",
+                              {
+                                      "lineHeight": "24px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "headline-lg-mobile": [
+                              "26px",
+                              {
+                                      "lineHeight": "32px",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "headline-sm": [
+                              "20px",
+                              {
+                                      "lineHeight": "28px",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "body-sm": [
+                              "14px",
+                              {
+                                      "lineHeight": "20px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "display": [
+                              "48px",
+                              {
+                                      "lineHeight": "56px",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "headline-md": [
+                              "24px",
+                              {
+                                      "lineHeight": "32px",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "label-md": [
+                              "12px",
+                              {
+                                      "lineHeight": "16px",
+                                      "letterSpacing": "0.02em",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "headline-lg": [
+                              "32px",
+                              {
+                                      "lineHeight": "40px",
+                                      "letterSpacing": "-0.01em",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "body-lg": [
+                              "18px",
+                              {
+                                      "lineHeight": "28px",
+                                      "fontWeight": "400"
+                              }
+                      ]
+              }
+      },
+          },
+        }
+    </script>
+</head>
+<body class="bg-background text-on-background h-full font-body-md overflow-hidden flex">
+<!-- Role State Management -->
+<script>
+        const USER_ROLE = 'CONTROLLER'; // Default: 'CONTROLLER', Set to 'ENGINEER' to see restricted state
+    </script>
+<!-- SideNavBar -->
+<nav class="fixed left-0 top-0 h-screen w-64 border-r border-outline-variant bg-surface-container-lowest z-50 flex flex-col py-lg" id="sidebar">
+<!-- Logo -->
+<div class="px-lg mb-8"><div class="px-6 py-8 flex items-center gap-3"><div class="w-8 h-8 bg-primary-container rounded flex items-center justify-center text-on-primary-container"><span class="material-symbols-outlined text-xl">grid_view</span></div><h1 class="text-xl font-bold tracking-tight text-on-surface">RAIL-OPS</h1></div></div>
+<!-- CTA -->
+
+<!-- Navigation Tabs -->
+<div class="flex-1 overflow-y-auto w-full"><div class="flex-1 flex flex-col gap-1 overflow-y-auto px-2"><div class="px-2 space-y-1"><a class="flex items-center gap-3 px-4 py-2.5 text-on-surface-variant hover:bg-surface-container rounded-lg transition-colors" href="#"><span class="material-symbols-outlined text-xl">dashboard</span><span class="font-medium text-sm">Dashboard</span></a><a class="flex items-center gap-3 px-4 py-2.5 text-on-surface-variant hover:bg-surface-container rounded-lg transition-colors" href="#"><span class="material-symbols-outlined text-xl">assignment</span><span class="font-medium text-sm">Task Backlog</span></a><a class="flex items-center gap-3 px-4 py-2.5 text-on-surface-variant hover:bg-surface-container rounded-lg transition-colors" href="#"><span class="material-symbols-outlined text-xl">calendar_today</span><span class="font-medium text-sm">Block Planner</span></a><a class="flex items-center gap-3 px-4 py-2.5 bg-primary-container/10 text-primary rounded-lg relative" href="#"><div class="absolute left-0 top-1/2 -translate-y-1/2 w-1 h-6 bg-primary rounded-r-full"></div><span class="material-symbols-outlined text-xl">sensors</span><span class="font-medium text-sm">Live Feed</span></a><a class="flex items-center gap-3 px-4 py-2.5 text-on-surface-variant hover:bg-surface-container rounded-lg transition-colors" href="#"><span class="material-symbols-outlined text-xl">bar_chart</span><span class="font-medium text-sm">Reports</span></a></div></div></div>
+<!-- Footer Tabs -->
+
+</nav>
+<!-- TopAppBar -->
+<header class="fixed top-0 right-0 left-64 h-16 z-40 bg-surface-container-lowest border-b border-outline-variant shadow-sm flex justify-between items-center px-lg w-[calc(100%-16rem)]" id="topbar"><div class="flex items-center gap-4"><h2 class="text-xl font-bold text-on-surface">Dashboard Overview</h2></div><div class="flex items-center gap-4"><div class="flex items-center gap-2 bg-surface-container px-3 py-1.5 rounded-lg border border-outline-variant/50 text-on-surface-variant"><span class="material-symbols-outlined text-sm">calendar_month</span><span class="text-xs font-medium">Aug 21, 2026 - Aug 29, 2026</span><span class="material-symbols-outlined text-sm">expand_more</span></div><button class="bg-primary text-on-primary px-4 py-1.5 rounded-full font-bold text-xs flex items-center gap-2 hover:bg-primary/90 transition-colors"><span class="material-symbols-outlined text-sm">sensors</span>VIEW LIVE FEED</button><div class="flex items-center gap-3 pl-4 border-l border-outline-variant"><div class="text-right"><p class="text-xs font-bold text-on-surface">Ravi Kumar</p><p class="text-[10px] text-on-surface-variant">Duty Engineer</p></div><div class="w-10 h-10 rounded-lg bg-gradient-to-br from-orange-400 to-red-500 flex items-center justify-center text-white font-bold">RK</div></div></div></header>
+<!-- Main Content Area -->
+<main class="ml-64 mt-16 p-lg h-[calc(100vh-4rem)] w-[calc(100%-16rem)] overflow-y-auto bg-background relative" id="main-content">
+<!-- RESTRICTED VIEW (Hidden by default, shown via JS if role='ENGINEER') -->
+<div class="hidden absolute inset-0 bg-surface-container-lowest z-30 flex flex-col items-center justify-center text-center p-8" id="restricted-view">
+<div class="w-24 h-24 bg-surface-container rounded-full flex items-center justify-center mb-6">
+<span class="material-symbols-outlined text-6xl text-outline">lock</span>
+</div>
+<h2 class="text-display font-display text-on-surface mb-4">Access Restricted</h2>
+<p class="text-body-lg font-body-lg text-on-surface-variant max-w-lg">
+                Cross-department block execution and live delay repacking is restricted to Chief Controllers.
+            </p>
+</div>
+<!-- ACTIVE VIEW (Shown if role='CONTROLLER') -->
+<div class="max-w-6xl mx-auto pb-32" id="active-view">
+<!-- Header Row -->
+<div class="flex justify-between items-end mb-8">
+<div>
+<h1 class="text-3xl font-extrabold tracking-tight text-[#111827]">Live Opportunity Feed</h1>
+<p class="text-body-md font-body-md text-on-surface-variant mt-2">Manage dynamic maintenance blocks.</p>
+</div>
+<div class="flex items-center gap-2 bg-surface-container-high px-4 py-2 rounded-full border border-outline-variant shadow-sm">
+<span class="relative flex h-3 w-3">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary-container opacity-75"></span>
+<span class="relative inline-flex rounded-full h-3 w-3 bg-primary"></span>
+</span>
+<span class="text-label-md font-label-md font-bold text-on-surface">COA Live Sync</span>
+</div>
+</div>
+<!-- Trigger Event (Live Delay Card) -->
+<div class="bg-surface-container-lowest border-2 border-[#E8A33D] rounded-2xl p-6 mb-8 shadow-md relative overflow-hidden animate-[pulse_3s_ease-in-out_infinite]">
+<!-- Ambient warning glow -->
+<div class="absolute -right-10 -top-10 w-48 h-48 bg-[#E8A33D] opacity-10 blur-3xl rounded-full"></div>
+<div class="flex items-start justify-between relative z-10">
+<div class="flex gap-4 items-start">
+<div class="w-12 h-12 rounded-full bg-[#E8A33D]/20 flex items-center justify-center text-[#E8A33D] shrink-0">
+<span class="material-symbols-outlined text-2xl font-bold">warning</span>
+</div>
+<div>
+<h3 class="text-headline-md font-headline-md font-bold text-on-surface mb-1">Goods-402 Freight Delayed by 180 Mins</h3>
+<p class="text-body-md font-body-md text-on-surface-variant">Unexpected locomotive failure at Sector 7. Track availability window expanded.</p>
+</div>
+</div>
+<div class="text-right">
+<p class="text-label-md font-label-md text-outline mb-1 uppercase tracking-widest">Margin Closes In</p>
+<p class="text-3xl font-mono font-bold text-[#C13B3B] bg-surface-container-high px-4 py-2 rounded-lg border border-outline-variant shadow-inner">02:59:45</p>
+</div>
+</div>
+</div>
+<!-- AI Repacking Engine (Interactive Sandbox) -->
+<div class="bg-surface-container-lowest rounded-2xl border border-outline-variant shadow-sm overflow-hidden mb-8">
+<!-- Sticky Utilisation Header -->
+<div class="sticky top-0 bg-surface-container-lowest/90 backdrop-blur-md border-b border-outline-variant p-6 z-20">
+<div class="flex justify-between items-end mb-4">
+<div>
+<h3 class="text-headline-sm font-headline-sm font-bold text-on-surface">AI Repacking Engine</h3>
+<p class="text-body-sm font-body-sm text-on-surface-variant">Select pending tasks to fit the new 180m window.</p>
+</div>
+<div class="text-right">
+<p class="text-label-md font-label-md text-outline mb-1 uppercase tracking-widest">Window Utilization</p>
+<p class="text-headline-sm font-headline-sm font-bold" id="utilization-text">
+<span class="text-primary" id="current-mins">175</span> <span class="text-on-surface-variant">/ 180 mins</span>
+</p>
+</div>
+</div>
+<!-- Progress Bar -->
+<div class="w-full h-4 bg-surface-container rounded-full overflow-hidden border border-outline-variant">
+<div class="h-full bg-primary-container transition-all duration-300 ease-out" id="utilization-bar" style="width: 97.2222%;"></div>
+</div>
+</div>
+<!-- Task Grid -->
+<div class="p-6">
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-4" id="task-list">
+<!-- Task 1 -->
+<label class="task-card flex items-start gap-4 p-5 rounded-xl border border-outline-variant bg-surface hover:bg-surface-container transition-colors cursor-pointer relative overflow-hidden group">
+<input checked="" class="task-toggle peer sr-only" data-duration="90" type="checkbox">
+<div class="w-14 h-8 bg-surface-container-highest rounded-full peer-checked:bg-primary-container peer-focus:ring-2 peer-focus:ring-primary/20 transition-colors relative shrink-0 mt-1">
+<div class="w-6 h-6 bg-surface-container-lowest rounded-full absolute top-1 left-1 peer-checked:translate-x-6 transition-transform shadow-sm"></div>
+</div>
+<div class="flex-1">
+<div class="flex justify-between items-start mb-2">
+<div class="flex items-center gap-2">
+<span class="px-2 py-0.5 rounded text-[10px] font-bold tracking-wider bg-blue-100 text-blue-800 border border-blue-200">TMS</span>
+<span class="text-label-md font-label-md font-bold text-on-surface">TRK-01</span>
+</div>
+<span class="text-label-md font-label-md font-bold text-on-surface-variant bg-surface-container-high px-2 py-1 rounded-md">90m</span>
+</div>
+<p class="text-body-md font-body-md text-on-surface-variant mb-3">Emergency rail flaw rectification at Milepost 42.</p>
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px] text-primary">psychiatry</span>
+<span class="text-[11px] font-medium text-primary uppercase tracking-wide">AI Criticality: High</span>
+</div>
+</div>
+<!-- Selection highlight ring -->
+<div class="absolute inset-0 border-2 border-transparent peer-checked:border-primary/20 rounded-xl pointer-events-none"></div>
+</label>
+<!-- Task 2 -->
+<label class="task-card flex items-start gap-4 p-5 rounded-xl border border-outline-variant bg-surface hover:bg-surface-container transition-colors cursor-pointer relative overflow-hidden group">
+<input checked="" class="task-toggle peer sr-only" data-duration="45" type="checkbox">
+<div class="w-14 h-8 bg-surface-container-highest rounded-full peer-checked:bg-primary-container peer-focus:ring-2 peer-focus:ring-primary/20 transition-colors relative shrink-0 mt-1">
+<div class="w-6 h-6 bg-surface-container-lowest rounded-full absolute top-1 left-1 peer-checked:translate-x-6 transition-transform shadow-sm"></div>
+</div>
+<div class="flex-1">
+<div class="flex justify-between items-start mb-2">
+<div class="flex items-center gap-2">
+<span class="px-2 py-0.5 rounded text-[10px] font-bold tracking-wider bg-green-100 text-green-800 border border-green-200">SMMS</span>
+<span class="text-label-md font-label-md font-bold text-on-surface">SIG-01</span>
+</div>
+<span class="text-label-md font-label-md font-bold text-on-surface-variant bg-surface-container-high px-2 py-1 rounded-md">45m</span>
+</div>
+<p class="text-body-md font-body-md text-on-surface-variant mb-3">Routine interlocking relay inspection and testing.</p>
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px] text-primary">psychiatry</span>
+<span class="text-[11px] font-medium text-primary uppercase tracking-wide">AI Criticality: Med</span>
+</div>
+</div>
+<!-- Selection highlight ring -->
+<div class="absolute inset-0 border-2 border-transparent peer-checked:border-primary/20 rounded-xl pointer-events-none"></div>
+</label>
+<!-- Task 3 -->
+<label class="task-card flex items-start gap-4 p-5 rounded-xl border border-outline-variant bg-surface hover:bg-surface-container transition-colors cursor-pointer relative overflow-hidden group">
+<input checked="" class="task-toggle peer sr-only" data-duration="40" type="checkbox">
+<div class="w-14 h-8 bg-surface-container-highest rounded-full peer-checked:bg-primary-container peer-focus:ring-2 peer-focus:ring-primary/20 transition-colors relative shrink-0 mt-1">
+<div class="w-6 h-6 bg-surface-container-lowest rounded-full absolute top-1 left-1 peer-checked:translate-x-6 transition-transform shadow-sm"></div>
+</div>
+<div class="flex-1">
+<div class="flex justify-between items-start mb-2">
+<div class="flex items-center gap-2">
+<span class="px-2 py-0.5 rounded text-[10px] font-bold tracking-wider bg-orange-100 text-orange-800 border border-orange-200">TDMS</span>
+<span class="text-label-md font-label-md font-bold text-on-surface">OHE-01</span>
+</div>
+<span class="text-label-md font-label-md font-bold text-on-surface-variant bg-surface-container-high px-2 py-1 rounded-md">40m</span>
+</div>
+<p class="text-body-md font-body-md text-on-surface-variant mb-3">Overhead equipment tension calibration (Sector 7).</p>
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px] text-primary">psychiatry</span>
+<span class="text-[11px] font-medium text-primary uppercase tracking-wide">AI Criticality: Med</span>
+</div>
+</div>
+<!-- Selection highlight ring -->
+<div class="absolute inset-0 border-2 border-transparent peer-checked:border-primary/20 rounded-xl pointer-events-none"></div>
+</label>
+<!-- Task 4 -->
+<label class="task-card flex items-start gap-4 p-5 rounded-xl border border-outline-variant bg-surface hover:bg-surface-container transition-colors cursor-pointer relative overflow-hidden group">
+<input class="task-toggle peer sr-only" data-duration="60" type="checkbox">
+<div class="w-14 h-8 bg-surface-container-highest rounded-full peer-checked:bg-primary-container peer-focus:ring-2 peer-focus:ring-primary/20 transition-colors relative shrink-0 mt-1">
+<div class="w-6 h-6 bg-surface-container-lowest rounded-full absolute top-1 left-1 peer-checked:translate-x-6 transition-transform shadow-sm"></div>
+</div>
+<div class="flex-1">
+<div class="flex justify-between items-start mb-2">
+<div class="flex items-center gap-2">
+<span class="px-2 py-0.5 rounded text-[10px] font-bold tracking-wider bg-blue-100 text-blue-800 border border-blue-200">TMS</span>
+<span class="text-label-md font-label-md font-bold text-on-surface">TRK-02</span>
+</div>
+<span class="text-label-md font-label-md font-bold text-on-surface-variant bg-surface-container-high px-2 py-1 rounded-md">60m</span>
+</div>
+<p class="text-body-md font-body-md text-on-surface-variant mb-3">Preventative ballast tamping operation.</p>
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px] text-outline">psychiatry</span>
+<span class="text-[11px] font-medium text-outline uppercase tracking-wide">AI Criticality: Low</span>
+</div>
+</div>
+<!-- Selection highlight ring -->
+<div class="absolute inset-0 border-2 border-transparent peer-checked:border-primary/20 rounded-xl pointer-events-none"></div>
+</label>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Execution Footer -->
+<footer class="fixed bottom-0 right-0 w-[calc(100%-16rem)] h-20 bg-surface-container-lowest border-t border-outline-variant shadow-[0_-4px_20px_rgba(0,0,0,0.03)] z-40 px-lg flex items-center justify-end gap-4" id="execution-footer">
+<button class="px-6 py-3 rounded-xl border border-outline-variant bg-surface-container-lowest text-on-surface hover:bg-surface-container transition-colors text-label-md font-label-md font-bold">
+            Dismiss Window
+        </button>
+<button class="px-6 py-3 rounded-xl bg-primary text-on-primary hover:bg-surface-tint shadow-sm hover:shadow-md transition-all text-label-md font-label-md font-bold flex items-center gap-2" id="dispatch-btn">
+<span class="material-symbols-outlined text-sm">send</span>
+<span id="dispatch-text" class="">Accept Plan &amp; Dispatch Crews</span>
+</button>
+</footer>
+<!-- Interactive Logic Script -->
+<script>
+        document.addEventListener('DOMContentLoaded', () => {
+            
+            // --- Navigation State Logic ---
+            const navData = {"name": "SideNavBar", "num_tabs": 8, "tab_labels": ["Dashboard", "Live Feed", "Time Tracking", "Task List", "Lead Pipeline", "Estimates", "Invoices", "Reports"], "tab_icons": ["dashboard", "dynamic_feed", "schedule", "assignment", "analytics", "request_quote", "receipt_long", "bar_chart"]};
+            const navTabsContainer = document.getElementById('nav-tabs');
+            
+            navData.tab_labels.forEach((label, index) => {
+                const icon = navData.tab_icons[index];
+                const isActive = label === "Live Feed";
+                const li = document.createElement('li');
+                li.className = 'w-full px-2';
+                
+                const activeClasses = "flex items-center gap-3 px-4 py-3 bg-primary-container/10 text-primary border-l-4 border-primary font-bold rounded-r-lg w-full scale-[0.99] transition-transform";
+                const inactiveClasses = "flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:text-primary hover:bg-surface-container transition-all duration-200 rounded-lg w-full border-l-4 border-transparent";
+                
+                li.innerHTML = `
+                    <a href="#" class="${isActive ? activeClasses : inactiveClasses}">
+                        <span class="material-symbols-outlined" ${isActive ? 'style="font-variation-settings: \'FILL\' 1;"' : ''}>${icon}</span>
+                        <span class="text-body-md font-body-md ${isActive ? 'font-bold' : 'font-medium'}">${label}</span>
+                    </a>
+                `;
+                navTabsContainer.appendChild(li);
+            });
+
+            // --- RBAC Logic ---
+            if (USER_ROLE === 'ENGINEER') {
+                document.getElementById('active-view').classList.add('hidden');
+                document.getElementById('execution-footer').classList.add('hidden');
+                document.getElementById('restricted-view').classList.remove('hidden');
+            }
+
+            // --- Interactive Sandbox Logic ---
+            const MAX_MINS = 180;
+            const toggles = document.querySelectorAll('.task-toggle');
+            const currentMinsEl = document.getElementById('current-mins');
+            const barEl = document.getElementById('utilization-bar');
+            const dispatchBtn = document.getElementById('dispatch-btn');
+            const dispatchText = document.getElementById('dispatch-text');
+
+            function calculateUtilization() {
+                let total = 0;
+                toggles.forEach(t => {
+                    if (t.checked) {
+                        total += parseInt(t.dataset.duration);
+                    }
+                });
+
+                // Update text
+                currentMinsEl.textContent = total;
+                
+                // Update bar percentage
+                const percentage = Math.min((total / MAX_MINS) * 100, 100);
+                barEl.style.width = `${percentage}%`;
+
+                // Status logic
+                if (total > MAX_MINS) {
+                    // Overbooked state
+                    currentMinsEl.classList.remove('text-primary');
+                    currentMinsEl.classList.add('text-[#C13B3B]');
+                    barEl.classList.remove('bg-primary-container');
+                    barEl.classList.add('bg-[#C13B3B]');
+                    
+                    // Disable button
+                    dispatchBtn.classList.remove('bg-primary', 'text-on-primary', 'hover:bg-surface-tint', 'shadow-sm', 'hover:shadow-md');
+                    dispatchBtn.classList.add('bg-surface-container-highest', 'text-on-surface-variant', 'cursor-not-allowed');
+                    dispatchBtn.disabled = true;
+                    dispatchText.textContent = "Resolve Conflict to Dispatch";
+                    dispatchBtn.querySelector('.material-symbols-outlined').textContent = 'warning';
+                } else {
+                    // Valid state
+                    currentMinsEl.classList.remove('text-[#C13B3B]');
+                    currentMinsEl.classList.add('text-primary');
+                    barEl.classList.remove('bg-[#C13B3B]');
+                    barEl.classList.add('bg-primary-container');
+                    
+                    // Enable button
+                    dispatchBtn.classList.add('bg-primary', 'text-on-primary', 'hover:bg-surface-tint', 'shadow-sm', 'hover:shadow-md');
+                    dispatchBtn.classList.remove('bg-surface-container-highest', 'text-on-surface-variant', 'cursor-not-allowed');
+                    dispatchBtn.disabled = false;
+                    dispatchText.textContent = "Accept Plan & Dispatch Crews";
+                    dispatchBtn.querySelector('.material-symbols-outlined').textContent = 'send';
+                }
+            }
+
+            // Bind events
+            toggles.forEach(t => {
+                t.addEventListener('change', calculateUtilization);
+            });
+
+            // Initial calculation
+            calculateUtilization();
+        });
+    </script>
+
+
+</body></html>

@@ -1,0 +1,870 @@
+<!DOCTYPE html><html class="light" lang="en" style=""><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>RAIL-OPS Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;600;700&amp;display=swap" rel="stylesheet">
+<script src="https://unpkg.com/lucide@latest"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-secondary-fixed-variant": "#404758",
+                      "on-error": "#ffffff",
+                      "surface-container-lowest": "#ffffff",
+                      "on-secondary-container": "#5c6274",
+                      "tertiary-container": "#acb2c6",
+                      "on-background": "#161d1a",
+                      "tertiary-fixed": "#dce2f7",
+                      "error": "#ba1a1a",
+                      "background": "#f4fbf6",
+                      "on-primary-fixed": "#002118",
+                      "on-tertiary-fixed": "#151b2a",
+                      "on-tertiary-fixed-variant": "#404657",
+                      "on-surface-variant": "#3c4a44",
+                      "tertiary": "#585e70",
+                      "surface-container-low": "#eef5f0",
+                      "secondary-fixed-dim": "#c0c6db",
+                      "outline-variant": "#bbcac2",
+                      "on-secondary-fixed": "#141b2b",
+                      "inverse-on-surface": "#ebf3ed",
+                      "surface-container-highest": "#dde4df",
+                      "primary": "#006b54",
+                      "on-tertiary-container": "#3e4455",
+                      "tertiary-fixed-dim": "#c0c6db",
+                      "on-primary-container": "#004e3d",
+                      "surface-dim": "#d4dcd7",
+                      "primary-fixed-dim": "#3edeb4",
+                      "secondary-fixed": "#dce2f7",
+                      "on-surface": "#161d1a",
+                      "primary-fixed": "#63fbcf",
+                      "surface-variant": "#dde4df",
+                      "inverse-primary": "#3edeb4",
+                      "surface": "#f4fbf6",
+                      "secondary-container": "#d9dff5",
+                      "inverse-surface": "#2b322f",
+                      "surface-tint": "#006b54",
+                      "on-primary": "#ffffff",
+                      "surface-bright": "#f4fbf6",
+                      "primary-container": "#14c9a0",
+                      "on-secondary": "#ffffff",
+                      "secondary": "#575e70",
+                      "on-tertiary": "#ffffff",
+                      "surface-container": "#e8f0ea",
+                      "surface-container-high": "#e2eae5",
+                      "on-error-container": "#93000a",
+                      "outline": "#6c7a74",
+                      "on-primary-fixed-variant": "#00513f",
+                      "error-container": "#ffdad6"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "sm": "8px",
+                      "base": "4px",
+                      "container-padding": "24px",
+                      "xxl": "48px",
+                      "md": "16px",
+                      "xl": "32px",
+                      "lg": "24px",
+                      "gutter": "16px",
+                      "xs": "4px"
+              },
+              "fontFamily": {
+                      "headline-md": [
+                              "Geist"
+                      ],
+                      "display": [
+                              "Geist"
+                      ],
+                      "body-md": [
+                              "Geist"
+                      ],
+                      "body-lg": [
+                              "Geist"
+                      ],
+                      "body-sm": [
+                              "Geist"
+                      ],
+                      "label-md": [
+                              "Geist"
+                      ],
+                      "headline-sm": [
+                              "Geist"
+                      ],
+                      "headline-lg": [
+                              "Geist"
+                      ],
+                      "headline-lg-mobile": [
+                              "Geist"
+                      ]
+              },
+              "fontSize": {
+                      "headline-md": [
+                              "24px",
+                              {
+                                      "lineHeight": "32px",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "display": [
+                              "48px",
+                              {
+                                      "lineHeight": "56px",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "body-md": [
+                              "16px",
+                              {
+                                      "lineHeight": "24px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "body-lg": [
+                              "18px",
+                              {
+                                      "lineHeight": "28px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "body-sm": [
+                              "14px",
+                              {
+                                      "lineHeight": "20px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "label-md": [
+                              "12px",
+                              {
+                                      "lineHeight": "16px",
+                                      "letterSpacing": "0.02em",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "headline-sm": [
+                              "20px",
+                              {
+                                      "lineHeight": "28px",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "headline-lg": [
+                              "32px",
+                              {
+                                      "lineHeight": "40px",
+                                      "letterSpacing": "-0.01em",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "headline-lg-mobile": [
+                              "26px",
+                              {
+                                      "lineHeight": "32px",
+                                      "fontWeight": "600"
+                              }
+                      ]
+              }
+      },
+          },
+        }
+    </script>
+<style>
+        body { font-family: 'Geist', sans-serif; background-color: #F4FBF6; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .gantt-track {
+            background-image: repeating-linear-gradient(to right, transparent, transparent 9.9%, #F3F4F6 10%);
+        }
+        
+        .block-hover:hover ~ .block-hover {
+            opacity: 0.4;
+        }
+        .blocks-container:hover .block-item:not(:hover) {
+            opacity: 0.4;
+        }
+        
+        .row-details {
+            display: grid;
+            grid-template-rows: 0fr;
+            transition: grid-template-rows 0.3s ease-out;
+        }
+        .row-details.open {
+            grid-template-rows: 1fr;
+        }
+        .row-details > div {
+            overflow: hidden;
+        }
+        .row-expand-icon {
+            transition: transform 0.3s ease;
+        }
+        .open + .task-row-details .row-expand-icon {
+            transform: rotate(180deg);
+        }
+    </style>
+</head>
+<body class="text-on-background bg-background h-screen overflow-hidden flex">
+<!-- SideNavBar -->
+<nav class="fixed left-0 top-0 h-screen w-64 border-r border-[#E5E7EB] bg-white flex flex-col py-6 z-50">
+<div class="px-6 mb-10 flex items-center gap-3">
+<div class="w-8 h-8 rounded-md bg-[#14c9a0] text-white flex items-center justify-center">
+<span class="material-symbols-outlined text-lg" data-icon="domain">domain</span>
+</div>
+<h1 class="text-[18px] font-bold text-[#161d1a]">RAIL-OPS</h1>
+</div>
+<div class="flex-1 overflow-y-auto">
+<ul class="space-y-2 px-3">
+<li class="">
+<a class="flex items-center gap-3 px-3 py-2.5 text-[#5c6274] hover:bg-gray-50 rounded-lg font-medium transition-all duration-200" href="#" onclick="switchView('dashboard')">
+<span class="material-symbols-outlined text-[20px]" data-icon="dashboard">dashboard</span>
+<span class="text-[14px]">Dashboard</span>
+</a>
+</li>
+<li class="">
+<a class="flex items-center gap-3 px-4 py-2.5 bg-[#F2FBF9] text-[#14C9A0] rounded-lg font-medium border-l-4 border-[#14C9A0] transition-all duration-200" href="#" onclick="switchView('backlog')">
+<span class="material-symbols-outlined text-[20px]" data-icon="list_alt">list_alt</span>
+<span class="text-[14px]">Task Backlog</span>
+</a>
+</li>
+<li class="">
+<a class="flex items-center gap-3 px-4 py-2.5 text-[#5c6274] hover:bg-gray-50 rounded-lg font-medium transition-all duration-200" href="#" onclick="switchView('planner')">
+<span class="material-symbols-outlined text-[20px]" data-icon="calendar_month">calendar_month</span>
+<span class="text-[14px]">Block Planner</span>
+</a>
+</li>
+<!-- RBAC Controlled -->
+<li id="liveFeedNav" class="">
+<a class="flex items-center gap-3 px-4 py-2.5 text-[#5c6274] hover:bg-gray-50 rounded-lg font-medium transition-all duration-200" href="#">
+<span class="material-symbols-outlined text-[20px]" data-icon="sensors">sensors</span>
+<span class="text-[14px] flex-1">Live Feed</span>
+</a>
+</li>
+<li class="">
+<a class="flex items-center gap-3 px-4 py-2.5 text-[#5c6274] hover:bg-gray-50 rounded-lg font-medium transition-all duration-200" href="#">
+<span class="material-symbols-outlined text-[20px]" data-icon="bar_chart">bar_chart</span>
+<span class="text-[14px]">Reports</span>
+</a>
+</li>
+</ul>
+</div>
+<div class="mt-auto px-4 hidden">
+<!-- Role Switcher (Hidden but kept for logic) -->
+<select class="text-xs border-none bg-transparent rounded-md py-1 px-2 cursor-pointer focus:ring-0 text-on-background font-semibold" id="sidebarRoleSelect" onchange="syncRoles(this.value)">
+<option value="CONTROLLER">CONTROLLER</option>
+<option value="ENGINEER">ENGINEER</option>
+</select>
+</div>
+</nav>
+<!-- Main Content Area -->
+<div class="flex-1 ml-64 flex flex-col h-screen">
+<!-- TopAppBar -->
+<header class="h-20 border-b border-[#E5E7EB] bg-white z-40 flex justify-between items-center px-8 shadow-sm shrink-0">
+<div class="flex items-center gap-6">
+<h2 class="text-[20px] text-[#161d1a] font-bold" id="appBarTitle">Unified Task Registry</h2>
+</div>
+<div class="flex items-center gap-4">
+<div class="flex items-center border border-[#E5E7EB] rounded-lg px-3 py-1.5 bg-white text-[14px] text-[#3c4a44]">
+<span class="material-symbols-outlined text-[18px] mr-2 text-[#6c7a74]">calendar_today</span>
+            Aug 21, 2026 - Aug 29, 2026
+            <span class="material-symbols-outlined text-[18px] ml-2 text-[#6c7a74]">expand_more</span>
+</div>
+<button class="bg-[#14c9a0] text-white px-4 py-2 rounded-lg text-[13px] font-bold flex items-center gap-2 hover:bg-[#14c9a0]/90 transition-colors">
+<span class="material-symbols-outlined text-[18px]">sensors</span>
+            VIEW LIVE FEED
+        </button>
+<div class="flex items-center gap-3 border border-[#E5E7EB] rounded-xl px-3 py-1.5 ml-2 bg-white">
+<div class="w-8 h-8 rounded-md bg-gradient-to-tr from-pink-500 to-orange-400 overflow-hidden flex-shrink-0">
+</div>
+<div class="flex flex-col">
+<span class="text-[13px] font-bold text-[#161d1a] leading-tight">Ravi Kumar</span>
+<span class="text-[11px] text-[#5c6274] leading-tight">Duty Engineer</span>
+</div>
+</div>
+<div class="flex flex-col ml-4 border-l pl-4 border-[#E5E7EB]">
+<label class="text-[10px] text-[#5c6274] font-bold uppercase tracking-wider mb-1">Simulate Role</label>
+<select class="text-xs border-outline-variant rounded-md py-1 px-2 focus:ring-[#14c9a0] focus:border-[#14c9a0]" id="roleSelect" onchange="syncRoles(this.value)">
+<option value="CONTROLLER">CONTROLLER (All Tasks)</option>
+<option value="ENGINEER">ENGINEER (Track Only)</option>
+</select>
+</div>
+</div>
+</header>
+<!-- View Container -->
+<main class="flex-1 overflow-auto p-8 bg-background relative" id="mainContent">
+<!-- View 1: Unified Task Registry (/backlog) -->
+<div class="max-w-[1600px] mx-auto space-y-6" id="view-backlog">
+<h2 class="text-2xl font-extrabold text-[#3c4a44] mb-4">Unified Task Registry</h2>
+<!-- Controls -->
+<div class="flex items-center justify-between bg-white p-4 rounded-xl border border-outline-variant shadow-sm mb-6">
+<div class="flex items-center gap-4">
+<div class="relative w-80">
+<span class="material-symbols-outlined absolute left-3 top-2 text-on-surface-variant">search</span>
+<input class="w-full pl-10 pr-4 py-2 border border-outline-variant rounded-full text-body-sm focus:ring-2 focus:ring-[#14c9a0]/20 focus:border-[#14c9a0] bg-white transition-all" placeholder="Search tasks, IDs, or locations..." type="text">
+</div>
+<div class="flex items-center gap-2">
+<button class="px-4 py-1.5 rounded-full text-[14px] bg-[#14c9a0]/10 text-[#14c9a0] font-semibold transition-all border border-transparent">All</button>
+<button class="px-4 py-1.5 rounded-full text-[14px] border border-outline-variant text-on-surface-variant hover:bg-gray-50 transition-all font-medium">Critical</button>
+<button class="px-4 py-1.5 rounded-full text-[14px] border border-outline-variant text-on-surface-variant hover:bg-gray-50 transition-all font-medium">High</button>
+<button class="px-4 py-1.5 rounded-full text-[14px] border border-outline-variant text-on-surface-variant hover:bg-gray-50 transition-all font-medium">Medium</button>
+</div>
+</div>
+<div class="flex items-center gap-3">
+<div class="flex items-center border border-outline-variant rounded-lg px-3 py-1.5 bg-white text-[14px]">
+<span class="text-[#5c6274] mr-2 font-medium">Sort By:</span>
+<select class="border-none bg-transparent p-0 text-[#161d1a] font-semibold focus:ring-0 text-[14px] cursor-pointer">
+<option>Track Criticality</option>
+<option>Priority</option>
+<option>Due Date</option>
+</select>
+</div>
+</div>
+</div>
+<!-- Table Container -->
+<div class="bg-white rounded-2xl border border-outline-variant shadow-sm overflow-hidden">
+<table class="w-full text-left border-collapse" id="taskTable">
+<thead>
+<tr class="border-b border-[#F3F4F6] bg-white text-[#5c6274]">
+<th class="py-4 px-6 text-[12px] font-semibold uppercase tracking-wider w-12"></th>
+<th class="py-4 px-6 text-[12px] font-semibold uppercase tracking-wider">Defect ID</th>
+<th class="py-4 px-6 text-[12px] font-semibold uppercase tracking-wider">Originating Dept</th>
+<th class="py-4 px-6 text-[12px] font-semibold uppercase tracking-wider">Section / Km</th>
+<th class="py-4 px-6 text-[12px] font-semibold uppercase tracking-wider">AI Criticality</th>
+<th class="py-4 px-6 text-[12px] font-semibold uppercase tracking-wider">Req. Time</th>
+<th class="py-4 px-6 text-[12px] font-semibold uppercase tracking-wider">Due Date</th>
+<th class="py-4 px-6 text-[12px] font-semibold uppercase tracking-wider text-center">Compatibility</th>
+</tr>
+</thead>
+<tbody class="text-[14px] text-on-background">
+<!-- Row 1 -->
+<tr class="task-row border-b border-[#F3F4F6] hover:bg-gray-50 transition-all duration-200 cursor-pointer group hover:border-l-4 hover:border-l-[#14c9a0]" data-dept="Track Maint." onclick="toggleRowDetails('row1-details', this)">
+<td class="py-4 px-6 text-center text-on-surface-variant w-12">
+<span class="material-symbols-outlined row-expand-icon">expand_more</span>
+</td>
+<td class="py-4 px-6 font-bold text-[#161d1a]">TRK-9021</td>
+<td class="py-4 px-6 font-medium">Track Maint.</td>
+<td class="py-4 px-6 text-[#5c6274]"><div class="flex items-center gap-2"><span class="">Km 142.5 (North)</span><span class="material-symbols-outlined text-[18px] text-[#6c7a74] cursor-pointer hover:text-[#14c9a0] transition-colors" title="View on Map">location_on</span></div></td>
+<td class="py-4 px-6">
+<span class="inline-flex items-center px-3 py-1 rounded-full text-[12px] font-bold bg-[#ba1a1a]/10 text-[#ba1a1a]">
+<span class="w-2 h-2 rounded-full bg-[#ba1a1a] mr-2"></span>
+                                        98 Critical
+                                    </span>
+</td>
+<td class="py-4 px-6 text-[#5c6274]">4.5 hrs</td>
+<td class="py-4 px-6 font-medium text-[#161d1a]">Oct 12</td>
+<td class="py-4 px-6 text-center">
+<i class="text-[#14c9a0]" data-lucide="layers"></i>
+</td>
+</tr>
+<tr class="task-row-details border-b border-[#F3F4F6] p-0" data-dept="Track Maint.">
+<td class="p-0" colspan="8">
+<div class="row-details bg-gray-50" id="row1-details">
+<div class="p-6 pl-20 flex gap-6">
+<div class="flex-1">
+<h4 class="text-[12px] font-bold text-[#5c6274] mb-2 uppercase tracking-wider">AI Reasoning</h4>
+<p class="text-[14px] text-[#3c4a44] mb-4 bg-white p-4 rounded-lg border border-outline-variant shadow-sm">Score boosted to 95 due to high traffic density + 3 days overdue. Historical sensor data indicates a 98% probability of rail fracture within 72 hours if unattended. High clustering with signal maintenance (SIG-882) in the same block.</p>
+<div class="flex gap-3">
+<button class="bg-[#14c9a0] text-white px-5 py-2.5 rounded-lg text-[13px] font-bold hover:bg-[#14c9a0]/90 transition-all shadow-sm">Schedule in Block</button>
+<button class="bg-white border border-outline-variant text-[#3c4a44] px-5 py-2.5 rounded-lg text-[13px] font-bold hover:bg-gray-50 transition-all shadow-sm">View Full Report</button>
+</div>
+</div>
+<div class="w-1/3 rounded-xl overflow-hidden border border-outline-variant h-40 relative shadow-sm">
+<img class="object-cover w-full h-full" data-alt="A high resolution, close up shot of a railway track section with visible stress marks, captured in bright daylight with a clean, industrial aesthetic and neutral tones." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCtJJe-GfSqwdvXvxfPFbkOp_q5NKg0afyfOPGKmxl581on1RZbNmpW-POsXwe0J1ROmagBDbv4ffmhSK94Bk1FUj4rjN829i9SitPksgostTMZCVNngEUltY1G59ljDQ5rDs2ulpPeLCfRy_RSBs9d3NYuhw1-eiZ26TmL4_QbNkMed1Wxbju0fG9kRseNVKHN1MsyOt-k3xyNFSQHfjUHTFk5qXeWLWDrkYbD9C7pKd7sTGz1Q_W4-Q">
+</div>
+</div>
+</div>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="task-row border-b border-[#F3F4F6] hover:bg-gray-50 transition-all duration-200 cursor-pointer group hover:border-l-4 hover:border-l-[#14c9a0]" data-dept="Signals" onclick="toggleRowDetails('row2-details', this)">
+<td class="py-4 px-6 text-center text-on-surface-variant w-12">
+<span class="material-symbols-outlined row-expand-icon">expand_more</span>
+</td>
+<td class="py-4 px-6 font-bold text-[#161d1a]">SIG-882</td>
+<td class="py-4 px-6 font-medium">Signals</td>
+<td class="py-4 px-6 text-[#5c6274]"><div class="flex items-center gap-2"><span class="">Km 142.8 (North)</span><span class="material-symbols-outlined text-[18px] text-[#6c7a74] cursor-pointer hover:text-[#14c9a0] transition-colors" title="View on Map">location_on</span></div></td>
+<td class="py-4 px-6">
+<span class="inline-flex items-center px-3 py-1 rounded-full text-[12px] font-bold bg-[#f59e0b]/10 text-[#f59e0b]">
+<span class="w-2 h-2 rounded-full bg-[#f59e0b] mr-2"></span>
+                                        65 Watch
+                                    </span>
+</td>
+<td class="py-4 px-6 text-[#5c6274]">2.0 hrs</td>
+<td class="py-4 px-6 font-medium text-[#161d1a]">Oct 15</td>
+<td class="py-4 px-6 text-center">
+<i class="text-[#14c9a0]" data-lucide="layers"></i>
+</td>
+</tr>
+<tr class="task-row-details border-b border-[#F3F4F6] p-0" data-dept="Signals">
+<td class="p-0" colspan="8">
+<div class="row-details bg-gray-50" id="row2-details">
+<div class="p-6 pl-20 flex gap-6">
+<div class="flex-1">
+<h4 class="text-[12px] font-bold text-[#5c6274] mb-2 uppercase tracking-wider">AI Reasoning</h4>
+<p class="text-[14px] text-[#3c4a44] mb-4 bg-white p-4 rounded-lg border border-outline-variant shadow-sm">Relay calibration required within 30 days. Moderate clustering opportunity with track maintenance.</p>
+<div class="flex gap-3">
+<button class="bg-[#14c9a0] text-white px-5 py-2.5 rounded-lg text-[13px] font-bold hover:bg-[#14c9a0]/90 transition-all shadow-sm">Schedule in Block</button>
+<button class="bg-white border border-outline-variant text-[#3c4a44] px-5 py-2.5 rounded-lg text-[13px] font-bold hover:bg-gray-50 transition-all shadow-sm">View Full Report</button>
+</div>
+</div>
+</div>
+</div>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="task-row border-b border-[#F3F4F6] hover:bg-gray-50 transition-all duration-200 cursor-pointer group hover:border-l-4 hover:border-l-[#14c9a0]" data-dept="OHE" onclick="toggleRowDetails('row3-details', this)">
+<td class="py-4 px-6 text-center text-on-surface-variant w-12">
+<span class="material-symbols-outlined row-expand-icon">expand_more</span>
+</td>
+<td class="py-4 px-6 font-bold text-[#161d1a]">OHE-104</td>
+<td class="py-4 px-6 font-medium">OHE</td>
+<td class="py-4 px-6 text-[#5c6274]"><div class="flex items-center gap-2"><span class="">Km 150.2 (South)</span><span class="material-symbols-outlined text-[18px] text-[#6c7a74] cursor-pointer hover:text-[#14c9a0] transition-colors" title="View on Map">location_on</span></div></td>
+<td class="py-4 px-6">
+<span class="inline-flex items-center px-3 py-1 rounded-full text-[12px] font-bold bg-[#10b981]/10 text-[#10b981]">
+<span class="w-2 h-2 rounded-full bg-[#10b981] mr-2"></span>
+                                        45 Routine
+                                    </span>
+</td>
+<td class="py-4 px-6 text-[#5c6274]">1.5 hrs</td>
+<td class="py-4 px-6 font-medium text-[#161d1a]">Oct 20</td>
+<td class="py-4 px-6 text-center text-[#5c6274]">
+<span class="material-symbols-outlined text-[20px]">remove</span>
+</td>
+</tr>
+<tr class="task-row-details border-b border-[#F3F4F6] p-0" data-dept="OHE">
+<td class="p-0" colspan="8">
+<div class="row-details bg-gray-50" id="row3-details">
+<div class="p-6 pl-20 flex gap-6">
+<div class="flex-1">
+<h4 class="text-[12px] font-bold text-[#5c6274] mb-2 uppercase tracking-wider">AI Reasoning</h4>
+<p class="text-[14px] text-[#3c4a44] mb-4 bg-white p-4 rounded-lg border border-outline-variant shadow-sm">Routine inspection of overhead equipment. No immediate risks identified. Can be scheduled during regular low-traffic windows.</p>
+<div class="flex gap-3">
+<button class="bg-[#14c9a0] text-white px-5 py-2.5 rounded-lg text-[13px] font-bold hover:bg-[#14c9a0]/90 transition-all shadow-sm">Schedule in Block</button>
+</div>
+</div>
+</div>
+</div>
+</td>
+</tr>
+<!-- Row 4 -->
+<tr class="task-row border-b border-[#F3F4F6] hover:bg-gray-50 transition-all duration-200 cursor-pointer group hover:border-l-4 hover:border-l-[#14c9a0]" data-dept="Track Maint." onclick="toggleRowDetails('row4-details', this)">
+<td class="py-4 px-6 text-center text-on-surface-variant w-12">
+<span class="material-symbols-outlined row-expand-icon">expand_more</span>
+</td>
+<td class="py-4 px-6 font-bold text-[#161d1a]">TRK-442</td>
+<td class="py-4 px-6 font-medium">Track Maint.</td>
+<td class="py-4 px-6 text-[#5c6274]"><div class="flex items-center gap-2"><span class="">Km 142.5 (North)</span><span class="material-symbols-outlined text-[18px] text-[#6c7a74] cursor-pointer hover:text-[#14c9a0] transition-colors" title="View on Map">location_on</span></div></td>
+<td class="py-4 px-6">
+<span class="inline-flex items-center px-3 py-1 rounded-full text-[12px] font-bold bg-[#ba1a1a]/10 text-[#ba1a1a]">
+<span class="w-2 h-2 rounded-full bg-[#ba1a1a] mr-2"></span>
+92 Critical
+</span>
+</td>
+<td class="py-4 px-6 text-[#5c6274]">6.0 hrs</td>
+<td class="py-4 px-6 font-medium text-[#161d1a]">Oct 14</td>
+<td class="py-4 px-6 text-center">
+<i class="text-[#14c9a0]" data-lucide="layers"></i>
+</td>
+</tr>
+<tr class="task-row-details border-b border-[#F3F4F6] p-0" data-dept="Track Maint.">
+<td class="p-0" colspan="8">
+<div class="row-details bg-gray-50" id="row4-details">
+<div class="p-6 pl-20 flex gap-6">
+<div class="flex-1">
+<h4 class="text-[12px] font-bold text-[#5c6274] mb-2 uppercase tracking-wider">AI Reasoning</h4>
+<p class="text-[14px] text-[#3c4a44] mb-4 bg-white p-4 rounded-lg border border-outline-variant shadow-sm">Deep ballast cleaning required. High priority due to drainage issues detected by track geometry car. Compatible with TRK-9021 for block optimization.</p>
+<div class="flex gap-3">
+<button class="bg-[#14c9a0] text-white px-5 py-2.5 rounded-lg text-[13px] font-bold hover:bg-[#14c9a0]/90 transition-all shadow-sm">Schedule in Block</button>
+</div>
+</div>
+</div>
+</div>
+</td>
+</tr>
+<!-- Row 5 -->
+<tr class="task-row border-b border-[#F3F4F6] hover:bg-gray-50 transition-all duration-200 cursor-pointer group hover:border-l-4 hover:border-l-[#14c9a0]" data-dept="Signals" onclick="toggleRowDetails('row5-details', this)">
+<td class="py-4 px-6 text-center text-on-surface-variant w-12">
+<span class="material-symbols-outlined row-expand-icon">expand_more</span>
+</td>
+<td class="py-4 px-6 font-bold text-[#161d1a]">SIG-112</td>
+<td class="py-4 px-6 font-medium">Signals</td>
+<td class="py-4 px-6 text-[#5c6274]"><div class="flex items-center gap-2"><span class="">Km 155.8 (Main)</span><span class="material-symbols-outlined text-[18px] text-[#6c7a74] cursor-pointer hover:text-[#14c9a0] transition-colors" title="View on Map">location_on</span></div></td>
+<td class="py-4 px-6">
+<span class="inline-flex items-center px-3 py-1 rounded-full text-[12px] font-bold bg-[#f59e0b]/10 text-[#f59e0b]">
+<span class="w-2 h-2 rounded-full bg-[#f59e0b] mr-2"></span>
+78 Watch
+</span>
+</td>
+<td class="py-4 px-6 text-[#5c6274]">3.5 hrs</td>
+<td class="py-4 px-6 font-medium text-[#161d1a]">Oct 18</td>
+<td class="py-4 px-6 text-center text-[#5c6274]">
+<span class="material-symbols-outlined text-[20px]">remove</span>
+</td>
+</tr>
+<tr class="task-row-details border-b border-[#F3F4F6] p-0" data-dept="Signals">
+<td class="p-0" colspan="8">
+<div class="row-details bg-gray-50" id="row5-details">
+<div class="p-6 pl-20 flex gap-6">
+<div class="flex-1">
+<h4 class="text-[12px] font-bold text-[#5c6274] mb-2 uppercase tracking-wider">AI Reasoning</h4>
+<p class="text-[14px] text-[#3c4a44] mb-4 bg-white p-4 rounded-lg border border-outline-variant shadow-sm">Interlocking logic update required. Isolated task with no immediate clustering opportunities in the current schedule window.</p>
+<div class="flex gap-3">
+<button class="bg-[#14c9a0] text-white px-5 py-2.5 rounded-lg text-[13px] font-bold hover:bg-[#14c9a0]/90 transition-all shadow-sm">Schedule in Block</button>
+</div>
+</div>
+</div>
+</div>
+</td>
+</tr>
+<!-- Row 6 -->
+<tr class="task-row border-b border-[#F3F4F6] hover:bg-gray-50 transition-all duration-200 cursor-pointer group hover:border-l-4 hover:border-l-[#14c9a0]" data-dept="OHE" onclick="toggleRowDetails('row6-details', this)">
+<td class="py-4 px-6 text-center text-on-surface-variant w-12">
+<span class="material-symbols-outlined row-expand-icon">expand_more</span>
+</td>
+<td class="py-4 px-6 font-bold text-[#161d1a]">OHE-505</td>
+<td class="py-4 px-6 font-medium">OHE</td>
+<td class="py-4 px-6 text-[#5c6274]"><div class="flex items-center gap-2"><span class="">Km 120.4 (South)</span><span class="material-symbols-outlined text-[18px] text-[#6c7a74] cursor-pointer hover:text-[#14c9a0] transition-colors" title="View on Map">location_on</span></div></td>
+<td class="py-4 px-6">
+<span class="inline-flex items-center px-3 py-1 rounded-full text-[12px] font-bold bg-[#10b981]/10 text-[#10b981]">
+<span class="w-2 h-2 rounded-full bg-[#10b981] mr-2"></span>
+30 Routine
+</span>
+</td>
+<td class="py-4 px-6 text-[#5c6274]">1.0 hrs</td>
+<td class="py-4 px-6 font-medium text-[#161d1a]">Oct 25</td>
+<td class="py-4 px-6 text-center">
+<i class="text-[#14c9a0]" data-lucide="layers"></i>
+</td>
+</tr>
+<tr class="task-row-details border-b border-[#F3F4F6] p-0" data-dept="OHE">
+<td class="p-0" colspan="8">
+<div class="row-details bg-gray-50" id="row6-details">
+<div class="p-6 pl-20 flex gap-6">
+<div class="flex-1">
+<h4 class="text-[12px] font-bold text-[#5c6274] mb-2 uppercase tracking-wider">AI Reasoning</h4>
+<p class="text-[14px] text-[#3c4a44] mb-4 bg-white p-4 rounded-lg border border-outline-variant shadow-sm">Insulator cleaning. Low priority. Can be piggybacked onto any mainline block in the South zone.</p>
+<div class="flex gap-3">
+<button class="bg-[#14c9a0] text-white px-5 py-2.5 rounded-lg text-[13px] font-bold hover:bg-[#14c9a0]/90 transition-all shadow-sm">Schedule in Block</button>
+</div>
+</div>
+</div>
+</div>
+</td>
+</tr>
+<!-- Row 7 -->
+<tr class="task-row border-b border-[#F3F4F6] hover:bg-gray-50 transition-all duration-200 cursor-pointer group hover:border-l-4 hover:border-l-[#14c9a0]" data-dept="Track Maint." onclick="toggleRowDetails('row7-details', this)">
+<td class="py-4 px-6 text-center text-on-surface-variant w-12">
+<span class="material-symbols-outlined row-expand-icon">expand_more</span>
+</td>
+<td class="py-4 px-6 font-bold text-[#161d1a]">TRK-881</td>
+<td class="py-4 px-6 font-medium">Track Maint.</td>
+<td class="py-4 px-6 text-[#5c6274]"><div class="flex items-center gap-2"><span class="">Km 160.1 (East)</span><span class="material-symbols-outlined text-[18px] text-[#6c7a74] cursor-pointer hover:text-[#14c9a0] transition-colors" title="View on Map">location_on</span></div></td>
+<td class="py-4 px-6">
+<span class="inline-flex items-center px-3 py-1 rounded-full text-[12px] font-bold bg-[#f59e0b]/10 text-[#f59e0b]">
+<span class="w-2 h-2 rounded-full bg-[#f59e0b] mr-2"></span>
+55 Watch
+</span>
+</td>
+<td class="py-4 px-6 text-[#5c6274]">2.5 hrs</td>
+<td class="py-4 px-6 font-medium text-[#161d1a]">Oct 19</td>
+<td class="py-4 px-6 text-center">
+<i class="text-[#14c9a0]" data-lucide="layers"></i>
+</td>
+</tr>
+<tr class="task-row-details border-b border-[#F3F4F6] p-0" data-dept="Track Maint.">
+<td class="p-0" colspan="8">
+<div class="row-details bg-gray-50" id="row7-details">
+<div class="p-6 pl-20 flex gap-6">
+<div class="flex-1">
+<h4 class="text-[12px] font-bold text-[#5c6274] mb-2 uppercase tracking-wider">AI Reasoning</h4>
+<p class="text-[14px] text-[#3c4a44] mb-4 bg-white p-4 rounded-lg border border-outline-variant shadow-sm">Sleeper replacement. Moderate wear detected. High compatibility with upcoming OHE maintenance in the East sector.</p>
+<div class="flex gap-3">
+<button class="bg-[#14c9a0] text-white px-5 py-2.5 rounded-lg text-[13px] font-bold hover:bg-[#14c9a0]/90 transition-all shadow-sm">Schedule in Block</button>
+</div>
+</div>
+</div>
+</div>
+</td>
+</tr></tbody>
+</table>
+</div>
+</div>
+<!-- View 2: AI Block Planner (/planner) -->
+<div class="hidden max-w-[1600px] mx-auto h-full flex flex-col" id="view-planner">
+<div class="flex items-center justify-between mb-6">
+<h2 class="text-[24px] font-bold text-on-background">AI Shadow Block Planner</h2>
+<div class="bg-white p-1 rounded-lg border border-outline-variant flex shadow-sm" id="granularitySwitcher">
+<button class="px-4 py-1.5 text-[14px] rounded-md bg-gray-100 text-on-background shadow-sm transition-all" onclick="setGranularity(this)">Daily</button>
+<button class="px-4 py-1.5 text-[14px] rounded-md text-on-surface-variant hover:bg-gray-50 transition-all" onclick="setGranularity(this)">Weekly</button>
+<button class="px-4 py-1.5 text-[14px] rounded-md text-on-surface-variant hover:bg-gray-50 transition-all" onclick="setGranularity(this)">Monthly</button>
+</div>
+</div>
+<!-- Gantt Area -->
+<div class="flex-1 bg-white rounded-xl border border-outline-variant shadow-sm flex flex-col overflow-hidden relative blocks-container">
+<!-- Timeline Header -->
+<div class="flex border-b border-[#F3F4F6] bg-gray-50 h-12">
+<div class="w-48 flex-shrink-0 border-r border-[#F3F4F6] p-3 flex items-center">
+<span class="text-[14px] font-medium text-[#5c6274]">Location / Zone</span>
+</div>
+<div class="flex-1 flex text-xs text-[#5c6274] items-end pb-2 gantt-track">
+<div class="flex-1 border-l border-outline-variant/30 pl-1">06:00</div>
+<div class="flex-1 border-l border-outline-variant/30 pl-1">10:00</div>
+<div class="flex-1 border-l border-outline-variant/30 pl-1">14:00</div>
+<div class="flex-1 border-l border-outline-variant/30 pl-1">18:00</div>
+<div class="flex-1 border-l border-outline-variant/30 pl-1">22:00</div>
+</div>
+</div>
+<!-- Tracks -->
+<div class="flex-1 overflow-y-auto relative">
+<!-- Track 1 -->
+<div class="flex border-b border-[#F3F4F6] h-20 group">
+<div class="w-48 flex-shrink-0 border-r border-[#F3F4F6] p-4 flex flex-col justify-center bg-white group-hover:bg-gray-50 transition-colors">
+<span class="text-[14px] font-bold">GWL Yard</span>
+<span class="text-[11px] text-[#5c6274]">Zone A</span>
+</div>
+<div class="flex-1 relative gantt-track group-hover:bg-gray-50/50 transition-colors">
+<!-- Shadow Block -->
+<div class="absolute top-4 h-12 left-[10%] w-[30%] bg-white border border-outline-variant rounded-lg shadow-sm transition-all duration-300 cursor-pointer flex overflow-hidden z-10 block-item hover:scale-105 hover:shadow-md hover:z-20" onclick="openDrawer('block-1')">
+<div class="flex flex-col w-2 h-full">
+<div class="flex-1 bg-[#3b82f6]"></div> <!-- Blue -->
+<div class="flex-1 bg-[#14c9a0]"></div> <!-- Mint -->
+<div class="flex-1 bg-[#f59e0b]"></div> <!-- Orange -->
+</div>
+<div class="flex-1 p-2 flex flex-col justify-center">
+<span class="text-[14px] font-bold leading-tight">Shadow Block A</span>
+<span class="text-[11px] text-[#5c6274]">3 Tasks • 2.5h</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Track 2 -->
+<div class="flex border-b border-[#F3F4F6] h-20 group">
+<div class="w-48 flex-shrink-0 border-r border-[#F3F4F6] p-4 flex flex-col justify-center bg-white group-hover:bg-gray-50 transition-colors">
+<span class="text-[14px] font-bold">Km 140-145</span>
+<span class="text-[11px] text-[#5c6274]">Mainline North</span>
+</div>
+<div class="flex-1 relative gantt-track group-hover:bg-gray-50/50 transition-colors">
+<!-- Shadow Block -->
+<div class="absolute top-4 h-12 left-[45%] w-[40%] bg-white border border-outline-variant rounded-lg shadow-sm transition-all duration-300 cursor-pointer flex overflow-hidden z-10 block-item hover:scale-105 hover:shadow-md hover:z-20" onclick="openDrawer('block-2')">
+<div class="flex flex-col w-2 h-full">
+<div class="flex-1 bg-[#3b82f6]"></div>
+<div class="flex-1 bg-[#14c9a0]"></div>
+</div>
+<div class="flex-1 p-2 flex flex-col justify-center">
+<span class="text-[14px] font-bold leading-tight">Shadow Block B</span>
+<span class="text-[11px] text-[#5c6274]">2 Tasks • 4.0h</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Drawer Backdrop -->
+<div class="fixed inset-0 bg-black/20 z-20 hidden opacity-0 transition-opacity duration-300" id="drawerBackdrop" onclick="closeDrawer()"></div>
+<!-- Drawer Panel (Hidden by default) -->
+<div class="fixed top-0 right-0 w-96 h-screen bg-white border-l border-outline-variant shadow-lg transform translate-x-full transition-transform duration-300 z-30 flex flex-col" id="drawerPanel">
+<div class="p-6 border-b border-outline-variant flex justify-between items-start pt-16">
+<div>
+<h3 class="text-[20px] font-bold text-on-background">Block Details</h3>
+<p class="text-[14px] text-[#14c9a0] font-bold mt-1">Shadow Efficiency: 2.75x</p>
+</div>
+<button class="text-on-surface-variant hover:text-on-background transition-colors" onclick="closeDrawer()">
+<span class="material-symbols-outlined">close</span>
+</button>
+</div>
+<div class="p-6 flex-1 overflow-y-auto space-y-6">
+<div>
+<h4 class="text-[12px] font-semibold text-on-surface-variant mb-3 uppercase">Packed Tasks</h4>
+<ul class="space-y-3">
+<li class="bg-gray-50 p-3 rounded-lg border border-outline-variant/50">
+<div class="flex justify-between items-center mb-1">
+<span class="font-bold text-[14px]">TRK-9021</span>
+<span class="text-[11px] bg-[#14c9a0]/10 text-[#14c9a0] px-2 rounded">Track</span>
+</div>
+<p class="text-[12px] text-on-surface-variant">Rail replacement at Km 142.5</p>
+</li>
+<li class="bg-gray-50 p-3 rounded-lg border border-outline-variant/50">
+<div class="flex justify-between items-center mb-1">
+<span class="font-bold text-[14px]">SIG-882</span>
+<span class="text-[11px] bg-[#3b82f6]/10 text-[#3b82f6] px-2 rounded">Signal</span>
+</div>
+<p class="text-[12px] text-on-surface-variant">Relay calibration</p>
+</li>
+</ul>
+</div>
+<div class="bg-gray-50 p-4 rounded-xl border border-outline-variant">
+<p class="text-[12px] text-on-surface-variant text-center">AI generated conflict avoidance path.</p>
+</div>
+</div>
+<div class="p-6 border-t border-outline-variant bg-white space-y-3" id="drawerActions">
+<!-- Actions injected via JS based on role -->
+</div>
+</div>
+<!-- Placeholder for Dashboard Overview -->
+<div class="max-w-[1600px] mx-auto hidden" id="view-dashboard">
+<h2 class="text-[24px] font-bold text-on-background">Dashboard Overview Content Placeholder</h2>
+</div>
+</main>
+</div>
+<script>
+        lucide.createIcons();
+        
+        // Global State
+        let currentRole = 'CONTROLLER';
+        let currentDepartmentFilter = 'SMMS'; // Example department for ENGINEER role filter
+
+        function syncRoles(roleValue) {
+            currentRole = roleValue;
+            if(document.getElementById('sidebarRoleSelect')) document.getElementById('sidebarRoleSelect').value = roleValue;
+            if(document.getElementById('roleSelect')) document.getElementById('roleSelect').value = roleValue;
+            toggleRoleLogic();
+        }
+
+        function toggleRowDetails(id, rowEl) {
+            const el = document.getElementById(id);
+            if(el.classList.contains('open')) {
+                el.classList.remove('open');
+                rowEl.classList.remove('open');
+            } else {
+                // Close others first (optional accordion behavior)
+                document.querySelectorAll('.row-details.open').forEach(openEl => {
+                    if(openEl.id !== id) {
+                        openEl.classList.remove('open');
+                        // find associated row and remove open class
+                        const prevRow = openEl.closest('.task-row-details').previousElementSibling;
+                        if(prevRow) prevRow.classList.remove('open');
+                    }
+                });
+                el.classList.add('open');
+                rowEl.classList.add('open');
+            }
+        }
+
+        function switchView(viewName) {
+            document.getElementById('view-backlog').classList.add('hidden');
+            document.getElementById('view-planner').classList.add('hidden');
+            if(document.getElementById('view-dashboard')) document.getElementById('view-dashboard').classList.add('hidden');
+            
+            const viewEl = document.getElementById('view-' + viewName);
+            if(viewEl) viewEl.classList.remove('hidden');
+            
+            const titles = {
+                'backlog': 'Unified Task Registry',
+                'planner': 'Block Planner',
+                'dashboard': 'Dashboard Overview'
+            };
+            document.getElementById('appBarTitle').innerText = titles[viewName] || 'Dashboard Overview';
+        }
+
+        function openDrawer(blockId) {
+            const drawer = document.getElementById('drawerPanel');
+            const backdrop = document.getElementById('drawerBackdrop');
+            
+            backdrop.classList.remove('hidden');
+            // Small delay to allow display block to apply before animating opacity
+            setTimeout(() => {
+                backdrop.classList.remove('opacity-0');
+            }, 10);
+            
+            drawer.classList.remove('translate-x-full');
+            updateDrawerActions();
+        }
+
+        function closeDrawer() {
+            const drawer = document.getElementById('drawerPanel');
+            const backdrop = document.getElementById('drawerBackdrop');
+            
+            drawer.classList.add('translate-x-full');
+            backdrop.classList.add('opacity-0');
+            
+            setTimeout(() => {
+                backdrop.classList.add('hidden');
+            }, 300); // match transition duration
+        }
+
+        function setGranularity(btn) {
+            const container = document.getElementById('granularitySwitcher');
+            const buttons = container.querySelectorAll('button');
+            
+            buttons.forEach(b => {
+                b.className = 'px-4 py-1.5 text-[14px] rounded-md text-on-surface-variant hover:bg-gray-50 transition-all';
+            });
+            
+            btn.className = 'px-4 py-1.5 text-[14px] rounded-md bg-gray-100 text-on-background shadow-sm transition-all';
+        }
+
+        function applyTableFilters() {
+            const rows = document.querySelectorAll('.task-row');
+            rows.forEach(row => {
+                const detailsRow = row.nextElementSibling;
+                if (currentRole === 'ENGINEER') {
+                    if (row.dataset.dept !== 'Track Maint.') {
+                        row.style.display = 'none';
+                        if(detailsRow && detailsRow.classList.contains('task-row-details')) detailsRow.style.display = 'none';
+                    } else {
+                        row.style.display = 'table-row';
+                        if(detailsRow && detailsRow.classList.contains('task-row-details')) detailsRow.style.display = 'table-row';
+                    }
+                } else {
+                    row.style.display = 'table-row';
+                    if(detailsRow && detailsRow.classList.contains('task-row-details')) detailsRow.style.display = 'table-row';
+                }
+            });
+        }
+
+        function toggleRoleLogic() {
+            const liveFeedNav = document.getElementById('liveFeedNav');
+            
+            if(currentRole === 'CONTROLLER') {
+                if(liveFeedNav) liveFeedNav.style.display = 'block';
+            } else {
+                if(liveFeedNav) liveFeedNav.style.display = 'none';
+            }
+            
+            applyTableFilters();
+            
+            // Re-render open drawer actions if open
+            if(!document.getElementById('drawerPanel').classList.contains('translate-x-full')) {
+                updateDrawerActions();
+            }
+        }
+
+        function updateDrawerActions() {
+            const actionContainer = document.getElementById('drawerActions');
+            
+            if(currentRole === 'CONTROLLER') {
+                actionContainer.innerHTML = `
+                    <button class="w-full bg-[#14c9a0] text-white py-3 rounded-xl text-[14px] hover:bg-[#14c9a0]/90 transition-all font-bold">
+                        Approve Block
+                    </button>
+                    <button class="w-full bg-white border border-outline-variant text-on-surface-variant py-3 rounded-xl text-[14px] hover:bg-gray-50 transition-all font-bold">
+                        Modify Tasks
+                    </button>
+                `;
+            } else {
+                actionContainer.innerHTML = `
+                    <div class="w-full bg-gray-50 text-[#5c6274] py-3 rounded-xl text-[14px] text-center border border-outline-variant flex items-center justify-center gap-2">
+                        <span class="material-symbols-outlined text-sm">pending</span>
+                        Awaiting Chief Controller Approval
+                    </div>
+                `;
+            }
+        }
+
+        // Init state
+        syncRoles('CONTROLLER');
+        switchView('backlog'); // Default to backlog view as per request
+    </script>
+
+
+</body></html>
