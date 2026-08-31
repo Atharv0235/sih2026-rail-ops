@@ -29,7 +29,7 @@ const ROLES: LoginPersona[] = [
     role: 'ENGINEER',
     dept: 'Track',
     label: 'SSE - P.Way',
-    icon: 'train_tracks',
+    icon: 'directions_railway',
     sub: 'TMS: Track defects, fractures. Submits requests for Traffic Blocks & machine availability.',
   },
   {
@@ -219,7 +219,7 @@ function RolePicker({ onSelect }: { onSelect: (persona: LoginPersona) => void })
         {/* Role cards — side by side */}
         <div style={{ width: '100%', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12, marginBottom: 32 }}>
           {ROLES.map(r => (
-            <button key={r.id} className="ro-role-card" onClick={() => onSelect(r)}>
+            <button key={r.id} className="ro-role-card" style={{ height: '100%' }} onClick={() => onSelect(r)}>
               <span className="material-symbols-outlined" style={{ color: TEAL, fontSize: 30, marginBottom: 14, fontVariationSettings: "'FILL' 1" }}>
                 {r.icon}
               </span>
