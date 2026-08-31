@@ -1,24 +1,52 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useAuthStore, type Role } from '../store/useAuthStore';
+import { useAuthStore, type Role, type Department } from '../store/useAuthStore';
 
 /* ── Constants ── */
 const RAILWAY_BG = 'https://lh3.googleusercontent.com/aida/AEtjO1X9Rsr-HDFlvjbvREJ-iivgmgkq50poMLM6XhBn0fWv61Fwnnsg_UOKLwZPc4L8Zxw0I5LEOc_isdHyy37bkbx8sgZYfnZ-WuYA-GubIujCzFIlnE2zoFPhpgMRhvBYHDU_8l4xO2wlfhNM6T4qtbnQjtoGWrdcDg6-QMs1YQPQ4M9917T0XI_WLSnCSdVCgRUyHv1Quj9Ryib9SPaIP2Y5xovLjxDGUu7bd7ntjyCbijx6yEMAy1vfwnE';
 const LOGO_IMG  = 'https://lh3.googleusercontent.com/aida-public/AB6AXuAmOI8i2gYzZShtTdrdeTTFk56tk8FT0ichbJ0UPGGJ1xeIjtTB11z1_t0SOFkLDkHqKlf0jMo5tcxHdXSxvZC0loUoKciiXOPXj1MP6mAignE1GBZRCBzt-1p5W7R_4Qa6jXDMUSglB4jziHcaN08wROJ1SIZaRqXJYDX5rGf40sn2RhpOvkUtn1INA_L_MenXLpKp7juMcybhKfSHt0wxCZqNACEEhamAb2kR5DaZOmcnGR93w1SQcjGe8mzqzTwr011xNr2y22A';
 const TEAL      = '#14C9A0';
 
-const ROLES = [
+type LoginPersona = {
+  id: string;
+  role: Role;
+  dept?: Department;
+  label: string;
+  icon: string;
+  sub: string;
+};
+
+const ROLES: LoginPersona[] = [
   {
-    key: 'CONTROLLER' as const,
+    id: 'controller',
+    role: 'CONTROLLER',
     label: 'Chief Controller',
     icon: 'dashboard',
-    sub: 'Approve blocks, manage corridors and live feed',
+    sub: 'Master UI, live status, Mega Blocks, What-If Gantt. The only role that can Approve Blocks.',
   },
   {
-    key: 'ENGINEER' as const,
-    label: 'Dept Engineer',
-    icon: 'engineering',
-    sub: 'Submit and track defects · TMS, SMMS, TDMS',
+    id: 'sse-pway',
+    role: 'ENGINEER',
+    dept: 'Track',
+    label: 'SSE - P.Way',
+    icon: 'train_tracks',
+    sub: 'TMS: Track defects, fractures. Submits requests for Traffic Blocks & machine availability.',
+  },
+  {
+    id: 'sse-signal',
+    role: 'ENGINEER',
+    dept: 'Signal',
+    label: 'SSE - Signal',
+    icon: 'traffic',
+    sub: 'SMMS: Point machines, track circuits. Requests Disconnections or full Traffic Blocks.',
+  },
+  {
+    id: 'sse-trd',
+    role: 'ENGINEER',
+    dept: 'Traction',
+    label: 'SSE - TRD / CTPC',
+    icon: 'electric_bolt',
+    sub: 'TDMS: OHE, Insulators. Requests Power Blocks (diesel trains can still run!).',
   },
 ];
 
@@ -164,7 +192,7 @@ function BgWrapper({ children }: { children: React.ReactNode }) {
 }
 
 /* ── STEP 1: Role Picker ── */
-function RolePicker({ onSelect }: { onSelect: (role: Exclude<Role, null>) => void }) {
+function RolePicker({ onSelect }: { onSelect: (persona: LoginPersona) => void }) {
   return (
     <BgWrapper>
       <div className="ro-card">
@@ -191,7 +219,7 @@ function RolePicker({ onSelect }: { onSelect: (role: Exclude<Role, null>) => voi
         {/* Role cards — side by side */}
         <div style={{ width: '100%', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12, marginBottom: 32 }}>
           {ROLES.map(r => (
-            <button key={r.key} className="ro-role-card" onClick={() => onSelect(r.key)}>
+            <button key={r.id} className="ro-role-card" onClick={() => onSelect(r)}>
               <span className="material-symbols-outlined" style={{ color: TEAL, fontSize: 30, marginBottom: 14, fontVariationSettings: "'FILL' 1" }}>
                 {r.icon}
               </span>
@@ -206,14 +234,14 @@ function RolePicker({ onSelect }: { onSelect: (role: Exclude<Role, null>) => voi
 }
 
 /* ── STEP 2: Login Form ── */
-function LoginForm({ role, onBack, onSubmit }: {
-  role: Exclude<Role, null>;
+function LoginForm({ persona, onBack, onSubmit }: {
+  persona: LoginPersona;
   onBack: () => void;
   onSubmit: (name: string) => void;
 }) {
   const [showPwd, setShowPwd] = useState(false);
   const [name, setName]       = useState('');
-  const roleLabel = role === 'CONTROLLER' ? 'Chief Controller' : 'Dept Engineer';
+  const roleLabel = persona.label;
 
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -297,21 +325,27 @@ export function Login() {
   const setDepartment  = useAuthStore(s => s.setDepartment);
   const setDisplayName = useAuthStore(s => s.setDisplayName);
   const [step, setStep]         = useState<'pick' | 'form'>('pick');
-  const [selected, setSelected] = useState<Exclude<Role, null>>('CONTROLLER');
+  const [selected, setSelected] = useState<LoginPersona>(ROLES[0]);
 
-  function handleRolePick(role: Exclude<Role, null>) {
-    setSelected(role);
+  function handleRolePick(persona: LoginPersona) {
+    setSelected(persona);
     setStep('form');
   }
 
   function handleSubmit(name: string) {
-    setRole(selected);
+    if (selected.role) setRole(selected.role);
     setDisplayName(name);
+    
     // Assign a default department to engineers for the prototype
-    if (selected === 'ENGINEER') {
-      setDepartment('Track');
+    if (selected.dept) {
+      setDepartment(selected.dept);
     }
-    navigate('/dashboard');
+    
+    if (selected.role === 'ENGINEER') {
+      window.location.href = '/eng-dashboard.html';
+    } else {
+      navigate('/dashboard');
+    }
   }
 
   return (
@@ -321,7 +355,7 @@ export function Login() {
 
       {step === 'pick'
         ? <RolePicker onSelect={handleRolePick} />
-        : <LoginForm role={selected} onBack={() => setStep('pick')} onSubmit={handleSubmit} />
+        : <LoginForm persona={selected} onBack={() => setStep('pick')} onSubmit={handleSubmit} />
       }
     </>
   );
