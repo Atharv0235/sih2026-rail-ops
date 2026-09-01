@@ -60,9 +60,12 @@ export function BlockInspector({ blockId, label, color, canApprove }: BlockInspe
         ))}
       </div>
 
-      {/* Shadow multiplier */}
+      {/* Time Efficiency Score */}
       <div style={{ background: 'var(--green-soft)', borderRadius: 10, padding: '12px 16px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-        <span className="t-label" style={{ color: 'var(--green)' }}>Shadow Multiplier</span>
+        <div>
+          <div className="t-label" style={{ color: 'var(--green)' }}>Time Efficiency Score</div>
+          <div style={{ fontSize: 11, color: 'var(--green)', opacity: 0.8, marginTop: 2, fontWeight: 500 }}>Time saved by doing tasks together</div>
+        </div>
         <span className="t-mono" style={{ fontSize: 22, fontWeight: 800, color: 'var(--green)' }}>2.1×</span>
       </div>
 

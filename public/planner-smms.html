@@ -130,10 +130,10 @@
             </button>
 </div>
 <ul class="flex-1 space-y-1">
-<li><a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:text-primary hover:bg-surface-container transition-all duration-200" href="/eng-dashboard.html"><span class="material-symbols-outlined">dashboard</span><span class="text-body-md font-body-md">Dashboard</span></a></li>
-<li><a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:text-primary hover:bg-surface-container transition-all duration-200" href="/eng-backlog.html"><span class="material-symbols-outlined">assignment</span><span class="text-body-md font-body-md">Task Backlog</span></a></li>
-<li><a class="flex items-center gap-3 px-4 py-3 bg-primary-container/10 text-primary border-l-4 border-primary font-bold" href="/eng-planner.html"><span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">analytics</span><span class="text-body-md font-body-md">Block Planner</span></a></li>
-<li><a class="flex items-center gap-3 px-4 py-3 text-primary hover:bg-primary-container/10 transition-all duration-200 rounded-lg" href="/eng-livefeed.html"><span class="material-symbols-outlined">sensors</span><span class="text-body-md font-body-md">Live Feed</span><span class="ml-auto text-[9px] bg-primary-container/20 text-primary px-1.5 py-0.5 rounded font-bold uppercase tracking-wider">Live</span></a></li>
+<li><a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:text-primary hover:bg-surface-container transition-all duration-200" href="/eng-smms.html"><span class="material-symbols-outlined">dashboard</span><span class="text-body-md font-body-md">Dashboard</span></a></li>
+<li><a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:text-primary hover:bg-surface-container transition-all duration-200" href="/backlog-smms.html"><span class="material-symbols-outlined">assignment</span><span class="text-body-md font-body-md">Task Backlog</span></a></li>
+<li><a class="flex items-center gap-3 px-4 py-3 bg-primary-container/10 text-primary border-l-4 border-primary font-bold" href="/planner-smms.html"><span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">analytics</span><span class="text-body-md font-body-md">Block Planner</span></a></li>
+<li><a class="flex items-center gap-3 px-4 py-3 text-primary hover:bg-primary-container/10 transition-all duration-200 rounded-lg" href="/livefeed-smms.html"><span class="material-symbols-outlined">sensors</span><span class="text-body-md font-body-md">Live Feed</span><span class="ml-auto text-[9px] bg-primary-container/20 text-primary px-1.5 py-0.5 rounded font-bold uppercase tracking-wider">Live</span></a></li>
 </ul>
 <div class="mt-auto px-4 space-y-1">
 <a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:text-primary hover:bg-surface-container transition-all duration-200" href="#">
@@ -189,7 +189,7 @@
 <label class="relative inline-flex items-center cursor-pointer">
 <input checked="" class="sr-only peer" id="focusToggle" type="checkbox"/>
 <div class="w-11 h-6 bg-surface-container-highest peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
-<span class="ml-3 text-label-md font-label-md text-on-background font-semibold">Highlight My Crews (TMS)</span>
+<span class="ml-3 text-label-md font-label-md text-on-background font-semibold">Highlight My Crews (SMMS)</span>
 </label>
 </div>
 </div>
@@ -242,8 +242,8 @@
 <!-- Row 1: GWL Yard -->
 <div class="h-16 border-b border-outline-variant/30 relative z-10 group">
 <!-- TMS Block (Highlighted) -->
-<div class="absolute top-2 left-12 w-48 h-12 bg-[#E1EFFE] border border-[#3F83F8] rounded-md shadow-sm flex flex-col justify-center px-3 cursor-pointer hover:shadow-md transition-shadow" onclick="openInspector()">
-<div class="text-[10px] font-bold text-[#1A56DB] uppercase tracking-wide">TMS (Track)</div>
+<div class="absolute top-2 left-12 w-48 h-12 bg-[#DEF7EC] border border-[#31C48D] rounded-md shadow-sm flex flex-col justify-center px-3 cursor-pointer hover:shadow-md transition-shadow" onclick="openInspector()">
+<div class="text-[10px] font-bold text-[#057A55] uppercase tracking-wide">SMMS (Signal)</div>
 <div class="text-xs text-on-surface font-medium truncate">Rail Grinding</div>
 </div>
 </div>
@@ -268,8 +268,8 @@
 <!-- Row 3: Km 140-145 -->
 <div class="h-16 border-b border-outline-variant/30 relative z-10 group">
 <!-- TMS Block -->
-<div class="absolute top-2 left-[500px] w-[200px] h-12 bg-[#E1EFFE] border border-[#3F83F8] rounded-md shadow-sm flex flex-col justify-center px-3 cursor-pointer hover:shadow-md transition-shadow" onclick="openInspector()">
-<div class="text-[10px] font-bold text-[#1A56DB] uppercase tracking-wide">TMS (Track)</div>
+<div class="absolute top-2 left-[500px] w-[200px] h-12 bg-[#DEF7EC] border border-[#31C48D] rounded-md shadow-sm flex flex-col justify-center px-3 cursor-pointer hover:shadow-md transition-shadow" onclick="openInspector()">
+<div class="text-[10px] font-bold text-[#057A55] uppercase tracking-wide">SMMS (Signal)</div>
 <div class="text-xs text-on-surface font-medium truncate">Ballast Cleaning</div>
 </div>
 </div>
@@ -292,60 +292,23 @@
 </div>
 <!-- Content -->
 <div class="flex-1 overflow-y-auto p-lg">
-<!-- Hero Metric -->
-<div class="bg-primary-container/10 border border-primary-container/30 rounded-xl p-4 mb-6 flex items-center gap-4">
-<div class="w-12 h-12 rounded-full bg-primary flex items-center justify-center text-on-primary shrink-0">
-<span class="material-symbols-outlined text-[24px]">bolt</span>
-</div>
-<div>
-<div class="text-label-md font-label-md text-primary font-bold uppercase tracking-wider">AI Optimization Score</div>
-<div class="text-headline-md font-headline-md font-bold text-on-background mt-1">Shadow Efficiency: 2.75x</div>
-</div>
-</div>
-<!-- Stepper Timeline -->
-<div class="space-y-6 relative before:absolute before:inset-0 before:ml-5 before:-translate-x-px md:before:mx-auto md:before:translate-x-0 before:h-full before:w-0.5 before:bg-gradient-to-b before:from-transparent before:via-outline-variant before:to-transparent pl-8">
-<!-- Task 1: TMS -->
-<div class="relative flex items-start gap-4">
-<div class="absolute -left-8 w-6 h-6 rounded-full bg-[#3F83F8] border-4 border-surface-container-lowest flex items-center justify-center z-10 mt-1"></div>
+  <h3 class="text-headline-sm font-headline-sm font-bold text-on-background mb-4">My Assigned Task</h3>
+  
 <div class="flex-1 bg-surface-container-low border border-outline-variant rounded-lg p-4">
-<div class="flex items-center justify-between mb-2">
-<span class="text-[10px] font-bold text-[#1A56DB] bg-[#E1EFFE] px-2 py-0.5 rounded uppercase">TMS</span>
-<span class="text-label-md font-label-md text-on-surface-variant">12:00 - 14:30</span>
+  <div class="flex items-center justify-between mb-2">
+    <span class="text-[10px] font-bold text-[#057A55] bg-[#DEF7EC] px-2 py-0.5 rounded uppercase">SMMS</span>
+    <span class="text-label-md font-label-md text-on-surface-variant">12:30 - 15:00</span>
+  </div>
+  <h4 class="text-body-md font-body-md font-bold text-on-background">Axle Counter Calibration</h4>
+  <p class="text-body-sm font-body-sm text-on-surface-variant mt-1">Targeting Sector A-4 block. Simultaneous access approved.</p>
 </div>
-<h4 class="text-body-md font-body-md font-bold text-on-background">Deep Tamping &amp; Alignment</h4>
-<p class="text-body-sm font-body-sm text-on-surface-variant mt-1">Crew: Team Alpha. Equipment: Tamping Machine T-04.</p>
+
 </div>
-</div>
-<!-- Task 2: SMMS -->
-<div class="relative flex items-start gap-4">
-<div class="absolute -left-8 w-6 h-6 rounded-full bg-[#31C48D] border-4 border-surface-container-lowest flex items-center justify-center z-10 mt-1"></div>
-<div class="flex-1 bg-surface-container-low border border-outline-variant rounded-lg p-4">
-<div class="flex items-center justify-between mb-2">
-<span class="text-[10px] font-bold text-[#057A55] bg-[#DEF7EC] px-2 py-0.5 rounded uppercase">SMMS</span>
-<span class="text-label-md font-label-md text-on-surface-variant">12:30 - 15:00</span>
-</div>
-<h4 class="text-body-md font-body-md font-bold text-on-background">Axle Counter Calibration</h4>
-<p class="text-body-sm font-body-sm text-on-surface-variant mt-1">Simultaneous access granted behind tamping machine.</p>
-</div>
-</div>
-<!-- Task 3: TDMS -->
-<div class="relative flex items-start gap-4">
-<div class="absolute -left-8 w-6 h-6 rounded-full bg-[#FACA15] border-4 border-surface-container-lowest flex items-center justify-center z-10 mt-1"></div>
-<div class="flex-1 bg-surface-container-low border border-outline-variant rounded-lg p-4">
-<div class="flex items-center justify-between mb-2">
-<span class="text-[10px] font-bold text-[#C27803] bg-[#FEECDC] px-2 py-0.5 rounded uppercase">TDMS</span>
-<span class="text-label-md font-label-md text-on-surface-variant">13:00 - 14:00</span>
-</div>
-<h4 class="text-body-md font-body-md font-bold text-on-background">OHE Tension Check</h4>
-<p class="text-body-sm font-body-sm text-on-surface-variant mt-1">Power block required on Line 2.</p>
-</div>
-</div>
-</div>
-</div>
-<!-- Sticky Footer (RBAC) -->
-<div class="p-lg border-t border-outline-variant bg-[#FFFBEB] flex items-center gap-3">
-<span class="material-symbols-outlined text-[#E8A33D]">lock</span>
-<span class="text-body-sm font-body-sm text-[#92400E] font-medium">Awaiting Chief Controller Approval. Engineers have view-only access.</span>
+<!-- Sticky Footer (Action) -->
+<div class="p-lg border-t border-outline-variant bg-surface-container-lowest flex justify-end">
+  <button id="deployCrewBtn" onclick="openCrewSelectionModal()" class="bg-[#14c9a0] hover:bg-[#0fa682] text-white px-6 py-3 rounded-xl font-bold shadow-sm transition-colors flex items-center gap-2 w-full justify-center text-body-md uppercase tracking-wider">
+    <span class="material-symbols-outlined text-[20px]">group_add</span> Deploy My Crew
+  </button>
 </div>
 </div>
 <!-- Backdrop for Drawer -->
@@ -620,6 +583,104 @@ function submitNewRequest() {
   closeNewRequestModal();
 }
 </script>
+
+<!-- Crew Selection Modal -->
+<div id="crewSelectionModal" class="fixed inset-0 bg-black/60 z-[100] hidden flex items-center justify-center p-4 transition-opacity duration-300 opacity-0" onclick="if(event.target === this) closeCrewSelectionModal()">
+  <div class="bg-white rounded-2xl shadow-xl w-full max-w-lg overflow-hidden flex flex-col transform transition-transform duration-300 scale-95" id="crewSelectionContent">
+    <!-- Header -->
+    <div class="px-6 py-4 border-b border-[#bbcac2] bg-[#f4fbf6] flex justify-between items-center">
+      <div class="flex items-center gap-3">
+        <span class="material-symbols-outlined text-[#14c9a0]">groups</span>
+        <h3 class="font-bold text-[#161d1a] text-lg">Select Crew to Deploy</h3>
+      </div>
+      <button onclick="closeCrewSelectionModal()" class="text-[#6c7a74] hover:text-[#161d1a]">
+        <span class="material-symbols-outlined">close</span>
+      </button>
+    </div>
+
+    <!-- Body (Crew List) -->
+    <div class="p-6 space-y-4 max-h-[60vh] overflow-y-auto bg-surface-container-lowest">
+      
+      <!-- Occupied Crew (Deployed < 5 hrs ago) -->
+      <div class="relative bg-gradient-to-r from-[#ba1a1a]/5 to-[#ffdad6]/30 border-2 border-[#ba1a1a]/40 rounded-xl p-4 flex items-center justify-between opacity-70 cursor-not-allowed">
+        <div class="flex items-center gap-4">
+          <div class="w-10 h-10 rounded-full bg-[#ba1a1a] flex items-center justify-center text-white font-bold text-xs">TA</div>
+          <div>
+            <h4 class="font-bold text-[#161d1a]">Team Alpha</h4>
+            <p class="text-[11px] text-[#ba1a1a] font-bold uppercase mt-1">Occupied: Deployed 2h Ago</p>
+          </div>
+        </div>
+        <span class="material-symbols-outlined text-[#ba1a1a]">block</span>
+      </div>
+
+      <!-- Free Crew (Available) -->
+      <div onclick="selectCrew('Team Beta')" class="relative bg-gradient-to-r from-[#14c9a0]/10 to-[#3edeb4]/10 border-2 border-[#14c9a0] rounded-xl p-4 flex items-center justify-between cursor-pointer hover:shadow-md transition-shadow group">
+        <div class="flex items-center gap-4">
+          <div class="w-10 h-10 rounded-full bg-[#14c9a0] flex items-center justify-center text-white font-bold text-xs">TB</div>
+          <div>
+            <h4 class="font-bold text-[#161d1a] group-hover:text-[#006b54] transition-colors">Team Beta</h4>
+            <p class="text-[11px] text-[#006b54] font-bold uppercase mt-1 flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">check_circle</span> Available (0 constraints in next 5h)</p>
+          </div>
+        </div>
+        <span class="material-symbols-outlined text-[#14c9a0] group-hover:translate-x-1 transition-transform">arrow_forward</span>
+      </div>
+
+      <!-- Occupied Crew (Scheduled < 5 hrs radius) -->
+      <div class="relative bg-gradient-to-r from-[#ba1a1a]/5 to-[#ffdad6]/30 border-2 border-[#ba1a1a]/40 rounded-xl p-4 flex items-center justify-between opacity-70 cursor-not-allowed">
+        <div class="flex items-center gap-4">
+          <div class="w-10 h-10 rounded-full bg-[#ba1a1a] flex items-center justify-center text-white font-bold text-xs">TG</div>
+          <div>
+            <h4 class="font-bold text-[#161d1a]">Team Gamma</h4>
+            <p class="text-[11px] text-[#ba1a1a] font-bold uppercase mt-1">Occupied: Scheduled in 3h</p>
+          </div>
+        </div>
+        <span class="material-symbols-outlined text-[#ba1a1a]">block</span>
+      </div>
+      
+    </div>
+  </div>
+</div>
+
+<script>
+if (typeof openCrewSelectionModal === 'undefined') {
+  window.openCrewSelectionModal = function() {
+    const m = document.getElementById('crewSelectionModal');
+    const c = document.getElementById('crewSelectionContent');
+    m.classList.remove('hidden');
+    setTimeout(() => {
+      m.classList.remove('opacity-0');
+      c.classList.remove('scale-95');
+    }, 10);
+  }
+  
+  window.closeCrewSelectionModal = function() {
+    const m = document.getElementById('crewSelectionModal');
+    const c = document.getElementById('crewSelectionContent');
+    m.classList.add('opacity-0');
+    c.classList.add('scale-95');
+    setTimeout(() => m.classList.add('hidden'), 300);
+  }
+  
+  window.selectCrew = function(teamName) {
+    closeCrewSelectionModal();
+    // Update the button in the first drawer
+    const deployBtn = document.getElementById('deployCrewBtn');
+    if (deployBtn) {
+      deployBtn.innerHTML = '<span class="material-symbols-outlined text-[20px]">rocket_launch</span> Deploy the team (' + teamName + ')';
+      // Optional: change color to signify readiness
+      deployBtn.classList.remove('bg-[#14c9a0]', 'hover:bg-[#0fa682]');
+      deployBtn.classList.add('bg-[#006b54]', 'hover:bg-[#004e3d]');
+      
+      // Update onclick to simulate final deployment
+      deployBtn.onclick = function() {
+         alert(teamName + ' has been successfully deployed to the field.');
+         closeInspector();
+      };
+    }
+  }
+}
+</script>
+
 </body>
 </html>
 

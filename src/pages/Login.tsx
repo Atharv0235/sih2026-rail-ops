@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useAuthStore, type Role, type Department } from '../store/useAuthStore';
+import { useAuthStore } from '../store/useAuthStore';
 
 /* ── Constants ── */
 const RAILWAY_BG = 'https://lh3.googleusercontent.com/aida/AEtjO1X9Rsr-HDFlvjbvREJ-iivgmgkq50poMLM6XhBn0fWv61Fwnnsg_UOKLwZPc4L8Zxw0I5LEOc_isdHyy37bkbx8sgZYfnZ-WuYA-GubIujCzFIlnE2zoFPhpgMRhvBYHDU_8l4xO2wlfhNM6T4qtbnQjtoGWrdcDg6-QMs1YQPQ4M9917T0XI_WLSnCSdVCgRUyHv1Quj9Ryib9SPaIP2Y5xovLjxDGUu7bd7ntjyCbijx6yEMAy1vfwnE';
@@ -9,11 +9,11 @@ const TEAL      = '#14C9A0';
 
 type LoginPersona = {
   id: string;
-  role: Role;
-  dept?: Department;
+  role: string;
   label: string;
   icon: string;
   sub: string;
+  badge?: { text: string; color: string; bg: string };
 };
 
 const ROLES: LoginPersona[] = [
@@ -26,27 +26,27 @@ const ROLES: LoginPersona[] = [
   },
   {
     id: 'sse-pway',
-    role: 'ENGINEER',
-    dept: 'Track',
-    label: 'SSE - P.Way',
+    role: 'ENGINEER_TRACK',
+    label: 'SSE - P.Way (Track)',
     icon: 'directions_railway',
     sub: 'TMS: Track defects, fractures. Submits requests for Traffic Blocks & machine availability.',
+    badge: { text: 'TRACK', color: '#60A5FA', bg: 'rgba(96, 165, 250, 0.15)' }
   },
   {
     id: 'sse-signal',
-    role: 'ENGINEER',
-    dept: 'Signal',
-    label: 'SSE - Signal',
+    role: 'ENGINEER_SIGNAL',
+    label: 'SSE - Signal & Telecom',
     icon: 'traffic',
     sub: 'SMMS: Point machines, track circuits. Requests Disconnections or full Traffic Blocks.',
+    badge: { text: 'SIGNAL', color: '#34D399', bg: 'rgba(52, 211, 153, 0.15)' }
   },
   {
     id: 'sse-trd',
-    role: 'ENGINEER',
-    dept: 'Traction',
-    label: 'SSE - TRD / CTPC',
+    role: 'ENGINEER_TRACTION',
+    label: 'SSE - Traction (TRD)',
     icon: 'electric_bolt',
     sub: 'TDMS: OHE, Insulators. Requests Power Blocks (diesel trains can still run!).',
+    badge: { text: 'TRACTION', color: '#F97316', bg: 'rgba(249, 115, 22, 0.15)' }
   },
 ];
 
@@ -77,7 +77,7 @@ const styles = `
     background: #1A2332;
     border: 1px solid rgba(255,255,255,0.10);
     border-radius: 16px;
-    padding: 20px 20px;
+    padding: 20px;
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -86,6 +86,7 @@ const styles = `
     cursor: pointer;
     transition: border-color 0.2s, background 0.2s, transform 0.2s;
     outline: none;
+    position: relative;
   }
   .ro-role-card:hover {
     border-color: ${TEAL};
@@ -195,7 +196,7 @@ function BgWrapper({ children }: { children: React.ReactNode }) {
 function RolePicker({ onSelect }: { onSelect: (persona: LoginPersona) => void }) {
   return (
     <BgWrapper>
-      <div className="ro-card">
+      <div className="ro-card" style={{ maxWidth: 800 }}>
         {/* Logo */}
         <div style={{ display: 'flex', alignItems: 'center', gap: 14, marginBottom: 10 }}>
           <img src={LOGO_IMG} alt="RAIL-OPS" style={{ width: 44, height: 44, borderRadius: 12, objectFit: 'cover', border: '1px solid rgba(255,255,255,0.15)' }} />
@@ -211,16 +212,23 @@ function RolePicker({ onSelect }: { onSelect: (persona: LoginPersona) => void })
         <div style={{ width: '100%', height: 1, background: 'rgba(255,255,255,0.10)', marginBottom: 28 }} />
 
         {/* Heading */}
-        <h2 style={{ color: '#fff', fontSize: 22, fontWeight: 700, marginBottom: 8 }}>Select Your Role</h2>
+        <h2 style={{ color: '#fff', fontSize: 22, fontWeight: 700, marginBottom: 8 }}>Select Your Identity</h2>
         <p style={{ color: 'rgba(255,255,255,0.55)', fontSize: 14, marginBottom: 32 }}>
-          No credentials required · prototype mode
+          Choose a specific persona to access their tailored dashboard.
         </p>
 
         {/* Role cards — side by side */}
-        <div style={{ width: '100%', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12, marginBottom: 32 }}>
+        <div style={{ width: '100%', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16, marginBottom: 32 }}>
           {ROLES.map(r => (
             <button key={r.id} className="ro-role-card" style={{ height: '100%' }} onClick={() => onSelect(r)}>
-              <span className="material-symbols-outlined" style={{ color: TEAL, fontSize: 30, marginBottom: 14, fontVariationSettings: "'FILL' 1" }}>
+              
+              {r.badge && (
+                <span className="ro-mono" style={{ position: 'absolute', top: 20, right: 20, fontSize: 10, fontWeight: 700, padding: '4px 8px', borderRadius: 6, color: r.badge.color, background: r.badge.bg }}>
+                  {r.badge.text}
+                </span>
+              )}
+
+              <span className="material-symbols-outlined" style={{ color: r.badge?.color || TEAL, fontSize: 30, marginBottom: 14, fontVariationSettings: "'FILL' 1" }}>
                 {r.icon}
               </span>
               <div style={{ color: '#fff', fontWeight: 700, fontSize: 15, marginBottom: 6 }}>{r.label}</div>
@@ -241,7 +249,6 @@ function LoginForm({ persona, onBack, onSubmit }: {
 }) {
   const [showPwd, setShowPwd] = useState(false);
   const [name, setName]       = useState('');
-  const roleLabel = persona.label;
 
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -253,16 +260,16 @@ function LoginForm({ persona, onBack, onSubmit }: {
       <div className="ro-card">
         {/* Role pill badge */}
         <div className="ro-mono" style={{
-          background: TEAL, color: '#000', fontWeight: 700,
-          fontSize: 10, letterSpacing: '0.12em', textTransform: 'uppercase',
+          background: persona.badge?.color || TEAL, color: '#000', fontWeight: 800,
+          fontSize: 11, letterSpacing: '0.12em', textTransform: 'uppercase',
           padding: '4px 14px', borderRadius: 9999, marginBottom: 24,
         }}>
-          {roleLabel}
+          {persona.label}
         </div>
 
         {/* Welcome heading */}
         <h1 style={{ color: '#fff', fontSize: 30, fontWeight: 800, letterSpacing: '-0.02em', marginBottom: 8 }}>
-          Welcome, {roleLabel}
+          Welcome, {persona.label.split(' - ')[0]}
         </h1>
         <p style={{ color: 'rgba(255,255,255,0.60)', fontSize: 14, marginBottom: 32 }}>
           Enter your details to access RAIL-OPS
@@ -270,7 +277,7 @@ function LoginForm({ persona, onBack, onSubmit }: {
 
         {/* Form */}
         <form style={{ width: '100%', display: 'flex', flexDirection: 'column', gap: 16 }} onSubmit={handleSubmit}>
-
+          
           {/* Full Name */}
           <div style={{ position: 'relative', width: '100%' }}>
             <span className="material-symbols-outlined" style={{ position: 'absolute', left: 14, top: '50%', transform: 'translateY(-50%)', color: TEAL, fontSize: 20, pointerEvents: 'none' }}>person</span>
@@ -322,7 +329,6 @@ function LoginForm({ persona, onBack, onSubmit }: {
 export function Login() {
   const navigate   = useNavigate();
   const setRole        = useAuthStore(s => s.setRole);
-  const setDepartment  = useAuthStore(s => s.setDepartment);
   const setDisplayName = useAuthStore(s => s.setDisplayName);
   const [step, setStep]         = useState<'pick' | 'form'>('pick');
   const [selected, setSelected] = useState<LoginPersona>(ROLES[0]);
@@ -333,18 +339,20 @@ export function Login() {
   }
 
   function handleSubmit(name: string) {
-    if (selected.role) setRole(selected.role);
+    if (selected.role) {
+      // @ts-ignore: Intentionally bypassing type to forcefully set the specific 4 roles required by strict UI separation
+      setRole(selected.role);
+    }
     setDisplayName(name);
     
-    // Assign a default department to engineers for the prototype
-    if (selected.dept) {
-      setDepartment(selected.dept);
-    }
-    
-    if (selected.role === 'ENGINEER') {
-      window.location.href = '/eng-dashboard.html';
+    if (selected.id === 'sse-pway') {
+      window.location.href = '/eng-tms.html';
+    } else if (selected.id === 'sse-signal') {
+      window.location.href = '/eng-smms.html';
+    } else if (selected.id === 'sse-trd') {
+      window.location.href = '/eng-tdms.html';
     } else {
-      navigate('/dashboard');
+      window.location.href = '/pending.html';
     }
   }
 

@@ -1,5 +1,4 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
-import { Landing } from './pages/Landing';
 import { Login } from './pages/Login';
 import { EngTaskBacklogPage } from './pages/EngTaskBacklogPage';
 import { useEffect } from 'react';
@@ -14,7 +13,7 @@ export default function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/"              element={<Landing />} />
+        <Route path="/"              element={<Navigate to="/login" replace />} />
         <Route path="/login"         element={<Login />} />
         <Route path="/dashboard"     element={<StaticRedirect to="/dashboard.html" />} />
         <Route path="/backlog"       element={<StaticRedirect to="/backlog.html" />} />
@@ -22,7 +21,7 @@ export default function App() {
         <Route path="/live"          element={<StaticRedirect to="/live.html" />} />
         {/* ── Dept Engineer pages ── */}
         <Route path="/eng-backlog"   element={<EngTaskBacklogPage />} />
-        <Route path="*"              element={<Navigate to="/" replace />} />
+        <Route path="*"              element={<Navigate to="/login" replace />} />
       </Routes>
     </BrowserRouter>
   );

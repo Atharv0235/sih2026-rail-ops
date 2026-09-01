@@ -226,7 +226,7 @@
 <ul class="space-y-2 px-3">
 
 <li class="">
-<a class="flex items-center gap-3 px-4 py-2.5 bg-[#F2FBF9] text-[#14C9A0] rounded-lg font-medium border-l-4 border-[#14C9A0] transition-all duration-200" href="/backlog" >
+<a class="flex items-center gap-3 px-4 py-2.5 text-[#5c6274] hover:bg-gray-50 rounded-lg font-medium transition-all duration-200" href="/backlog" >
 <span class="material-symbols-outlined text-[20px]" data-icon="list_alt">list_alt</span>
 <span class="text-[14px]">Task Backlog</span>
 </a>
@@ -239,7 +239,7 @@
 </li>
 <!-- RBAC Controlled -->
 <li id="pendingNav" class="">
-<a class="flex items-center gap-3 px-4 py-2.5 text-[#5c6274] hover:bg-gray-50 rounded-lg font-medium transition-all duration-200" href="/pending.html">
+<a class="flex items-center gap-3 px-4 py-2.5 bg-[#F2FBF9] text-[#14C9A0] rounded-lg font-medium border-l-4 border-[#14C9A0] transition-all duration-200" href="/pending.html">
 <span class="material-symbols-outlined text-[20px]" data-icon="pending_actions">pending_actions</span>
 <span class="text-[14px] flex-1">Pending Requests</span>
 </a>
@@ -330,273 +330,118 @@
 <thead>
 <tr class="border-b border-[#F3F4F6] bg-white text-[#5c6274]">
 <th class="py-4 px-6 text-[12px] font-semibold uppercase tracking-wider w-12"></th>
-<th class="py-4 px-6 text-[12px] font-semibold uppercase tracking-wider">Defect ID</th>
-<th class="py-4 px-6 text-[12px] font-semibold uppercase tracking-wider">Originating Dept</th>
-<th class="py-4 px-6 text-[12px] font-semibold uppercase tracking-wider">Section / Km</th>
+<th class="py-4 px-6 text-[12px] font-semibold uppercase tracking-wider">Dept</th>
+<th class="py-4 px-6 text-[12px] font-semibold uppercase tracking-wider">Defect</th>
+<th class="py-4 px-6 text-[12px] font-semibold uppercase tracking-wider">Location</th>
+<th class="py-4 px-6 text-[12px] font-semibold uppercase tracking-wider">Geolocation</th>
+<th class="py-4 px-6 text-[12px] font-semibold uppercase tracking-wider">Machinery</th>
+<th class="py-4 px-6 text-[12px] font-semibold uppercase tracking-wider">Duration</th>
 <th class="py-4 px-6 text-[12px] font-semibold uppercase tracking-wider">AI Criticality</th>
-<th class="py-4 px-6 text-[12px] font-semibold uppercase tracking-wider">Req. Time</th>
-<th class="py-4 px-6 text-[12px] font-semibold uppercase tracking-wider">Due Date</th>
-<th class="py-4 px-6 text-[12px] font-semibold uppercase tracking-wider text-center">Compatibility</th>
+<th class="py-4 px-6 text-[12px] font-semibold uppercase tracking-wider">Image</th>
 </tr>
 </thead>
 <tbody class="text-[14px] text-on-background">
-<!-- Row 1 -->
-<tr class="task-row border-b border-[#F3F4F6] hover:bg-gray-50 transition-all duration-200 cursor-pointer group hover:border-l-4 hover:border-l-[#14c9a0]" data-dept="Track Maint." onclick="toggleRowDetails('row1-details', this)">
+
+<!-- Row 1: TMS -->
+<tr class="task-row border-b border-[#F3F4F6] hover:bg-gray-50 transition-all duration-200 cursor-pointer group hover:border-l-4 hover:border-l-[#14c9a0]" onclick="toggleRowDetails('row1-details', this)">
 <td class="py-4 px-6 text-center text-on-surface-variant w-12">
 <span class="material-symbols-outlined row-expand-icon">expand_more</span>
 </td>
-<td class="py-4 px-6 font-bold text-[#161d1a]">TRK-9021</td>
-<td class="py-4 px-6 font-medium">Track Maint.</td>
-<td class="py-4 px-6 text-[#5c6274]"><div class="flex items-center gap-2"><span class="">Km 142.5 (North)</span><span class="material-symbols-outlined text-[18px] text-[#6c7a74] cursor-pointer hover:text-[#14c9a0] transition-colors" title="View on Map" onclick="event.stopPropagation(); openMapModal(23.234, 77.432)">location_on</span></div></td>
+<td class="py-4 px-6 font-bold text-[#161d1a]"><span class="flex items-center gap-2"><span class="w-2.5 h-2.5 rounded-full bg-blue-500"></span> TMS</span></td>
+<td class="py-4 px-6 font-medium">Rail Fracture</td>
+<td class="py-4 px-6 text-[#5c6274]">Km 142.5</td>
+<td class="py-4 px-6"><span class="text-primary cursor-pointer hover:underline flex items-center gap-1" onclick="event.stopPropagation(); openMapModal(23.234, 77.432)"><span class="material-symbols-outlined text-[16px]">location_on</span> 23.234, 77.432</span></td>
+<td class="py-4 px-6 text-[#5c6274]">Tamping Machine</td>
+<td class="py-4 px-6 font-medium text-[#161d1a]">120 Mins</td>
 <td class="py-4 px-6">
-<span class="inline-flex items-center px-3 py-1 rounded-full text-[12px] font-bold bg-[#ba1a1a]/10 text-[#ba1a1a]">
-<span class="w-2 h-2 rounded-full bg-[#ba1a1a] mr-2"></span>
-                                        98 Critical
-                                    </span>
+<span class="inline-flex items-center px-3 py-1 rounded-full text-[12px] font-bold bg-[#ba1a1a]/10 text-[#ba1a1a]">98% Critical</span>
 </td>
-<td class="py-4 px-6 text-[#5c6274]">4.5 hrs</td>
-<td class="py-4 px-6 font-medium text-[#161d1a]">Oct 12</td>
-<td class="py-4 px-6 text-center">
-<i class="text-[#14c9a0]" data-lucide="layers"></i>
-</td>
+<td class="py-4 px-6"><span class="material-symbols-outlined text-on-surface-variant cursor-pointer hover:text-primary transition-colors" onclick="event.stopPropagation(); openImageModal('https://lh3.googleusercontent.com/aida-public/AB6AXuCtJJe-GfSqwdvXvxfPFbkOp_q5NKg0afyfOPGKmxl581on1RZbNmpW-POsXwe0J1ROmagBDbv4ffmhSK94Bk1FUj4rjN829i9SitPksgostTMZCVNngEUltY1G59ljDQ5rDs2ulpPeLCfRy_RSBs9d3NYuhw1-eiZ26TmL4_QbNkMed1Wxbju0fG9kRseNVKHN1MsyOt-k3xyNFSQHfjUHTFk5qXeWLWDrkYbD9C7pKd7sTGz1Q_W4-Q')">image</span></td>
 </tr>
-<tr class="task-row-details border-b border-[#F3F4F6] p-0" data-dept="Track Maint.">
-<td class="p-0" colspan="8">
+<tr class="task-row-details border-b border-[#F3F4F6] p-0">
+<td class="p-0" colspan="9">
 <div class="row-details bg-gray-50" id="row1-details">
 <div class="p-6 pl-20 flex gap-6">
 <div class="flex-1">
-<h4 class="text-[12px] font-bold text-[#5c6274] mb-2 uppercase tracking-wider">AI Reasoning</h4>
-<p class="text-[14px] text-[#3c4a44] mb-4 bg-white p-4 rounded-lg border border-outline-variant shadow-sm">Score boosted to 95 due to high traffic density + 3 days overdue. Historical sensor data indicates a 98% probability of rail fracture within 72 hours if unattended. High clustering with signal maintenance (SIG-882) in the same block.</p>
-<div class="flex gap-3">
-<button class="bg-[#14c9a0] text-white px-5 py-2.5 rounded-lg text-[13px] font-bold hover:bg-[#14c9a0]/90 transition-all shadow-sm">Schedule in Block</button>
-<button class="bg-white border border-outline-variant text-[#3c4a44] px-5 py-2.5 rounded-lg text-[13px] font-bold hover:bg-gray-50 transition-all shadow-sm">View Full Report</button>
-
-<button onclick="openFlagModal(this)" class="bg-[#ba1a1a]/10 border border-[#ba1a1a]/20 text-[#ba1a1a] px-5 py-2.5 rounded-lg text-[13px] font-bold hover:bg-[#ba1a1a]/20 transition-all shadow-sm flex items-center gap-2"><span class="material-symbols-outlined text-[16px]">flag</span> Flag</button></div>
+<h4 class="text-[12px] font-bold text-[#5c6274] mb-2 uppercase tracking-wider">AI Assessment</h4>
+<p class="text-[14px] text-[#3c4a44] mb-4 bg-white p-4 rounded-lg border border-outline-variant shadow-sm">High risk rail fracture reported by Track Engineer. Immediate shadow block clustering recommended.</p>
+<div class="flex gap-4 mt-6">
+<button class="bg-[#7c3aed] text-white px-6 py-3 rounded-xl text-[14px] font-bold hover:bg-[#6d28d9] transition-all shadow-md flex items-center gap-2"><span class="material-symbols-outlined text-sm">auto_awesome</span> Search AI for best suited time</button>
+<button class="bg-[#14c9a0] text-white px-8 py-3 rounded-xl text-[14px] font-bold hover:bg-[#12b590] transition-all shadow-md">Approve</button>
 </div>
-<div class="w-1/3 rounded-xl overflow-hidden border border-outline-variant h-40 relative shadow-sm">
-<img class="object-cover w-full h-full cursor-pointer hover:opacity-90 transition-opacity" data-alt="A high resolution, close up shot of a railway track section with visible stress marks, captured in bright daylight with a clean, industrial aesthetic and neutral tones." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCtJJe-GfSqwdvXvxfPFbkOp_q5NKg0afyfOPGKmxl581on1RZbNmpW-POsXwe0J1ROmagBDbv4ffmhSK94Bk1FUj4rjN829i9SitPksgostTMZCVNngEUltY1G59ljDQ5rDs2ulpPeLCfRy_RSBs9d3NYuhw1-eiZ26TmL4_QbNkMed1Wxbju0fG9kRseNVKHN1MsyOt-k3xyNFSQHfjUHTFk5qXeWLWDrkYbD9C7pKd7sTGz1Q_W4-Q" onclick="event.stopPropagation(); openImageModal(this.src)">
 </div>
 </div>
 </div>
 </td>
 </tr>
-<!-- Row 2 -->
-<tr class="task-row border-b border-[#F3F4F6] hover:bg-gray-50 transition-all duration-200 cursor-pointer group hover:border-l-4 hover:border-l-[#14c9a0]" data-dept="Signals" onclick="toggleRowDetails('row2-details', this)">
+
+<!-- Row 2: SMMS -->
+<tr class="task-row border-b border-[#F3F4F6] hover:bg-gray-50 transition-all duration-200 cursor-pointer group hover:border-l-4 hover:border-l-[#14c9a0]" onclick="toggleRowDetails('row2-details', this)">
 <td class="py-4 px-6 text-center text-on-surface-variant w-12">
 <span class="material-symbols-outlined row-expand-icon">expand_more</span>
 </td>
-<td class="py-4 px-6 font-bold text-[#161d1a]">SIG-882</td>
-<td class="py-4 px-6 font-medium">Signals</td>
-<td class="py-4 px-6 text-[#5c6274]"><div class="flex items-center gap-2"><span class="">Km 142.8 (North)</span><span class="material-symbols-outlined text-[18px] text-[#6c7a74] cursor-pointer hover:text-[#14c9a0] transition-colors" title="View on Map" onclick="event.stopPropagation(); openMapModal(23.234, 77.432)">location_on</span></div></td>
+<td class="py-4 px-6 font-bold text-[#161d1a]"><span class="flex items-center gap-2"><span class="w-2.5 h-2.5 rounded-full bg-emerald-500"></span> SMMS</span></td>
+<td class="py-4 px-6 font-medium">Relay Inspection</td>
+<td class="py-4 px-6 text-[#5c6274]">Signal 4A</td>
+<td class="py-4 px-6"><span class="text-primary cursor-pointer hover:underline flex items-center gap-1" onclick="event.stopPropagation(); openMapModal(23.235, 77.433)"><span class="material-symbols-outlined text-[16px]">location_on</span> 23.235, 77.433</span></td>
+<td class="py-4 px-6 text-[#5c6274]">Testing Rig</td>
+<td class="py-4 px-6 font-medium text-[#161d1a]">90 Mins</td>
 <td class="py-4 px-6">
-<span class="inline-flex items-center px-3 py-1 rounded-full text-[12px] font-bold bg-[#f59e0b]/10 text-[#f59e0b]">
-<span class="w-2 h-2 rounded-full bg-[#f59e0b] mr-2"></span>
-                                        65 Watch
-                                    </span>
+<span class="inline-flex items-center px-3 py-1 rounded-full text-[12px] font-bold bg-[#f59e0b]/10 text-[#f59e0b]">72% Watch</span>
 </td>
-<td class="py-4 px-6 text-[#5c6274]">2.0 hrs</td>
-<td class="py-4 px-6 font-medium text-[#161d1a]">Oct 15</td>
-<td class="py-4 px-6 text-center">
-<i class="text-[#14c9a0]" data-lucide="layers"></i>
-</td>
+<td class="py-4 px-6"><span class="material-symbols-outlined text-on-surface-variant cursor-pointer hover:text-primary transition-colors" onclick="event.stopPropagation(); openImageModal('https://images.unsplash.com/photo-1558237748-032906d4e2c9?auto=format&fit=crop&q=80')">image</span></td>
 </tr>
-<tr class="task-row-details border-b border-[#F3F4F6] p-0" data-dept="Signals">
-<td class="p-0" colspan="8">
+<tr class="task-row-details border-b border-[#F3F4F6] p-0">
+<td class="p-0" colspan="9">
 <div class="row-details bg-gray-50" id="row2-details">
 <div class="p-6 pl-20 flex gap-6">
 <div class="flex-1">
-<h4 class="text-[12px] font-bold text-[#5c6274] mb-2 uppercase tracking-wider">AI Reasoning</h4>
-<p class="text-[14px] text-[#3c4a44] mb-4 bg-white p-4 rounded-lg border border-outline-variant shadow-sm">Relay calibration required within 30 days. Moderate clustering opportunity with track maintenance.</p>
-<div class="flex gap-3">
-<button class="bg-[#14c9a0] text-white px-5 py-2.5 rounded-lg text-[13px] font-bold hover:bg-[#14c9a0]/90 transition-all shadow-sm">Schedule in Block</button>
-<button class="bg-white border border-outline-variant text-[#3c4a44] px-5 py-2.5 rounded-lg text-[13px] font-bold hover:bg-gray-50 transition-all shadow-sm">View Full Report</button>
-
-<button onclick="openFlagModal(this)" class="bg-[#ba1a1a]/10 border border-[#ba1a1a]/20 text-[#ba1a1a] px-5 py-2.5 rounded-lg text-[13px] font-bold hover:bg-[#ba1a1a]/20 transition-all shadow-sm flex items-center gap-2"><span class="material-symbols-outlined text-[16px]">flag</span> Flag</button></div>
+<h4 class="text-[12px] font-bold text-[#5c6274] mb-2 uppercase tracking-wider">AI Assessment</h4>
+<p class="text-[14px] text-[#3c4a44] mb-4 bg-white p-4 rounded-lg border border-outline-variant shadow-sm">Routine relay inspection. Can be clustered with high-priority track maintenance in the same geographic corridor.</p>
+<div class="flex gap-4 mt-6">
+<button class="bg-[#7c3aed] text-white px-6 py-3 rounded-xl text-[14px] font-bold hover:bg-[#6d28d9] transition-all shadow-md flex items-center gap-2"><span class="material-symbols-outlined text-sm">auto_awesome</span> Search AI for best suited time</button>
+<button class="bg-[#14c9a0] text-white px-8 py-3 rounded-xl text-[14px] font-bold hover:bg-[#12b590] transition-all shadow-md">Approve</button>
+</div>
 </div>
 </div>
 </div>
 </td>
 </tr>
-<!-- Row 3 -->
-<tr class="task-row border-b border-[#F3F4F6] hover:bg-gray-50 transition-all duration-200 cursor-pointer group hover:border-l-4 hover:border-l-[#14c9a0]" data-dept="OHE" onclick="toggleRowDetails('row3-details', this)">
+
+<!-- Row 3: TDMS -->
+<tr class="task-row border-b border-[#F3F4F6] hover:bg-gray-50 transition-all duration-200 cursor-pointer group hover:border-l-4 hover:border-l-[#14c9a0]" onclick="toggleRowDetails('row3-details', this)">
 <td class="py-4 px-6 text-center text-on-surface-variant w-12">
 <span class="material-symbols-outlined row-expand-icon">expand_more</span>
 </td>
-<td class="py-4 px-6 font-bold text-[#161d1a]">OHE-104</td>
-<td class="py-4 px-6 font-medium">OHE</td>
-<td class="py-4 px-6 text-[#5c6274]"><div class="flex items-center gap-2"><span class="">Km 150.2 (South)</span><span class="material-symbols-outlined text-[18px] text-[#6c7a74] cursor-pointer hover:text-[#14c9a0] transition-colors" title="View on Map" onclick="event.stopPropagation(); openMapModal(23.234, 77.432)">location_on</span></div></td>
+<td class="py-4 px-6 font-bold text-[#161d1a]"><span class="flex items-center gap-2"><span class="w-2.5 h-2.5 rounded-full bg-orange-500"></span> TDMS</span></td>
+<td class="py-4 px-6 font-medium">OHE Dropper</td>
+<td class="py-4 px-6 text-[#5c6274]">Mast 112</td>
+<td class="py-4 px-6"><span class="text-primary cursor-pointer hover:underline flex items-center gap-1" onclick="event.stopPropagation(); openMapModal(23.238, 77.430)"><span class="material-symbols-outlined text-[16px]">location_on</span> 23.238, 77.430</span></td>
+<td class="py-4 px-6 text-[#5c6274]">Tower Wagon</td>
+<td class="py-4 px-6 font-medium text-[#161d1a]">180 Mins</td>
 <td class="py-4 px-6">
-<span class="inline-flex items-center px-3 py-1 rounded-full text-[12px] font-bold bg-[#10b981]/10 text-[#10b981]">
-<span class="w-2 h-2 rounded-full bg-[#10b981] mr-2"></span>
-                                        45 Routine
-                                    </span>
+<span class="inline-flex items-center px-3 py-1 rounded-full text-[12px] font-bold bg-[#10b981]/10 text-[#10b981]">45% Routine</span>
 </td>
-<td class="py-4 px-6 text-[#5c6274]">1.5 hrs</td>
-<td class="py-4 px-6 font-medium text-[#161d1a]">Oct 20</td>
-<td class="py-4 px-6 text-center text-[#5c6274]">
-<span class="material-symbols-outlined text-[20px]">remove</span>
-</td>
+<td class="py-4 px-6"><span class="material-symbols-outlined text-on-surface-variant cursor-pointer hover:text-primary transition-colors" onclick="event.stopPropagation(); openImageModal('https://images.unsplash.com/photo-1541887089-86641b9d149f?auto=format&fit=crop&q=80')">image</span></td>
 </tr>
-<tr class="task-row-details border-b border-[#F3F4F6] p-0" data-dept="OHE">
-<td class="p-0" colspan="8">
+<tr class="task-row-details border-b border-[#F3F4F6] p-0">
+<td class="p-0" colspan="9">
 <div class="row-details bg-gray-50" id="row3-details">
 <div class="p-6 pl-20 flex gap-6">
 <div class="flex-1">
-<h4 class="text-[12px] font-bold text-[#5c6274] mb-2 uppercase tracking-wider">AI Reasoning</h4>
-<p class="text-[14px] text-[#3c4a44] mb-4 bg-white p-4 rounded-lg border border-outline-variant shadow-sm">Routine inspection of overhead equipment. No immediate risks identified. Can be scheduled during regular low-traffic windows.</p>
-<div class="flex gap-3">
-<button class="bg-[#14c9a0] text-white px-5 py-2.5 rounded-lg text-[13px] font-bold hover:bg-[#14c9a0]/90 transition-all shadow-sm">Schedule in Block</button>
+<h4 class="text-[12px] font-bold text-[#5c6274] mb-2 uppercase tracking-wider">AI Assessment</h4>
+<p class="text-[14px] text-[#3c4a44] mb-4 bg-white p-4 rounded-lg border border-outline-variant shadow-sm">Preventative maintenance for dropper alignment. Highly compatible with other blocks in this block section.</p>
+<div class="flex gap-4 mt-6">
+<button class="bg-[#7c3aed] text-white px-6 py-3 rounded-xl text-[14px] font-bold hover:bg-[#6d28d9] transition-all shadow-md flex items-center gap-2"><span class="material-symbols-outlined text-sm">auto_awesome</span> Search AI for best suited time</button>
+<button class="bg-[#14c9a0] text-white px-8 py-3 rounded-xl text-[14px] font-bold hover:bg-[#12b590] transition-all shadow-md">Approve</button>
+</div>
+</div>
+</div>
+</div>
+</td>
+</tr>
 
-<button onclick="openFlagModal(this)" class="bg-[#ba1a1a]/10 border border-[#ba1a1a]/20 text-[#ba1a1a] px-5 py-2.5 rounded-lg text-[13px] font-bold hover:bg-[#ba1a1a]/20 transition-all shadow-sm flex items-center gap-2"><span class="material-symbols-outlined text-[16px]">flag</span> Flag</button></div>
-</div>
-</div>
-</div>
-</td>
-</tr>
-<!-- Row 4 -->
-<tr class="task-row border-b border-[#F3F4F6] hover:bg-gray-50 transition-all duration-200 cursor-pointer group hover:border-l-4 hover:border-l-[#14c9a0]" data-dept="Track Maint." onclick="toggleRowDetails('row4-details', this)">
-<td class="py-4 px-6 text-center text-on-surface-variant w-12">
-<span class="material-symbols-outlined row-expand-icon">expand_more</span>
-</td>
-<td class="py-4 px-6 font-bold text-[#161d1a]">TRK-442</td>
-<td class="py-4 px-6 font-medium">Track Maint.</td>
-<td class="py-4 px-6 text-[#5c6274]"><div class="flex items-center gap-2"><span class="">Km 142.5 (North)</span><span class="material-symbols-outlined text-[18px] text-[#6c7a74] cursor-pointer hover:text-[#14c9a0] transition-colors" title="View on Map" onclick="event.stopPropagation(); openMapModal(23.234, 77.432)">location_on</span></div></td>
-<td class="py-4 px-6">
-<span class="inline-flex items-center px-3 py-1 rounded-full text-[12px] font-bold bg-[#ba1a1a]/10 text-[#ba1a1a]">
-<span class="w-2 h-2 rounded-full bg-[#ba1a1a] mr-2"></span>
-92 Critical
-</span>
-</td>
-<td class="py-4 px-6 text-[#5c6274]">6.0 hrs</td>
-<td class="py-4 px-6 font-medium text-[#161d1a]">Oct 14</td>
-<td class="py-4 px-6 text-center">
-<i class="text-[#14c9a0]" data-lucide="layers"></i>
-</td>
-</tr>
-<tr class="task-row-details border-b border-[#F3F4F6] p-0" data-dept="Track Maint.">
-<td class="p-0" colspan="8">
-<div class="row-details bg-gray-50" id="row4-details">
-<div class="p-6 pl-20 flex gap-6">
-<div class="flex-1">
-<h4 class="text-[12px] font-bold text-[#5c6274] mb-2 uppercase tracking-wider">AI Reasoning</h4>
-<p class="text-[14px] text-[#3c4a44] mb-4 bg-white p-4 rounded-lg border border-outline-variant shadow-sm">Deep ballast cleaning required. High priority due to drainage issues detected by track geometry car. Compatible with TRK-9021 for block optimization.</p>
-<div class="flex gap-3">
-<button class="bg-[#14c9a0] text-white px-5 py-2.5 rounded-lg text-[13px] font-bold hover:bg-[#14c9a0]/90 transition-all shadow-sm">Schedule in Block</button>
-
-<button onclick="openFlagModal(this)" class="bg-[#ba1a1a]/10 border border-[#ba1a1a]/20 text-[#ba1a1a] px-5 py-2.5 rounded-lg text-[13px] font-bold hover:bg-[#ba1a1a]/20 transition-all shadow-sm flex items-center gap-2"><span class="material-symbols-outlined text-[16px]">flag</span> Flag</button></div>
-</div>
-</div>
-</div>
-</td>
-</tr>
-<!-- Row 5 -->
-<tr class="task-row border-b border-[#F3F4F6] hover:bg-gray-50 transition-all duration-200 cursor-pointer group hover:border-l-4 hover:border-l-[#14c9a0]" data-dept="Signals" onclick="toggleRowDetails('row5-details', this)">
-<td class="py-4 px-6 text-center text-on-surface-variant w-12">
-<span class="material-symbols-outlined row-expand-icon">expand_more</span>
-</td>
-<td class="py-4 px-6 font-bold text-[#161d1a]">SIG-112</td>
-<td class="py-4 px-6 font-medium">Signals</td>
-<td class="py-4 px-6 text-[#5c6274]"><div class="flex items-center gap-2"><span class="">Km 155.8 (Main)</span><span class="material-symbols-outlined text-[18px] text-[#6c7a74] cursor-pointer hover:text-[#14c9a0] transition-colors" title="View on Map" onclick="event.stopPropagation(); openMapModal(23.234, 77.432)">location_on</span></div></td>
-<td class="py-4 px-6">
-<span class="inline-flex items-center px-3 py-1 rounded-full text-[12px] font-bold bg-[#f59e0b]/10 text-[#f59e0b]">
-<span class="w-2 h-2 rounded-full bg-[#f59e0b] mr-2"></span>
-78 Watch
-</span>
-</td>
-<td class="py-4 px-6 text-[#5c6274]">3.5 hrs</td>
-<td class="py-4 px-6 font-medium text-[#161d1a]">Oct 18</td>
-<td class="py-4 px-6 text-center text-[#5c6274]">
-<span class="material-symbols-outlined text-[20px]">remove</span>
-</td>
-</tr>
-<tr class="task-row-details border-b border-[#F3F4F6] p-0" data-dept="Signals">
-<td class="p-0" colspan="8">
-<div class="row-details bg-gray-50" id="row5-details">
-<div class="p-6 pl-20 flex gap-6">
-<div class="flex-1">
-<h4 class="text-[12px] font-bold text-[#5c6274] mb-2 uppercase tracking-wider">AI Reasoning</h4>
-<p class="text-[14px] text-[#3c4a44] mb-4 bg-white p-4 rounded-lg border border-outline-variant shadow-sm">Interlocking logic update required. Isolated task with no immediate clustering opportunities in the current schedule window.</p>
-<div class="flex gap-3">
-<button class="bg-[#14c9a0] text-white px-5 py-2.5 rounded-lg text-[13px] font-bold hover:bg-[#14c9a0]/90 transition-all shadow-sm">Schedule in Block</button>
-
-<button onclick="openFlagModal(this)" class="bg-[#ba1a1a]/10 border border-[#ba1a1a]/20 text-[#ba1a1a] px-5 py-2.5 rounded-lg text-[13px] font-bold hover:bg-[#ba1a1a]/20 transition-all shadow-sm flex items-center gap-2"><span class="material-symbols-outlined text-[16px]">flag</span> Flag</button></div>
-</div>
-</div>
-</div>
-</td>
-</tr>
-<!-- Row 6 -->
-<tr class="task-row border-b border-[#F3F4F6] hover:bg-gray-50 transition-all duration-200 cursor-pointer group hover:border-l-4 hover:border-l-[#14c9a0]" data-dept="OHE" onclick="toggleRowDetails('row6-details', this)">
-<td class="py-4 px-6 text-center text-on-surface-variant w-12">
-<span class="material-symbols-outlined row-expand-icon">expand_more</span>
-</td>
-<td class="py-4 px-6 font-bold text-[#161d1a]">OHE-505</td>
-<td class="py-4 px-6 font-medium">OHE</td>
-<td class="py-4 px-6 text-[#5c6274]"><div class="flex items-center gap-2"><span class="">Km 120.4 (South)</span><span class="material-symbols-outlined text-[18px] text-[#6c7a74] cursor-pointer hover:text-[#14c9a0] transition-colors" title="View on Map" onclick="event.stopPropagation(); openMapModal(23.234, 77.432)">location_on</span></div></td>
-<td class="py-4 px-6">
-<span class="inline-flex items-center px-3 py-1 rounded-full text-[12px] font-bold bg-[#10b981]/10 text-[#10b981]">
-<span class="w-2 h-2 rounded-full bg-[#10b981] mr-2"></span>
-30 Routine
-</span>
-</td>
-<td class="py-4 px-6 text-[#5c6274]">1.0 hrs</td>
-<td class="py-4 px-6 font-medium text-[#161d1a]">Oct 25</td>
-<td class="py-4 px-6 text-center">
-<i class="text-[#14c9a0]" data-lucide="layers"></i>
-</td>
-</tr>
-<tr class="task-row-details border-b border-[#F3F4F6] p-0" data-dept="OHE">
-<td class="p-0" colspan="8">
-<div class="row-details bg-gray-50" id="row6-details">
-<div class="p-6 pl-20 flex gap-6">
-<div class="flex-1">
-<h4 class="text-[12px] font-bold text-[#5c6274] mb-2 uppercase tracking-wider">AI Reasoning</h4>
-<p class="text-[14px] text-[#3c4a44] mb-4 bg-white p-4 rounded-lg border border-outline-variant shadow-sm">Insulator cleaning. Low priority. Can be piggybacked onto any mainline block in the South zone.</p>
-<div class="flex gap-3">
-<button class="bg-[#14c9a0] text-white px-5 py-2.5 rounded-lg text-[13px] font-bold hover:bg-[#14c9a0]/90 transition-all shadow-sm">Schedule in Block</button>
-
-<button onclick="openFlagModal(this)" class="bg-[#ba1a1a]/10 border border-[#ba1a1a]/20 text-[#ba1a1a] px-5 py-2.5 rounded-lg text-[13px] font-bold hover:bg-[#ba1a1a]/20 transition-all shadow-sm flex items-center gap-2"><span class="material-symbols-outlined text-[16px]">flag</span> Flag</button></div>
-</div>
-</div>
-</div>
-</td>
-</tr>
-<!-- Row 7 -->
-<tr class="task-row border-b border-[#F3F4F6] hover:bg-gray-50 transition-all duration-200 cursor-pointer group hover:border-l-4 hover:border-l-[#14c9a0]" data-dept="Track Maint." onclick="toggleRowDetails('row7-details', this)">
-<td class="py-4 px-6 text-center text-on-surface-variant w-12">
-<span class="material-symbols-outlined row-expand-icon">expand_more</span>
-</td>
-<td class="py-4 px-6 font-bold text-[#161d1a]">TRK-881</td>
-<td class="py-4 px-6 font-medium">Track Maint.</td>
-<td class="py-4 px-6 text-[#5c6274]"><div class="flex items-center gap-2"><span class="">Km 160.1 (East)</span><span class="material-symbols-outlined text-[18px] text-[#6c7a74] cursor-pointer hover:text-[#14c9a0] transition-colors" title="View on Map" onclick="event.stopPropagation(); openMapModal(23.234, 77.432)">location_on</span></div></td>
-<td class="py-4 px-6">
-<span class="inline-flex items-center px-3 py-1 rounded-full text-[12px] font-bold bg-[#f59e0b]/10 text-[#f59e0b]">
-<span class="w-2 h-2 rounded-full bg-[#f59e0b] mr-2"></span>
-55 Watch
-</span>
-</td>
-<td class="py-4 px-6 text-[#5c6274]">2.5 hrs</td>
-<td class="py-4 px-6 font-medium text-[#161d1a]">Oct 19</td>
-<td class="py-4 px-6 text-center">
-<i class="text-[#14c9a0]" data-lucide="layers"></i>
-</td>
-</tr>
-<tr class="task-row-details border-b border-[#F3F4F6] p-0" data-dept="Track Maint.">
-<td class="p-0" colspan="8">
-<div class="row-details bg-gray-50" id="row7-details">
-<div class="p-6 pl-20 flex gap-6">
-<div class="flex-1">
-<h4 class="text-[12px] font-bold text-[#5c6274] mb-2 uppercase tracking-wider">AI Reasoning</h4>
-<p class="text-[14px] text-[#3c4a44] mb-4 bg-white p-4 rounded-lg border border-outline-variant shadow-sm">Sleeper replacement. Moderate wear detected. High compatibility with upcoming OHE maintenance in the East sector.</p>
-<div class="flex gap-3">
-<button class="bg-[#14c9a0] text-white px-5 py-2.5 rounded-lg text-[13px] font-bold hover:bg-[#14c9a0]/90 transition-all shadow-sm">Schedule in Block</button>
-
-<button onclick="openFlagModal(this)" class="bg-[#ba1a1a]/10 border border-[#ba1a1a]/20 text-[#ba1a1a] px-5 py-2.5 rounded-lg text-[13px] font-bold hover:bg-[#ba1a1a]/20 transition-all shadow-sm flex items-center gap-2"><span class="material-symbols-outlined text-[16px]">flag</span> Flag</button></div>
-</div>
-</div>
-</div>
-</td>
-</tr></tbody>
+</tbody>
 </table>
 </div>
 </div>
@@ -880,6 +725,7 @@
   </div>
 </div>
 
+<!-- Map Modal Placeholder (just simple view) -->
 <div id="mapModal" class="fixed inset-0 bg-black/40 z-[100] hidden flex items-center justify-center p-4 transition-opacity duration-300 opacity-0" onclick="if(event.target === this) closeMapModal()">
   <div class="bg-white rounded-xl shadow-2xl w-full max-w-2xl overflow-hidden flex flex-col transform transition-transform duration-300 scale-95" id="mapModalContent">
     <div class="px-5 py-4 border-b border-outline-variant flex justify-between items-center bg-surface-container-lowest">
@@ -887,6 +733,7 @@
       <button onclick="closeMapModal()" class="text-[#6c7a74] hover:text-[#111827]"><span class="material-symbols-outlined">close</span></button>
     </div>
     <div class="p-4 bg-gray-100 flex items-center justify-center h-96 relative">
+      <!-- Simulated map using an iframe or image for demo -->
       <iframe class="w-full h-full rounded-lg shadow-inner" src="https://www.openstreetmap.org/export/embed.html?bbox=77.42%2C23.23%2C77.44%2C23.24&amp;layer=mapnik&amp;marker=23.235%2C77.432" style="border: 1px solid black"></iframe>
       <div class="absolute bottom-6 left-6 bg-white px-4 py-2 rounded-lg shadow-md border border-gray-200 font-mono text-sm" id="mapCoords"></div>
     </div>
@@ -894,95 +741,40 @@
 </div>
 
 <script>
-if (typeof openImageModal === 'undefined') {
-  window.openImageModal = function(src) {
-    document.getElementById('modalImg').src = src;
-    const m = document.getElementById('imageModal');
-    const c = document.getElementById('imageModalContent');
-    m.classList.remove('hidden');
-    setTimeout(() => {
-      m.classList.remove('opacity-0');
-      c.classList.remove('scale-95');
-    }, 10);
-  }
-  window.closeImageModal = function() {
-    const m = document.getElementById('imageModal');
-    const c = document.getElementById('imageModalContent');
-    m.classList.add('opacity-0');
-    c.classList.add('scale-95');
-    setTimeout(() => m.classList.add('hidden'), 300);
-  }
-  window.openMapModal = function(lat, lng) {
-    document.getElementById('mapCoords').innerText = 'LAT: ' + lat + ' | LNG: ' + lng;
-    const m = document.getElementById('mapModal');
-    const c = document.getElementById('mapModalContent');
-    m.classList.remove('hidden');
-    setTimeout(() => {
-      m.classList.remove('opacity-0');
-      c.classList.remove('scale-95');
-    }, 10);
-  }
-  window.closeMapModal = function() {
-    const m = document.getElementById('mapModal');
-    const c = document.getElementById('mapModalContent');
-    m.classList.add('opacity-0');
-    c.classList.add('scale-95');
-    setTimeout(() => m.classList.add('hidden'), 300);
-  }
+function openImageModal(src) {
+  document.getElementById('modalImg').src = src;
+  const m = document.getElementById('imageModal');
+  const c = document.getElementById('imageModalContent');
+  m.classList.remove('hidden');
+  setTimeout(() => {
+    m.classList.remove('opacity-0');
+    c.classList.remove('scale-95');
+  }, 10);
 }
-</script>
+function closeImageModal() {
+  const m = document.getElementById('imageModal');
+  const c = document.getElementById('imageModalContent');
+  m.classList.add('opacity-0');
+  c.classList.add('scale-95');
+  setTimeout(() => m.classList.add('hidden'), 300);
+}
 
-
-<!-- Flag Modal -->
-<div id="flagModal" class="fixed inset-0 bg-black/40 z-[100] hidden flex items-center justify-center p-4 transition-opacity duration-300 opacity-0" onclick="if(event.target === this) closeFlagModal()">
-  <div class="bg-white rounded-xl shadow-2xl w-full max-w-sm overflow-hidden flex flex-col transform transition-transform duration-300 scale-95" id="flagModalContent">
-    <div class="px-5 py-4 border-b border-outline-variant flex justify-between items-center bg-[#ba1a1a]/5">
-      <h3 class="font-bold text-[#ba1a1a] flex items-center gap-2"><span class="material-symbols-outlined text-[18px]">flag</span> Flag Task</h3>
-      <button onclick="closeFlagModal()" class="text-[#6c7a74] hover:text-[#111827]"><span class="material-symbols-outlined">close</span></button>
-    </div>
-    <div class="p-6 flex flex-col gap-4 text-center">
-      <div class="bg-gray-50 rounded-lg p-4 border border-gray-100 flex flex-col gap-1 items-center">
-        <span class="text-xs text-gray-500 uppercase font-bold tracking-wider">Task ID</span>
-        <span class="text-lg font-black text-gray-900" id="flagModalId">TRK-000</span>
-        <span class="text-sm font-semibold text-gray-600 mt-1" id="flagModalName">Dept Name</span>
-      </div>
-      <p class="text-sm text-gray-600">This task has been approved but remains incomplete. Would you like to request an explanation from the engineering department?</p>
-      <button class="bg-[#ba1a1a] text-white px-6 py-3 rounded-xl text-[14px] font-bold hover:bg-[#9c1616] transition-all shadow-md mt-2 w-full flex justify-center items-center gap-2" onclick="alert('Reason request sent to engineering department.'); closeFlagModal();">
-        <span class="material-symbols-outlined text-[18px]">help_center</span> Ask for reason
-      </button>
-    </div>
-  </div>
-</div>
-
-<script>
-if (typeof openFlagModal === 'undefined') {
-  window.openFlagModal = function(btn) {
-    const rowDetails = btn.closest('.task-row-details');
-    if (!rowDetails) return;
-    const mainRow = rowDetails.previousElementSibling;
-    if (!mainRow) return;
-
-    const id = mainRow.cells[1].innerText.trim();
-    const name = mainRow.cells[2].innerText.trim();
-    
-    document.getElementById('flagModalId').innerText = id;
-    document.getElementById('flagModalName').innerText = name;
-
-    const m = document.getElementById('flagModal');
-    const c = document.getElementById('flagModalContent');
-    m.classList.remove('hidden');
-    setTimeout(() => {
-      m.classList.remove('opacity-0');
-      c.classList.remove('scale-95');
-    }, 10);
-  }
-  window.closeFlagModal = function() {
-    const m = document.getElementById('flagModal');
-    const c = document.getElementById('flagModalContent');
-    m.classList.add('opacity-0');
-    c.classList.add('scale-95');
-    setTimeout(() => m.classList.add('hidden'), 300);
-  }
+function openMapModal(lat, lng) {
+  document.getElementById('mapCoords').innerText = 'LAT: ' + lat + ' | LNG: ' + lng;
+  const m = document.getElementById('mapModal');
+  const c = document.getElementById('mapModalContent');
+  m.classList.remove('hidden');
+  setTimeout(() => {
+    m.classList.remove('opacity-0');
+    c.classList.remove('scale-95');
+  }, 10);
+}
+function closeMapModal() {
+  const m = document.getElementById('mapModal');
+  const c = document.getElementById('mapModalContent');
+  m.classList.add('opacity-0');
+  c.classList.add('scale-95');
+  setTimeout(() => m.classList.add('hidden'), 300);
 }
 </script>
 

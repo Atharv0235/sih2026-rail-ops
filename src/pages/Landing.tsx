@@ -148,7 +148,7 @@ export function Landing() {
       <section style={{ background: '#fff', borderBottom: '1px solid #E3E8E7' }}>
         <div style={{ maxWidth: 1200, margin: '0 auto', padding: '0 5vw', display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)' }}>
           {[
-            { value: '2.75×',   label: 'Shadow Maintenance Multiplier',   sub: 'Tasks packed per block' },
+            { value: '2.75×',   label: 'Time Efficiency Score',   sub: 'Time saved by doing tasks together' },
             { value: '124 hrs', label: 'Downtime Saved This Month',        sub: 'Across all corridors' },
             { value: '3 depts', label: 'Integrated in One Pane',           sub: 'TMS · SMMS · TDMS' },
             { value: '<30 s',   label: 'Delay-Triggered Reaction Time',    sub: 'Live opportunity alerts' },
@@ -215,7 +215,7 @@ export function Landing() {
                 <div style={{ width: 42, height: 42, borderRadius: 10, background: row.bg, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 12, fontWeight: 800, color: row.color, flexShrink: 0 }}>{row.dept}</div>
                 <div style={{ flex: 1 }}>
                   <div style={{ fontSize: 14, fontWeight: 700, color: '#0D1C19', marginBottom: 2 }}>{row.label}</div>
-                  <div style={{ fontSize: 12, color: '#7A9690', fontWeight: 500 }}>Score: {row.score} · Shadow Eligible</div>
+                  <div style={{ fontSize: 12, color: '#7A9690', fontWeight: 500 }}>Score: {row.score} · Parallel Ready</div>
                 </div>
                 <div style={{ padding: '3px 10px', borderRadius: 9999, background: row.bg, color: row.color, fontSize: 11, fontWeight: 700 }}>{row.badge}</div>
               </div>
@@ -251,7 +251,10 @@ export function Landing() {
                 </div>
               ))}
               <div style={{ marginTop: 16, padding: '10px 14px', background: 'rgba(212,130,10,0.2)', borderRadius: 8, border: '1px solid rgba(212,130,10,0.4)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                <span style={{ fontSize: 13, color: 'rgba(255,255,255,0.8)', fontWeight: 500 }}>Shadow Multiplier for this block</span>
+                <div>
+                  <span style={{ fontSize: 13, color: 'rgba(255,255,255,0.8)', fontWeight: 500, display: 'block' }}>Time Efficiency Score</span>
+                  <span style={{ fontSize: 11, color: 'rgba(255,255,255,0.5)', marginTop: 2, display: 'block' }}>Time saved by doing tasks together</span>
+                </div>
                 <span style={{ fontSize: 24, fontWeight: 900, color: '#D4820A', fontVariantNumeric: 'tabular-nums' }}>2.75×</span>
               </div>
             </div>

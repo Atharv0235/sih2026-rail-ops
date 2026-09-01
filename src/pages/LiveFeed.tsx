@@ -73,9 +73,12 @@ export function LiveFeed() {
               ))}
             </div>
 
-            <div style={{ background: 'var(--green-soft)', border: '1px solid var(--green)', borderRadius: 10, padding: '14px 20px', display: 'flex', justifyContent: 'space-between', marginBottom: 24, fontSize: 14 }}>
+            <div style={{ background: 'var(--green-soft)', border: '1px solid var(--green)', borderRadius: 10, padding: '14px 20px', display: 'flex', justifyContent: 'space-between', marginBottom: 24, fontSize: 14, alignItems: 'center' }}>
               <span style={{ color: 'var(--green)', fontWeight: 500 }}>AI Plan: <strong>165 min</strong> of 180 min available</span>
-              <span style={{ color: 'var(--green)', fontWeight: 800 }}>Shadow Multiplier: 2.1×</span>
+              <div style={{ textAlign: 'right' }}>
+                <div style={{ color: 'var(--green)', fontWeight: 800 }}>Time Efficiency Score: 2.1×</div>
+                <div style={{ fontSize: 11, color: 'var(--green)', opacity: 0.8, marginTop: 2, fontWeight: 500 }}>Time saved by doing tasks together</div>
+              </div>
             </div>
 
             <div style={{ display: 'flex', gap: 12 }}>

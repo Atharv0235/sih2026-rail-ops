@@ -28,6 +28,12 @@ const BLOCKS: Block[] = [
     ],
   },
   {
+    id: "IB-0102", section: "GWL Yard", day: "Mon", corridor: "GWL–JHS", start: 6.5, duration: 1.5, efficiency: "1.00x",
+    tasks: [
+      { id: "DEF-10288", department: "TMS", label: "Ultrasonic flaw detection" },
+    ],
+  },
+  {
     id: "SB-0246", section: "Km 140–145", day: "Tue", corridor: "BPL–ET", start: 5, duration: 2.5, efficiency: "2.40x",
     tasks: [
       { id: "DEF-10241", department: "TMS", label: "Rail wear measurement" },
@@ -36,11 +42,24 @@ const BLOCKS: Block[] = [
     ],
   },
   {
-    id: "SB-0250", section: "JHS Approach", day: "Wed", corridor: "GWL–JHS", start: 1, duration: 2, efficiency: "2.15x",
+    id: "IB-0115", section: "Km 140–145", day: "Tue", corridor: "BPL–ET", start: 1, duration: 1.5, efficiency: "1.00x",
+    tasks: [
+      { id: "DEF-10304", department: "SMMS", label: "Cable insulation test" },
+    ],
+  },
+  {
+    id: "SB-0250", section: "JHS Approach", day: "Wed", corridor: "GWL–JHS", start: 1.5, duration: 2, efficiency: "2.15x",
     tasks: [
       { id: "DEF-10205", department: "TMS", label: "Ballast profile check" },
       { id: "DEF-10233", department: "SMMS", label: "Signal sighting audit" },
       { id: "DEF-10187", department: "TDMS", label: "Neutral section test" },
+    ],
+  },
+  {
+    id: "SB-0251", section: "JHS Approach", day: "Wed", corridor: "GWL–JHS", start: 5.5, duration: 2, efficiency: "1.85x",
+    tasks: [
+      { id: "DEF-10311", department: "TMS", label: "Weld replacement" },
+      { id: "DEF-10299", department: "TDMS", label: "Mast alignment check" },
     ],
   },
   {
@@ -51,6 +70,12 @@ const BLOCKS: Block[] = [
       { id: "DEF-10218", department: "TDMS", label: "Catenary maintenance" },
     ],
   },
+  {
+    id: "IB-0120", section: "BPL–ET Mainline", day: "Thu", corridor: "BPL–ET", start: 1, duration: 1, efficiency: "1.00x",
+    tasks: [
+      { id: "DEF-10322", department: "TDMS", label: "Dropper adjustment" },
+    ],
+  },
 ];
 
 const deptStyle = {
@@ -59,19 +84,15 @@ const deptStyle = {
   TDMS: { color: "#F97316", bg: "rgba(249,115,22,.10)", name: "Traction" },
 };
 
-function ShadowBlock({ block, onClick }: { block: Block; onClick: () => void }) {
+function TaskBlock({ block, task, meta, onClick }: { block: Block; task: any; meta: { color: string; name: string }; onClick: () => void }) {
   return (
     <button
       onClick={onClick}
-      style={{ left: `${(block.start / 8) * 100}%`, width: `${(block.duration / 8) * 100}%` }}
-      className="group/block absolute top-1/2 z-[1] h-14 -translate-y-1/2 origin-center cursor-pointer overflow-hidden rounded-lg border border-white bg-white shadow-md transition-all duration-300 hover:z-10 hover:scale-105 hover:shadow-lg"
+      style={{ left: `${(block.start / 8) * 100}%`, width: `${(block.duration / 8) * 100}%`, backgroundColor: meta.color }}
+      className="group/block absolute top-1/2 z-[1] h-8 -translate-y-1/2 origin-center cursor-pointer overflow-hidden rounded-md shadow-sm transition-all duration-200 hover:z-10 hover:scale-[1.02] hover:shadow-md"
     >
-      <span className="absolute inset-x-0 top-0 h-1/3 bg-[#3B82F6]" />
-      <span className="absolute inset-x-0 top-1/3 h-1/3 bg-[#10B981]" />
-      <span className="absolute inset-x-0 bottom-0 h-1/3 bg-[#F97316]" />
-      <span className="absolute inset-1 flex items-center justify-between rounded bg-white/90 px-2 text-left text-[10px] font-extrabold text-[#111827] backdrop-blur-sm">
-        <span className="truncate">{block.id}</span>
-        <span className="ml-1 shrink-0">{block.duration * 60}m</span>
+      <span className="absolute inset-0 flex items-center px-2 text-left text-[10px] font-extrabold text-white/95">
+        <span className="truncate drop-shadow-sm">{task.label}</span>
       </span>
     </button>
   );
@@ -118,15 +139,35 @@ export function BlockPlanner({ role }: { role: Role }) {
           </div>
           <div className="group/canvas">
             {SECTIONS.map((section) => (
-              <div key={section} className="grid grid-cols-[160px_1fr] border-b border-gray-100 last:border-b-0">
-                <div className="flex items-center px-4 py-7">
-                  <div><p className="text-sm font-bold text-[#111827]">{section}</p><p className="mt-1 text-[11px] text-[#9CA3AF]">Main corridor</p></div>
+              <div key={section} className="border-b-2 border-gray-200 last:border-b-0 pb-1">
+                <div className="px-4 py-3 bg-gray-50/50">
+                  <p className="text-sm font-bold text-[#111827]">{section}</p>
+                  <p className="text-[11px] text-[#9CA3AF]">Main corridor</p>
                 </div>
-                <div className="relative grid grid-cols-8 bg-[linear-gradient(to_right,#f3f4f6_1px,transparent_1px)] bg-[size:12.5%_100%] group-hover/canvas:[&>button:not(:hover)]:opacity-50">
-                  {BLOCKS.filter((b) => b.section === section).map((block) => (
-                    <ShadowBlock key={block.id} block={block} onClick={() => setSelected(block)} />
-                  ))}
-                </div>
+                
+                {["TMS", "SMMS", "TDMS"].map((dept) => {
+                  const meta = deptStyle[dept as keyof typeof deptStyle];
+                  const deptTasks = BLOCKS.filter((b) => b.section === section).flatMap(b => {
+                     const task = b.tasks.find(t => t.department === dept);
+                     return task ? { block: b, task } : null;
+                  }).filter(Boolean) as {block: Block, task: any}[];
+
+                  return (
+                    <div key={dept} className="grid grid-cols-[160px_1fr] border-b border-gray-100 last:border-b-0">
+                      <div className="flex items-center px-4 py-2 border-r border-gray-100">
+                         <div className="flex items-center gap-2">
+                           <span className="w-2.5 h-2.5 rounded-sm" style={{backgroundColor: meta.color}}></span>
+                           <span className="text-[10px] font-bold text-[#6B7280]">{dept} / {meta.name}</span>
+                         </div>
+                      </div>
+                      <div className="relative h-12 bg-[linear-gradient(to_right,#f3f4f6_1px,transparent_1px)] bg-[size:12.5%_100%] group-hover/canvas:[&>button:not(:hover)]:opacity-60">
+                        {deptTasks.map(({block, task}) => (
+                           <TaskBlock key={task.id} block={block} task={task} meta={meta} onClick={() => setSelected(block)} />
+                        ))}
+                      </div>
+                    </div>
+                  );
+                })}
               </div>
             ))}
           </div>

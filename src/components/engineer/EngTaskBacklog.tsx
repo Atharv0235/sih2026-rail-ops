@@ -443,7 +443,7 @@ export function EngTaskBacklog({
                           <td className="px-6 py-4">
                             {task.shadowCompatible ? (
                               <span className="inline-flex items-center gap-1.5 rounded-lg bg-[#14C9A0]/10 px-2.5 py-1.5 text-[11px] font-bold text-[#14C9A0]">
-                                <Layers className="h-3.5 w-3.5" />Shadow Ready
+                                <Layers className="h-3.5 w-3.5" />Parallel Ready
                               </span>
                             ) : (
                               <span className="inline-flex items-center gap-1.5 rounded-lg bg-gray-100 px-2.5 py-1.5 text-[11px] font-semibold text-[#9CA3AF]">
