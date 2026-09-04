@@ -384,56 +384,23 @@
 <!-- Independent block in BPL-ET (TDMS only) at 09:00 (left 18.75%) -->
 <div class="absolute top-[356px] left-[18.75%] w-[15%] h-[14px] bg-orange-500 rounded flex items-center px-2 cursor-pointer shadow-sm z-10" onclick="openTaskInfo('TDMS', 'Dropper adjustment', 'Mast 498', 'Crane', '90 Mins', '50%')"><span class="text-[9px] font-bold text-white truncate pointer-events-none">TDMS: Dropper</span></div>
 
+</div> <!-- Close Gantt Content Area -->
+</div> <!-- Close Gantt Wrapper (flex) -->
+</div> <!-- Close Gantt Grid Container -->
+</main> <!-- Close Page Canvas -->
+</div> <!-- Close Main Content Area -->
 
+<!-- Hover Tooltip -->
+<div id="block-tooltip" class="fixed z-[999] pointer-events-none opacity-0 transition-opacity duration-150 bg-[#1a2332] text-white rounded-xl shadow-2xl px-3 py-2.5 text-[11px] min-w-[180px] max-w-[240px]" style="top:0;left:0;display:none">
+  <p id="tt-title" class="font-bold text-[12px] mb-1.5 text-[#14C9A0]"></p>
+  <div class="space-y-1 text-white/80">
+    <div class="flex items-center gap-1.5"><span class="material-symbols-outlined text-[12px]">place</span><span id="tt-location"></span></div>
+    <div class="flex items-center gap-1.5"><span class="material-symbols-outlined text-[12px]">construction</span><span id="tt-machine"></span></div>
+    <div class="flex items-center gap-1.5"><span class="material-symbols-outlined text-[12px]">schedule</span><span id="tt-duration"></span></div>
+    <div class="flex items-center gap-1.5"><span class="material-symbols-outlined text-[12px]">crisis_alert</span><span id="tt-criticality"></span> criticality</div>
+  </div>
 </div>
-<div class="w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-sm">
-<span class="material-symbols-outlined text-primary text-2xl">auto_graph</span>
-</div>
-</div>
-<!-- Stacked Task List -->
-<h4 class="text-label-md font-label-md text-on-surface uppercase tracking-wider mb-4 border-b border-outline-variant pb-2">Integrated Tasks</h4>
-<div class="space-y-3">
-<div class="bg-white p-4 rounded-xl border border-outline-variant shadow-sm flex gap-4 items-start">
-<div class="w-2 h-full bg-blue-500 rounded-full self-stretch shrink-0"></div>
-<div>
-<p class="text-label-md font-label-md font-bold text-on-surface mb-1">TMS Maintenance</p>
-<p class="text-body-sm font-body-sm text-on-surface-variant">Routine track inspection and ballast leveling.</p>
-</div>
-</div>
-<div class="bg-white p-4 rounded-xl border border-outline-variant shadow-sm flex gap-4 items-start">
-<div class="w-2 h-full bg-green-500 rounded-full self-stretch shrink-0"></div>
-<div>
-<p class="text-label-md font-label-md font-bold text-on-surface mb-1">SMMS Signalling</p>
-<p class="text-body-sm font-body-sm text-on-surface-variant">Sensor recalibration at junction points.</p>
-</div>
-</div>
-<div class="bg-white p-4 rounded-xl border border-outline-variant shadow-sm flex gap-4 items-start">
-<div class="w-2 h-full bg-orange-500 rounded-full self-stretch shrink-0"></div>
-<div>
-<p class="text-label-md font-label-md font-bold text-on-surface mb-1">TDMS Overhead</p>
-<p class="text-body-sm font-body-sm text-on-surface-variant">Catenary wire tension adjustments.</p>
-</div>
-</div>
-</div>
-</div>
-<!-- Drawer Footer / RBAC Actions -->
-<div class="p-6 border-t border-outline-variant bg-surface-container-lowest flex flex-col gap-3">
-<div class="flex flex-col gap-3" id="controllerActions">
-<button class="w-full bg-primary-container text-on-primary-container py-3 rounded-xl font-label-md shadow-sm pulse-mint hover:bg-[#12b590] transition-colors">
-                    Approve Block
-                </button>
-<button class="w-full bg-white border border-outline text-on-surface py-3 rounded-xl font-label-md hover:bg-surface-container-low transition-colors">
-                    Modify Tasks
-                </button>
-</div>
-<div class="hidden flex-col gap-3" id="engineerActions">
-<div class="w-full bg-surface-variant text-on-surface-variant py-3 rounded-xl font-label-md text-center flex items-center justify-center gap-2">
-<span class="material-symbols-outlined text-sm">pending_actions</span>
-                    Awaiting Approval
-                </div>
-</div>
-</div>
-</div>
+
 <!-- Task Info Popup Modal -->
 <div id="taskInfoModal" class="fixed inset-0 bg-black/40 z-[100] hidden flex items-center justify-center p-4 transition-opacity duration-300" onclick="if(event.target === this) closeTaskInfo()">
   <div class="bg-white rounded-xl shadow-2xl w-full max-w-[320px] overflow-hidden flex flex-col transform transition-transform duration-300 scale-95 opacity-0" id="taskInfoContent">
