@@ -635,25 +635,64 @@
     setTimeout(() => popover.classList.add('hidden'), 300);
   }
 </script>
+<!-- Secondary Live Feed Updates -->
+<h4 class="text-title-lg font-bold text-on-surface mb-4 mt-8">Recent Live Updates</h4>
+<div class="flex flex-col gap-4 mb-8">
+  <!-- Card 1 -->
+  <div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-4 shadow-sm flex items-start gap-4 hover:shadow-md transition-shadow">
+    <div class="w-10 h-10 rounded-full bg-[#E8A33D]/20 flex items-center justify-center text-[#E8A33D] shrink-0">
+      <span class="material-symbols-outlined text-xl">schedule</span>
+    </div>
+    <div class="flex-1">
+      <div class="flex justify-between items-center mb-1">
+        <h4 class="text-label-lg font-bold text-on-surface">GWL-SF Express Delayed by 45 Mins</h4>
+        <span class="text-label-sm font-medium text-on-surface-variant">Just now</span>
+      </div>
+      <p class="text-body-sm text-on-surface-variant">Speed restriction en-route caused a cascading delay. Expected arrival adjusted.</p>
+    </div>
+  </div>
 
-<!-- Trigger Event (Live Delay Card) -->
-<div class="bg-surface-container-lowest border-2 border-[#E8A33D] rounded-2xl p-6 mb-8 shadow-md relative overflow-hidden animate-[pulse_3s_ease-in-out_infinite]">
-<!-- Ambient warning glow -->
-<div class="absolute -right-10 -top-10 w-48 h-48 bg-[#E8A33D] opacity-10 blur-3xl rounded-full"></div>
-<div class="flex items-start justify-between relative z-10">
-<div class="flex gap-4 items-start">
-<div class="w-12 h-12 rounded-full bg-[#E8A33D]/20 flex items-center justify-center text-[#E8A33D] shrink-0">
-<span class="material-symbols-outlined text-2xl font-bold">warning</span>
-</div>
-<div>
-<h3 class="text-headline-md font-headline-md font-bold text-on-surface mb-1">Goods-402 Freight Delayed by 180 Mins</h3>
-<p class="text-body-md font-body-md text-on-surface-variant">Unexpected locomotive failure at Sector 7. Track availability window expanded.</p>
-</div>
-</div>
-<div class="text-right">
-<p class="text-label-md font-label-md text-outline mb-1 uppercase tracking-widest">Margin Closes In</p>
-<p class="text-3xl font-mono font-bold text-[#C13B3B] bg-surface-container-high px-4 py-2 rounded-lg border border-outline-variant shadow-inner">02:59:45</p>
-</div>
+  <!-- Card 2 -->
+  <div class="bg-surface-container-lowest border border-[#14C9A0]/30 rounded-xl p-4 shadow-sm flex items-start gap-4 hover:shadow-md transition-shadow">
+    <div class="w-10 h-10 rounded-full bg-[#14C9A0]/20 flex items-center justify-center text-[#006B54] shrink-0">
+      <span class="material-symbols-outlined text-xl">engineering</span>
+    </div>
+    <div class="flex-1">
+      <div class="flex justify-between items-center mb-1">
+        <h4 class="text-label-lg font-bold text-on-surface">Signal & Telecom (SMMS) Maintenance Extended</h4>
+        <span class="text-label-sm font-medium text-on-surface-variant">12 mins ago</span>
+      </div>
+      <p class="text-body-sm text-on-surface-variant">Working in GWL-ET section till 14:30 hrs. Block extended by 30 mins to resolve cable fault.</p>
+    </div>
+  </div>
+
+  <!-- Card 3 -->
+  <div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-4 shadow-sm flex items-start gap-4 hover:shadow-md transition-shadow">
+    <div class="w-10 h-10 rounded-full bg-blue-500/20 flex items-center justify-center text-blue-600 shrink-0">
+      <span class="material-symbols-outlined text-xl">bolt</span>
+    </div>
+    <div class="flex-1">
+      <div class="flex justify-between items-center mb-1">
+        <h4 class="text-label-lg font-bold text-on-surface">Traction (TDMS) OHE Inspection</h4>
+        <span class="text-label-sm font-medium text-on-surface-variant">28 mins ago</span>
+      </div>
+      <p class="text-body-sm text-on-surface-variant">Scheduled inspection at Sector 4 started on time. Estimated duration: 60 mins.</p>
+    </div>
+  </div>
+  
+  <!-- Card 4 -->
+  <div class="bg-surface-container-lowest border border-green-500/30 rounded-xl p-4 shadow-sm flex items-start gap-4 hover:shadow-md transition-shadow">
+    <div class="w-10 h-10 rounded-full bg-green-500/20 flex items-center justify-center text-green-700 shrink-0">
+      <span class="material-symbols-outlined text-xl">check_circle</span>
+    </div>
+    <div class="flex-1">
+      <div class="flex justify-between items-center mb-1">
+        <h4 class="text-label-lg font-bold text-on-surface">Track Relay (TMS) Completed Early</h4>
+        <span class="text-label-sm font-medium text-on-surface-variant">45 mins ago</span>
+      </div>
+      <p class="text-body-sm text-on-surface-variant">BPL-ET Mainline clear for dispatch. 20 mins of shadow block saved.</p>
+    </div>
+  </div>
 </div>
 </div>
 </div>

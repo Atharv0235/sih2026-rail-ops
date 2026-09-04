@@ -72,14 +72,14 @@ body { font-family: 'Geist', sans-serif; }
   </div>
   
   <div class="px-4 mb-6">
-    <button onclick="typeof openNewRequestModal === 'function' ? openNewRequestModal() : window.location.href='/eng-dashboard.html'" class="w-full bg-[#14c9a0] hover:bg-[#0fa682] text-white py-2.5 rounded-xl font-bold text-sm shadow-sm transition-colors flex items-center justify-center gap-2">
+    <button onclick="typeof openNewRequestModal === 'function' ? openNewRequestModal() : window.location.href='/eng-smms.html'" class="w-full bg-[#14c9a0] hover:bg-[#0fa682] text-white py-2.5 rounded-xl font-bold text-sm shadow-sm transition-colors flex items-center justify-center gap-2">
       <span class="material-symbols-outlined text-lg">add_box</span> New Request
     </button>
   </div>
   <div class="flex-1 overflow-y-auto px-3">
     <ul class="space-y-1.5">
     <li>
-      <a class="flex items-center justify-between px-4 py-3 bg-[#eaf6f3] text-[#14C9A0] rounded-r-xl font-medium border-l-4 border-[#14C9A0] transition-all duration-200" href="/eng-dashboard.html">
+      <a class="flex items-center justify-between px-4 py-3 bg-[#eaf6f3] text-[#14C9A0] rounded-r-xl font-medium border-l-4 border-[#14C9A0] transition-all duration-200" href="/eng-smms.html">
         <div class="flex items-center gap-3">
           <span class="material-symbols-outlined text-[22px]" style="font-variation-settings: 'FILL' 1;">dashboard</span>
           <span class="text-[15px]">Dashboard</span>
@@ -88,7 +88,7 @@ body { font-family: 'Geist', sans-serif; }
       </a>
     </li>
     <li>
-      <a class="flex items-center justify-between px-4 py-3 text-[#5c6274] hover:bg-[#f4fbf6] rounded-xl font-medium transition-all duration-200 ml-1" href="/eng-backlog.html">
+      <a class="flex items-center justify-between px-4 py-3 text-[#5c6274] hover:bg-[#f4fbf6] rounded-xl font-medium transition-all duration-200 ml-1" href="/backlog-smms.html">
         <div class="flex items-center gap-3">
           <span class="material-symbols-outlined text-[22px]">list_alt</span>
           <span class="text-[15px]">Task Log</span>
@@ -97,7 +97,7 @@ body { font-family: 'Geist', sans-serif; }
       </a>
     </li>
     <li>
-      <a class="flex items-center justify-between px-4 py-3 text-[#5c6274] hover:bg-[#f4fbf6] rounded-xl font-medium transition-all duration-200 ml-1" href="/eng-planner.html">
+      <a class="flex items-center justify-between px-4 py-3 text-[#5c6274] hover:bg-[#f4fbf6] rounded-xl font-medium transition-all duration-200 ml-1" href="/planner-smms.html">
         <div class="flex items-center gap-3">
           <span class="material-symbols-outlined text-[22px]">calendar_today</span>
           <span class="text-[15px]">Block Planner</span>
@@ -145,7 +145,44 @@ body { font-family: 'Geist', sans-serif; }
         <span class="font-bold text-[#006b54] text-sm">Signal (SMMS)</span>
       </div>
       <button onclick="window.location.href='/live.html'" class="bg-[#14C9A0] text-white hover:bg-[#0fa682] px-4 py-1.5 rounded-full font-bold text-xs flex items-center gap-2 shadow-sm transition-colors shrink-0 mx-2"><span class="material-symbols-outlined text-sm">sensors</span>VIEW LIVE FEED</button>
-<div class="flex items-center gap-2 border border-[#bbcac2] px-3 py-1.5 rounded-xl bg-white">
+<div class="relative group mr-1">
+  <button class="relative p-2 text-[#6c7a74] hover:text-[#161d1a] transition-colors rounded-full hover:bg-black/5" title="Notifications">
+    <span class="material-symbols-outlined">notifications</span>
+    <span class="absolute top-1.5 right-1.5 w-2.5 h-2.5 bg-[#ba1a1a] border-2 border-white rounded-full animate-pulse"></span>
+  </button>
+  
+  <!-- Dropdown -->
+  <div class="absolute right-0 mt-2 w-80 bg-white rounded-xl shadow-xl border border-outline-variant opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all z-50 p-2 pointer-events-none group-hover:pointer-events-auto hover:opacity-100 hover:visible hover:pointer-events-auto">
+    <div class="px-3 py-2 border-b border-outline-variant flex justify-between items-center">
+      <span class="font-bold text-on-surface text-sm">Notifications (1)</span>
+      <span class="text-[10px] text-primary cursor-pointer hover:underline font-bold">Mark all read</span>
+    </div>
+    
+    <div class="p-2 space-y-2 max-h-[300px] overflow-y-auto">
+      <!-- Pending Approval Item -->
+      <div class="bg-primary/5 rounded-lg p-3 border border-primary/20 shadow-sm relative overflow-hidden">
+        <div class="absolute top-0 left-0 w-1 h-full bg-[#ba1a1a]"></div>
+        <div class="flex items-center gap-2 mb-2 pl-2">
+          <span class="material-symbols-outlined text-[#ba1a1a] text-sm">pending_actions</span>
+          <span class="text-[10px] font-bold text-[#ba1a1a] uppercase tracking-wider">Action Required (Chief Controller)</span>
+        </div>
+        <p class="text-xs font-bold text-on-surface mb-1 pl-2">Schedule Modification: TMS Track Repair</p>
+        <p class="text-[10px] text-on-surface-variant mb-2 pl-2"><span class="font-bold">Reason:</span> Traffic Clearance (Train Delay)</p>
+        
+        <div class="bg-white rounded p-2 mb-3 border border-outline-variant text-[11px] ml-2">
+          <div class="flex justify-between mb-1"><span class="text-on-surface-variant">Original:</span> <span class="font-mono text-gray-500 line-through">10:00 - 14:00</span></div>
+          <div class="flex justify-between"><span class="text-on-surface-variant font-bold">Proposed:</span> <span class="font-mono text-primary font-bold">09:00 - 13:00</span></div>
+        </div>
+        
+        <div class="flex gap-2 pl-2">
+          <button class="flex-1 bg-surface-container-highest hover:bg-red-100 hover:text-red-600 text-on-surface text-[11px] font-bold py-1.5 rounded transition-colors" onclick="this.closest('.bg-primary/5').remove()">Reject</button>
+          <button class="flex-1 bg-[#14C9A0] hover:bg-[#0fa682] text-white text-[11px] font-bold py-1.5 rounded transition-colors" onclick="this.closest('.bg-primary/5').remove(); alert('Modification Approved. Gantt Chart synchronized with Chief Controller.')">Approve</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      <div class="flex items-center gap-2 border border-[#bbcac2] px-3 py-1.5 rounded-xl bg-white">
         <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center text-white font-bold text-xs">RK</div>
         <div class="flex flex-col">
           <span class="text-xs font-bold text-[#161d1a] leading-tight">Ravi Kumar</span>
@@ -448,10 +485,24 @@ setDept('SMMS');
         <span class="material-symbols-outlined text-[#006b54]">add_box</span>
         <h3 class="font-bold text-[#161d1a] text-lg">Log New Maintenance Request</h3>
       </div>
-      <button onclick="closeNewRequestModal()" class="text-[#6c7a74] hover:text-[#161d1a]">
-        <span class="material-symbols-outlined">close</span>
-      </button>
+      <div class="flex items-center gap-4">
+        <div class="flex items-center gap-2 bg-white text-[#006b54] px-3 py-1 rounded border border-[#bbcac2] shadow-sm" title="Live request timestamp">
+          
+          <span class="text-[11px] font-bold font-mono tracking-widest" id="live-request-time">00:00:00</span>
+        </div>
+        <button onclick="closeNewRequestModal()" class="text-[#6c7a74] hover:text-[#161d1a]">
+          <span class="material-symbols-outlined">close</span>
+        </button>
+      </div>
     </div>
+    <script>
+      setInterval(() => {
+        const timeEls = document.querySelectorAll('#live-request-time');
+        const now = new Date();
+        const timeStr = now.toLocaleTimeString('en-US', { hour12: false });
+        timeEls.forEach(el => el.innerText = timeStr);
+      }, 1000);
+    </script>
 
     <!-- Body -->
     <div class="p-6 overflow-y-auto max-h-[70vh] space-y-5">
@@ -527,13 +578,16 @@ setDept('SMMS');
         </div>
         <div>
           <div class="flex justify-between items-center mb-1">
-            <label class="text-[11px] font-bold text-[#6c7a74] uppercase">AI Criticality (0-100%)</label>
-            <span id="critVal" class="text-xs font-bold text-[#ba1a1a]">85% (Critical)</span>
+            <label class="flex items-center gap-1.5 text-[11px] font-bold text-[#6c7a74] uppercase">
+              Human Criticality (1-10)
+              
+            </label>
+            <span id="critVal" class="text-xs font-bold text-[#ba1a1a]">8 (Critical)</span>
           </div>
-          <input type="range" min="0" max="100" value="85" class="w-full accent-[#ba1a1a]" oninput="updateCrit(this.value)">
+          <input type="range" min="1" max="10" value="8" class="w-full accent-[#ba1a1a]" oninput="updateCrit(this.value)">
           <div class="flex justify-between text-[10px] text-[#6c7a74] mt-1">
-            <span>&lt;25 (Easy)</span>
-            <span>&gt;75 (Critical)</span>
+            <span>1 (Routine)</span>
+            <span>10 (Critical)</span>
           </div>
         </div>
       </div>
@@ -649,11 +703,11 @@ function closeNewRequestModal() {
 
 function updateCrit(val) {
   const span = document.getElementById('critVal');
-  let text = val + '% ';
-  if(val < 25) {
+  let text = val + ' ';
+  if(val <= 3) {
     text += '(Routine)';
     span.style.color = '#006b54'; 
-  } else if (val >= 75) {
+  } else if (val >= 8) {
     text += '(Critical)';
     span.style.color = '#ba1a1a'; 
   } else {
