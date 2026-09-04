@@ -161,39 +161,87 @@
 </head>
 <body class="bg-background text-on-background font-body-md min-h-screen flex overflow-hidden">
 <!-- SideNavBar -->
-<nav class="fixed left-0 top-0 h-screen w-64 border-r border-outline-variant bg-surface-container-lowest flex flex-col py-lg z-50">
-<!-- Header -->
-<div class="px-lg mb-8 flex items-center gap-3"><div class="flex items-center gap-3 px-4"><div class="w-10 h-10 bg-primary-container rounded-lg flex items-center justify-center text-on-primary-container font-bold text-xl">R</div><h1 class="text-xl font-bold text-on-surface tracking-tight">RAIL-OPS</h1></div></div>
-<!-- CTA -->
-<div class="px-4 mb-6"><div class="relative px-2"><span class="material-symbols-outlined absolute left-5 top-1/2 -translate-y-1/2 text-on-surface-variant text-lg">search</span><input class="w-full bg-surface-container-low border-none rounded-lg py-2 pl-10 pr-4 text-body-sm focus:ring-1 focus:ring-primary-container" placeholder="Search..." type="text"/></div></div>
-<!-- Navigation Tabs -->
-<div class="flex-1 flex flex-col gap-1 overflow-y-auto px-2"><a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-primary transition-colors" href="/backlog"><span class="material-symbols-outlined text-xl">list_alt</span><span class="font-label-md">Task Backlog</span></a><a class="flex items-center gap-3 px-4 py-2 bg-primary-container/10 text-primary border-l-4 border-primary rounded-r-lg" href="/planner"><span class="material-symbols-outlined text-xl">calendar_today</span><span class="font-label-md">Block Planner</span></a><a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-primary transition-colors" href="/pending.html"><span class="material-symbols-outlined text-xl">pending_actions</span><span class="font-label-md">Pending Requests</span></a><a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-primary transition-colors" href="#"><span class="material-symbols-outlined text-xl">bar_chart_4_bars</span><span class="font-label-md">Reports</span></a></div>
-<!-- Footer Tabs -->
+<nav class="fixed left-0 top-0 h-screen w-64 border-r border-[#E5E7EB] bg-white flex flex-col pt-8 pb-4 z-50">
+  <div class="px-6 mb-8 flex items-center gap-3">
+    <div class="w-10 h-10 rounded-xl bg-[#14c9a0] flex items-center justify-center shrink-0 shadow-sm">
+      <span class="material-symbols-outlined text-white text-[22px]" style="font-variation-settings:'FILL' 1,'wght' 400,'GRAD' 0,'opsz' 24">domain</span>
+    </div>
+    <h1 class="text-xl font-bold text-[#161d1a] tracking-tight">RAIL-OPS</h1>
+  </div>
+  
+  <div class="flex-1 overflow-y-auto px-3">
+    <ul class="space-y-1.5">
+    <li>
+      <a class="flex items-center justify-between px-4 py-3 text-[#5c6274] hover:bg-[#f4fbf6] rounded-xl font-medium transition-all duration-200 ml-1" href="/backlog.html">
+        <div class="flex items-center gap-3">
+          <span class="material-symbols-outlined text-[22px]">list_alt</span>
+          <span class="text-[15px]">Task Backlog</span>
+        </div>
+        
+      </a>
+    </li>
+    <li>
+      <a class="flex items-center justify-between px-4 py-3 bg-[#eaf6f3] text-[#14C9A0] rounded-r-xl font-medium border-l-4 border-[#14C9A0] transition-all duration-200" href="/planner.html">
+        <div class="flex items-center gap-3">
+          <span class="material-symbols-outlined text-[22px]" style="font-variation-settings: 'FILL' 1;">calendar_today</span>
+          <span class="text-[15px]">Block Planner</span>
+        </div>
+        
+      </a>
+    </li>
+    <li>
+      <a class="flex items-center justify-between px-4 py-3 text-[#5c6274] hover:bg-[#f4fbf6] rounded-xl font-medium transition-all duration-200 ml-1" href="/pending.html">
+        <div class="flex items-center gap-3">
+          <span class="material-symbols-outlined text-[22px]">pending_actions</span>
+          <span class="text-[15px]">Pending Requests</span>
+        </div>
+        
+      </a>
+    </li>
+    <li>
+      <a class="flex items-center justify-between px-4 py-3 text-[#5c6274] hover:bg-[#f4fbf6] rounded-xl font-medium transition-all duration-200 ml-1" href="#">
+        <div class="flex items-center gap-3">
+          <span class="material-symbols-outlined text-[22px]">bar_chart_4_bars</span>
+          <span class="text-[15px]">Reports</span>
+        </div>
+        
+      </a>
+    </li>
+    </ul>
+  </div>
+  
+  <div class="p-4 mt-auto">
+    <div class="bg-[#eff4f1] border border-[#bbcac2]/50 rounded-2xl p-4">
+      <p class="text-[10px] font-bold text-[#6c7a74] uppercase tracking-wider mb-1">LOGGED IN AS</p>
+      <p class="text-sm font-bold text-[#161d1a] truncate" id="sidebar-user-name">Priya Sharma</p>
+      <p class="text-[11px] font-semibold text-[#006b54] truncate mt-0.5" id="sidebar-user-dept">Chief Controller (HQ)</p>
+    </div>
+  </div>
 </nav>
 <!-- Main Content Area -->
 <div class="flex-1 ml-64 flex flex-col h-screen relative">
 <!-- TopAppBar -->
-<header class="h-16 flex justify-between items-center px-lg border-b border-outline-variant bg-surface-container-lowest shadow-sm shrink-0">
-<div class="flex items-center gap-6"><h2 class="text-headline-sm font-bold text-on-surface">Dashboard Overview</h2></div>
-<div class="flex items-center gap-4"><div class="flex items-center gap-4"><div class="flex items-center gap-2 bg-surface-container-low px-3 py-1.5 rounded-lg border border-outline-variant cursor-pointer"><span class="material-symbols-outlined text-on-surface-variant text-lg">calendar_month</span><span class="text-label-md text-on-surface-variant">Aug 21, 2026 - Aug 29, 2026</span><span class="material-symbols-outlined text-on-surface-variant text-lg">expand_more</span></div><button class="bg-primary-container text-on-primary-container px-4 py-2 rounded-full font-bold text-label-md flex items-center gap-2 hover:opacity-90 transition-opacity"><span class="material-symbols-outlined text-sm">sensors</span> VIEW LIVE FEED</button><div class="relative"><img alt="User Avatar" class="w-10 h-10 rounded-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBQf-0GyneYL_EJDf8ejuBzoctx8QhRdcdrT3RxQjKKAK1SjUfD3iLxMDPpMXkhd8Wjd5bUp37fU12AECkh7iqJKavg6yi3yDHUud955sCsrGCtfX8g95OsSahhEcqNVmSZVcBBHZQ8FZKNE8xM_FOsdTS3c-p0P3JcVpShGsvyNSh2EYMS9CBfBLANODefTjdH5ltRxiCcrhhYvbQ6uwTp7zysbTIPVXb0M7aWmUBL4I7Cjm5sNlf4Zg"/><div class="absolute -top-1 -right-1 w-4 h-4 bg-orange-500 border-2 border-white rounded-full"></div></div></div></div>
+<header class="min-h-16 flex justify-between items-center px-lg border-b border-outline-variant bg-surface-container-lowest shadow-sm shrink-0 flex-wrap py-3 gap-y-3">
+<div class="flex items-center gap-6 shrink-0"><h2 class="text-headline-sm font-bold text-on-surface">Dashboard Overview</h2></div>
+<div class="flex items-center gap-2 md:gap-4 flex-wrap shrink-0"><div class="flex items-center gap-2 md:gap-4 flex-wrap"><div class="flex items-center gap-2 bg-surface-container-low px-3 py-1.5 rounded-lg border border-outline-variant cursor-pointer shrink-0"><span class="material-symbols-outlined text-on-surface-variant text-lg">calendar_month</span><span class="text-label-md text-on-surface-variant whitespace-nowrap">Aug 21, 2026 - Aug 29, 2026</span><span class="material-symbols-outlined text-on-surface-variant text-lg">expand_more</span></div><button class="bg-primary-container text-on-primary-container px-4 py-2 rounded-full font-bold text-label-md flex items-center gap-2 hover:opacity-90 transition-opacity shrink-0"><span class="material-symbols-outlined text-sm">sensors</span> <span class="whitespace-nowrap">VIEW LIVE FEED</span></button><div class="relative shrink-0"><img alt="User Avatar" class="w-10 h-10 rounded-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBQf-0GyneYL_EJDf8ejuBzoctx8QhRdcdrT3RxQjKKAK1SjUfD3iLxMDPpMXkhd8Wjd5bUp37fU12AECkh7iqJKavg6yi3yDHUud955sCsrGCtfX8g95OsSahhEcqNVmSZVcBBHZQ8FZKNE8xM_FOsdTS3c-p0P3JcVpShGsvyNSh2EYMS9CBfBLANODefTjdH5ltRxiCcrhhYvbQ6uwTp7zysbTIPVXb0M7aWmUBL4I7Cjm5sNlf4Zg"/><div class="absolute -top-1 -right-1 w-4 h-4 bg-orange-500 border-2 border-white rounded-full"></div></div></div></div>
 </header>
 <!-- Page Canvas -->
 <main class="flex-1 overflow-auto p-container-padding bg-background relative flex flex-col gap-8">
 <!-- Page Header -->
-<div class="flex justify-between items-center">
+<div class="flex flex-col xl:flex-row justify-between items-start xl:items-center gap-4">
 <div>
 <h1 class="text-headline-lg font-headline-lg text-on-surface mb-2">AI Shadow Block Planner</h1>
 <p class="text-body-md font-body-md text-on-surface-variant">Intelligent scheduling for concurrent maintenance windows.</p>
 </div>
-<div class="flex items-center gap-6">
+<div class="flex items-center gap-3 md:gap-6 flex-wrap w-full xl:w-auto shrink-0">
 <!-- Granularity Switcher -->
-<div class="flex bg-surface-container-high rounded-xl p-1 border border-outline-variant" id="granularity-toggle">
-<button onclick="setGranularity(this)" class="px-4 py-1.5 rounded-lg text-label-md font-label-md text-on-surface-variant hover:text-on-surface transition-colors">Daily</button>
-<button onclick="setGranularity(this)" class="px-4 py-1.5 rounded-lg text-label-md font-label-md bg-primary-container text-on-primary-container shadow-sm transition-colors">Weekly</button>
-<button onclick="setGranularity(this)" class="px-4 py-1.5 rounded-lg text-label-md font-label-md text-on-surface-variant hover:text-on-surface transition-colors">Monthly</button>
+<div class="flex bg-surface-container-high rounded-xl p-1 border border-outline-variant overflow-hidden shrink-0" id="granularity-toggle">
+<button onclick="setGranularity(this)" class="px-4 py-1.5 rounded-lg text-label-md font-label-md text-on-surface-variant hover:text-on-surface transition-colors shrink-0">Daily</button>
+<button onclick="setGranularity(this)" class="px-4 py-1.5 rounded-lg text-label-md font-label-md bg-primary-container text-on-primary-container shadow-sm transition-colors shrink-0">Weekly</button>
+<button onclick="setGranularity(this)" class="px-4 py-1.5 rounded-lg text-label-md font-label-md text-on-surface-variant hover:text-on-surface transition-colors shrink-0">Monthly</button>
 </div>
 <!-- Role Toggle Demo -->
-<div class="flex items-center gap-2 bg-white px-3 py-1.5 rounded-xl border border-outline-variant shadow-sm cursor-pointer" onclick="toggleRole()">
+<div class="flex items-center gap-2 bg-white px-3 py-1.5 rounded-xl border border-outline-variant shadow-sm cursor-pointer shrink-0" onclick="toggleRole()">
 <span class="material-symbols-outlined text-primary text-sm">badge</span>
 <span class="text-label-md font-label-md text-on-surface" id="roleLabel">CONTROLLER</span>
 </div>

@@ -122,48 +122,67 @@
 </head>
 <body class="bg-surface text-on-surface flex h-screen overflow-hidden">
 <!-- SideNavBar -->
-<nav class="bg-surface-container-lowest fixed left-0 top-0 h-screen w-64 border-r border-outline-variant flex flex-col py-lg z-50">
-<div class="px-lg mb-8 flex items-center gap-3">
-<div class="w-10 h-10 rounded-lg bg-img-railops shadow-sm"></div>
-<div>
-<h1 class="text-headline-md font-headline-md font-bold text-primary">RAIL-OPS</h1>
-<p class="text-label-md font-label-md text-on-surface-variant">Railway Management</p>
-</div>
-</div>
-<div class="px-4 mb-6">
-<button class="w-full bg-primary text-on-primary py-3 rounded-xl font-bold flex items-center justify-center gap-2 hover:bg-primary-container hover:text-on-primary-container transition-all shadow-sm hover:shadow-md">
-<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">add</span>
-                New Request
-            </button>
-</div>
-<div class="flex-1 overflow-y-auto px-4 flex flex-col gap-1">
-<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:text-primary transition-colors hover:bg-surface-container rounded-lg" href="/eng-dashboard.html">
-<span class="material-symbols-outlined">dashboard</span>
-<span class="text-body-md font-body-md">Dashboard</span>
-</a><a class="flex items-center gap-3 px-4 py-3 bg-primary-container/10 text-primary border-l-4 border-primary font-bold rounded-r-lg" href="/eng-backlog.html">
-<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">assignment</span>
-<span class="text-body-md font-body-md">Task Backlog</span>
-</a><a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:text-primary transition-colors hover:bg-surface-container rounded-lg" href="/eng-planner.html">
-<span class="material-symbols-outlined">schedule</span>
-<span class="text-body-md font-body-md">Block Planner</span>
-</a><a class="flex items-center gap-3 px-4 py-3 text-primary hover:bg-primary-container/10 transition-colors rounded-lg" href="/eng-livefeed.html">
-<span class="material-symbols-outlined">sensors</span>
-<span class="text-body-md font-body-md">Live Feed</span><span class="ml-auto text-[9px] bg-primary-container/20 text-primary px-1.5 py-0.5 rounded font-bold uppercase tracking-wider">Live</span>
-</a></div>
-
-<div class="px-4 mt-auto border-t border-outline-variant/30 pt-4">
-<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:text-primary transition-colors hover:bg-surface-container rounded-lg" href="#">
-<span class="material-symbols-outlined">settings</span>
-<span class="text-body-md font-body-md">Settings</span>
-</a>
-<div class="flex items-center gap-3 px-4 py-3 mt-2">
-<div class="w-8 h-8 rounded-full bg-surface-variant flex items-center justify-center text-on-surface font-bold">TE</div>
-<div class="flex flex-col">
-<span class="text-label-md font-label-md">Tech Engineer</span>
-<span class="text-[10px] text-on-surface-variant">Dept: TMS</span>
-</div>
-</div>
-</div>
+<nav class="fixed left-0 top-0 h-screen w-64 border-r border-[#E5E7EB] bg-white flex flex-col pt-8 pb-4 z-50">
+  <div class="px-6 mb-8 flex items-center gap-3">
+    <div class="w-10 h-10 rounded-xl bg-[#14c9a0] flex items-center justify-center shrink-0 shadow-sm">
+      <span class="material-symbols-outlined text-white text-[22px]" style="font-variation-settings:'FILL' 1,'wght' 400,'GRAD' 0,'opsz' 24">train</span>
+    </div>
+    <h1 class="text-xl font-bold text-[#161d1a] tracking-tight">RAIL-OPS</h1>
+  </div>
+  
+  <div class="px-4 mb-6">
+    <button onclick="typeof openNewRequestModal === 'function' ? openNewRequestModal() : window.location.href='/eng-dashboard.html'" class="w-full bg-[#14c9a0] hover:bg-[#0fa682] text-white py-2.5 rounded-xl font-bold text-sm shadow-sm transition-colors flex items-center justify-center gap-2">
+      <span class="material-symbols-outlined text-lg">add_box</span> New Request
+    </button>
+  </div>
+  <div class="flex-1 overflow-y-auto px-3">
+    <ul class="space-y-1.5">
+    <li>
+      <a class="flex items-center justify-between px-4 py-3 text-[#5c6274] hover:bg-[#f4fbf6] rounded-xl font-medium transition-all duration-200 ml-1" href="/eng-dashboard.html">
+        <div class="flex items-center gap-3">
+          <span class="material-symbols-outlined text-[22px]">dashboard</span>
+          <span class="text-[15px]">Dashboard</span>
+        </div>
+        
+      </a>
+    </li>
+    <li>
+      <a class="flex items-center justify-between px-4 py-3 bg-[#eaf6f3] text-[#14C9A0] rounded-r-xl font-medium border-l-4 border-[#14C9A0] transition-all duration-200" href="/eng-backlog.html">
+        <div class="flex items-center gap-3">
+          <span class="material-symbols-outlined text-[22px]" style="font-variation-settings: 'FILL' 1;">list_alt</span>
+          <span class="text-[15px]">Task Log</span>
+        </div>
+        
+      </a>
+    </li>
+    <li>
+      <a class="flex items-center justify-between px-4 py-3 text-[#5c6274] hover:bg-[#f4fbf6] rounded-xl font-medium transition-all duration-200 ml-1" href="/eng-planner.html">
+        <div class="flex items-center gap-3">
+          <span class="material-symbols-outlined text-[22px]">calendar_today</span>
+          <span class="text-[15px]">Block Planner</span>
+        </div>
+        
+      </a>
+    </li>
+    <li>
+      <a class="flex items-center justify-between px-4 py-3 text-[#5c6274] hover:bg-[#f4fbf6] rounded-xl font-medium transition-all duration-200 ml-1" href="/live.html">
+        <div class="flex items-center gap-3">
+          <span class="material-symbols-outlined text-[22px]">sensors</span>
+          <span class="text-[15px]">Live Feed</span>
+        </div>
+        <span class="bg-[#d1f1e8] text-[#006b54] text-[10px] font-bold px-2 py-1 rounded tracking-wide">LIVE</span>
+      </a>
+    </li>
+    </ul>
+  </div>
+  
+  <div class="p-4 mt-auto">
+    <div class="bg-[#eff4f1] border border-[#bbcac2]/50 rounded-2xl p-4">
+      <p class="text-[10px] font-bold text-[#6c7a74] uppercase tracking-wider mb-1">LOGGED IN AS</p>
+      <p class="text-sm font-bold text-[#161d1a] truncate" id="sidebar-user-name">Ravi Kumar</p>
+      <p class="text-[11px] font-semibold text-[#006b54] truncate mt-0.5" id="sidebar-user-dept">Dept. Engineer - Track (TMS)</p>
+    </div>
+  </div>
 </nav>
 <!-- Main Content Canvas -->
 <main class="flex-1 ml-64 flex flex-col h-screen overflow-hidden">
@@ -182,10 +201,7 @@
 <button onclick="openNewRequestModal()" class="bg-[#14c9a0] hover:bg-[#0fa682] text-white px-4 py-2 rounded-lg font-bold text-sm shadow-sm transition-colors flex items-center gap-2 mr-2">
         <span class="material-symbols-outlined text-lg">add</span> New Request
       </button>
-<button class="flex items-center gap-2 px-4 py-1.5 bg-primary-container text-on-primary-container rounded-full text-label-md font-bold hover:bg-primary transition-colors shadow-sm mr-2">
-    <span class="material-symbols-outlined text-[18px] animate-pulse">radio</span>
-    VIEW LIVE FEED
-</button>
+<button onclick="window.location.href='/live.html'" class="bg-[#14C9A0] text-white hover:bg-[#0fa682] px-4 py-1.5 rounded-full font-bold text-xs flex items-center gap-2 shadow-sm transition-colors shrink-0 mx-2"><span class="material-symbols-outlined text-sm">sensors</span>VIEW LIVE FEED</button>
 <span class="text-label-md font-label-md text-on-surface-variant uppercase tracking-wider">Sync: Live</span>
 <span class="relative flex h-3 w-3">
 <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary-container opacity-75"></span>

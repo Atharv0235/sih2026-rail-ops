@@ -215,50 +215,62 @@
 </head>
 <body class="text-on-background bg-background h-screen overflow-hidden flex">
 <!-- SideNavBar -->
-<nav class="fixed left-0 top-0 h-screen w-64 border-r border-[#E5E7EB] bg-white flex flex-col py-6 z-50">
-<div class="px-6 mb-10 flex items-center gap-3">
-<div class="w-8 h-8 rounded-md bg-[#14c9a0] text-white flex items-center justify-center">
-<span class="material-symbols-outlined text-lg" data-icon="domain">domain</span>
-</div>
-<h1 class="text-[18px] font-bold text-[#161d1a]">RAIL-OPS</h1>
-</div>
-<div class="flex-1 overflow-y-auto">
-<ul class="space-y-2 px-3">
-
-<li class="">
-<a class="flex items-center gap-3 px-4 py-2.5 bg-[#F2FBF9] text-[#14C9A0] rounded-lg font-medium border-l-4 border-[#14C9A0] transition-all duration-200" href="/backlog" >
-<span class="material-symbols-outlined text-[20px]" data-icon="list_alt">list_alt</span>
-<span class="text-[14px]">Task Backlog</span>
-</a>
-</li>
-<li class="">
-<a class="flex items-center gap-3 px-4 py-2.5 text-[#5c6274] hover:bg-gray-50 rounded-lg font-medium transition-all duration-200" href="/planner" >
-<span class="material-symbols-outlined text-[20px]" data-icon="calendar_month">calendar_month</span>
-<span class="text-[14px]">Block Planner</span>
-</a>
-</li>
-<!-- RBAC Controlled -->
-<li id="pendingNav" class="">
-<a class="flex items-center gap-3 px-4 py-2.5 text-[#5c6274] hover:bg-gray-50 rounded-lg font-medium transition-all duration-200" href="/pending.html">
-<span class="material-symbols-outlined text-[20px]" data-icon="pending_actions">pending_actions</span>
-<span class="text-[14px] flex-1">Pending Requests</span>
-</a>
-</li>
-<li class="">
-<a class="flex items-center gap-3 px-4 py-2.5 text-[#5c6274] hover:bg-gray-50 rounded-lg font-medium transition-all duration-200" href="#">
-<span class="material-symbols-outlined text-[20px]" data-icon="bar_chart">bar_chart</span>
-<span class="text-[14px]">Reports</span>
-</a>
-</li>
-</ul>
-</div>
-<div class="mt-auto px-4 hidden">
-<!-- Role Switcher (Hidden but kept for logic) -->
-<select class="text-xs border-none bg-transparent rounded-md py-1 px-2 cursor-pointer focus:ring-0 text-on-background font-semibold" id="sidebarRoleSelect" onchange="syncRoles(this.value)">
-<option value="CONTROLLER">CONTROLLER</option>
-<option value="ENGINEER">ENGINEER</option>
-</select>
-</div>
+<nav class="fixed left-0 top-0 h-screen w-64 border-r border-[#E5E7EB] bg-white flex flex-col pt-8 pb-4 z-50">
+  <div class="px-6 mb-8 flex items-center gap-3">
+    <div class="w-10 h-10 rounded-xl bg-[#14c9a0] flex items-center justify-center shrink-0 shadow-sm">
+      <span class="material-symbols-outlined text-white text-[22px]" style="font-variation-settings:'FILL' 1,'wght' 400,'GRAD' 0,'opsz' 24">domain</span>
+    </div>
+    <h1 class="text-xl font-bold text-[#161d1a] tracking-tight">RAIL-OPS</h1>
+  </div>
+  
+  <div class="flex-1 overflow-y-auto px-3">
+    <ul class="space-y-1.5">
+    <li>
+      <a class="flex items-center justify-between px-4 py-3 bg-[#eaf6f3] text-[#14C9A0] rounded-r-xl font-medium border-l-4 border-[#14C9A0] transition-all duration-200" href="/backlog.html">
+        <div class="flex items-center gap-3">
+          <span class="material-symbols-outlined text-[22px]" style="font-variation-settings: 'FILL' 1;">list_alt</span>
+          <span class="text-[15px]">Task Backlog</span>
+        </div>
+        
+      </a>
+    </li>
+    <li>
+      <a class="flex items-center justify-between px-4 py-3 text-[#5c6274] hover:bg-[#f4fbf6] rounded-xl font-medium transition-all duration-200 ml-1" href="/planner.html">
+        <div class="flex items-center gap-3">
+          <span class="material-symbols-outlined text-[22px]">calendar_today</span>
+          <span class="text-[15px]">Block Planner</span>
+        </div>
+        
+      </a>
+    </li>
+    <li>
+      <a class="flex items-center justify-between px-4 py-3 text-[#5c6274] hover:bg-[#f4fbf6] rounded-xl font-medium transition-all duration-200 ml-1" href="/pending.html">
+        <div class="flex items-center gap-3">
+          <span class="material-symbols-outlined text-[22px]">pending_actions</span>
+          <span class="text-[15px]">Pending Requests</span>
+        </div>
+        
+      </a>
+    </li>
+    <li>
+      <a class="flex items-center justify-between px-4 py-3 text-[#5c6274] hover:bg-[#f4fbf6] rounded-xl font-medium transition-all duration-200 ml-1" href="#">
+        <div class="flex items-center gap-3">
+          <span class="material-symbols-outlined text-[22px]">bar_chart_4_bars</span>
+          <span class="text-[15px]">Reports</span>
+        </div>
+        
+      </a>
+    </li>
+    </ul>
+  </div>
+  
+  <div class="p-4 mt-auto">
+    <div class="bg-[#eff4f1] border border-[#bbcac2]/50 rounded-2xl p-4">
+      <p class="text-[10px] font-bold text-[#6c7a74] uppercase tracking-wider mb-1">LOGGED IN AS</p>
+      <p class="text-sm font-bold text-[#161d1a] truncate" id="sidebar-user-name">Priya Sharma</p>
+      <p class="text-[11px] font-semibold text-[#006b54] truncate mt-0.5" id="sidebar-user-dept">Chief Controller (HQ)</p>
+    </div>
+  </div>
 </nav>
 <!-- Main Content Area -->
 <div class="flex-1 ml-64 flex flex-col h-screen">
@@ -273,10 +285,7 @@
             Aug 21, 2026 - Aug 29, 2026
             <span class="material-symbols-outlined text-[18px] ml-2 text-[#6c7a74]">expand_more</span>
 </div>
-<button class="bg-[#14c9a0] text-white px-4 py-2 rounded-lg text-[13px] font-bold flex items-center gap-2 hover:bg-[#14c9a0]/90 transition-colors">
-<span class="material-symbols-outlined text-[18px]">sensors</span>
-            VIEW LIVE FEED
-        </button>
+<button onclick="window.location.href='/live.html'" class="bg-primary-container text-on-primary-container px-4 py-2 rounded-full font-bold text-label-md flex items-center gap-2 hover:opacity-90 transition-opacity"><span class="material-symbols-outlined text-sm">sensors</span> VIEW LIVE FEED</button>
 <div class="flex items-center gap-3 border border-[#E5E7EB] rounded-xl px-3 py-1.5 ml-2 bg-white">
 <div class="w-8 h-8 rounded-md bg-gradient-to-tr from-pink-500 to-orange-400 overflow-hidden flex-shrink-0">
 </div>
