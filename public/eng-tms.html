@@ -219,7 +219,79 @@ body { font-family: 'Geist', sans-serif; }
         </div>
       </section>
 
-      
+
+      <!-- KPI STAT CARDS -->
+      <section class="grid grid-cols-2 lg:grid-cols-4 gap-4">
+        <div class="bg-white rounded-2xl border border-[#bbcac2] shadow-sm p-5 flex flex-col gap-2 hover:shadow-md transition-shadow">
+          <div class="flex items-center justify-between">
+            <span class="text-[11px] font-bold text-[#6c7a74] uppercase tracking-wider">Critical Defects</span>
+            <div class="w-9 h-9 rounded-xl bg-[#ba1a1a]/10 flex items-center justify-center"><span class="material-symbols-outlined text-[#ba1a1a] text-lg mat-fill">crisis_alert</span></div>
+          </div>
+          <p class="text-4xl font-black text-[#ba1a1a] leading-none" id="kpi-critical">4</p>
+          <p class="text-xs text-[#6c7a74]"><span class="text-[#ba1a1a] font-bold">↑2</span> vs last week</p>
+        </div>
+        <div class="bg-white rounded-2xl border border-[#bbcac2] shadow-sm p-5 flex flex-col gap-2 hover:shadow-md transition-shadow">
+          <div class="flex items-center justify-between">
+            <span class="text-[11px] font-bold text-[#6c7a74] uppercase tracking-wider">Pending Tasks</span>
+            <div class="w-9 h-9 rounded-xl bg-[#006b54]/10 flex items-center justify-center"><span class="material-symbols-outlined text-[#006b54] text-lg mat-fill">pending_actions</span></div>
+          </div>
+          <p class="text-4xl font-black text-[#006b54] leading-none">16</p>
+          <p class="text-xs text-[#6c7a74]"><span class="text-[#006b54] font-bold">↓3</span> resolved today</p>
+        </div>
+        <div class="bg-white rounded-2xl border border-[#bbcac2] shadow-sm p-5 flex flex-col gap-2 hover:shadow-md transition-shadow">
+          <div class="flex items-center justify-between">
+            <span class="text-[11px] font-bold text-[#6c7a74] uppercase tracking-wider">Overdue</span>
+            <div class="w-9 h-9 rounded-xl bg-[#E8A33D]/10 flex items-center justify-center"><span class="material-symbols-outlined text-[#C07A18] text-lg mat-fill">schedule_send</span></div>
+          </div>
+          <p class="text-4xl font-black text-[#C07A18] leading-none">1</p>
+          <p class="text-xs text-[#6c7a74]"><span class="text-[#C07A18] font-bold">SLA breach risk</span></p>
+        </div>
+        <div class="bg-white rounded-2xl border border-[#bbcac2] shadow-sm p-5 flex flex-col gap-2 hover:shadow-md transition-shadow">
+          <div class="flex items-center justify-between">
+            <span class="text-[11px] font-bold text-[#6c7a74] uppercase tracking-wider">Blocks Assigned</span>
+            <div class="w-9 h-9 rounded-xl bg-[#3b82f6]/10 flex items-center justify-center"><span class="material-symbols-outlined text-[#1d4ed8] text-lg mat-fill">calendar_month</span></div>
+          </div>
+          <p class="text-4xl font-black text-[#1d4ed8] leading-none">6</p>
+          <p class="text-xs text-[#6c7a74]"><span class="text-[#1d4ed8] font-bold">Next: Aug 22 03:00</span></p>
+        </div>
+      </section>
+
+      <!-- CHARTS ROW -->
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+
+        <!-- Weekly Defect Trend (Bar Chart) -->
+        <div class="lg:col-span-2 bg-white rounded-2xl border border-[#bbcac2] shadow-sm overflow-hidden">
+          <div class="flex items-center justify-between px-6 py-4 border-b border-[#bbcac2] bg-[#eef5f0]">
+            <div class="flex items-center gap-3">
+              <span class="material-symbols-outlined text-[#006b54]">bar_chart</span>
+              <h3 class="font-bold text-[#161d1a] text-base">Weekly Defect Trend</h3>
+            </div>
+            <span class="text-[11px] text-[#6c7a74] uppercase tracking-wider font-bold">Track (TMS)</span>
+          </div>
+          <div class="p-5">
+            <canvas id="tmsBarChart" width="520" height="180" style="width:100%;height:180px"></canvas>
+          </div>
+        </div>
+
+        <!-- Task Status Donut -->
+        <div class="bg-white rounded-2xl border border-[#bbcac2] shadow-sm overflow-hidden">
+          <div class="flex items-center justify-between px-6 py-4 border-b border-[#bbcac2] bg-[#eef5f0]">
+            <div class="flex items-center gap-3">
+              <span class="material-symbols-outlined text-[#006b54]">donut_large</span>
+              <h3 class="font-bold text-[#161d1a] text-base">Task Status</h3>
+            </div>
+          </div>
+          <div class="p-5 flex flex-col items-center gap-4">
+            <canvas id="tmsDonut" width="160" height="160"></canvas>
+            <div class="grid grid-cols-2 gap-x-6 gap-y-2 w-full">
+              <div class="flex items-center gap-2"><span style="width:10px;height:10px;border-radius:50%;background:#ba1a1a;display:inline-block"></span><span class="text-xs text-[#3c4a44]">Critical <b>4</b></span></div>
+              <div class="flex items-center gap-2"><span style="width:10px;height:10px;border-radius:50%;background:#E8A33D;display:inline-block"></span><span class="text-xs text-[#3c4a44]">High <b>5</b></span></div>
+              <div class="flex items-center gap-2"><span style="width:10px;height:10px;border-radius:50%;background:#3b82f6;display:inline-block"></span><span class="text-xs text-[#3c4a44]">Medium <b>4</b></span></div>
+              <div class="flex items-center gap-2"><span style="width:10px;height:10px;border-radius:50%;background:#14c9a0;display:inline-block"></span><span class="text-xs text-[#3c4a44]">Routine <b>3</b></span></div>
+            </div>
+          </div>
+        </div>
+      </div>
 
       <!-- Two-column: Defects + Crew -->
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
@@ -394,12 +466,10 @@ let currentDept='TMS';
 function setDept(dept){
   currentDept=dept;
   const c=DEPT_CFG[dept];
-  document.getElementById('sidebar-role-label').textContent='Dept. Engineer - '+c.label;
   document.getElementById('header-role-label').textContent='Dept. Engineer - '+c.short;
   document.getElementById('banner-dept-pill').textContent=c.label;
   document.getElementById('banner-desc').textContent='Ground Maintenance Lead - '+c.label+'. Single-department operational view only.';
   document.getElementById('banner-icon').textContent=c.iconClass;
-  document.getElementById('kpi-dept-label').textContent=c.label;
   document.getElementById('defect-dept-label').textContent=c.short+' Only';
   document.getElementById('crew-dept-label').textContent=c.short+' Crews';
   document.getElementById('asset-dept-label').textContent=c.label;
@@ -410,14 +480,6 @@ function setDept(dept){
   renderDefects(c.defects);
   renderCrews(c.crews);
   renderAssets(c.assets);
-}
-
-">
-        <span class="material-symbols-outlined mat-fill text-xl" style="color:${k.color}">${k.icon}</span>
-      </div>
-      <p style="font-size:11px;color:#6c7a74;text-transform:uppercase;letter-spacing:.06em;font-weight:700">${k.label}</p>
-      <p style="font-size:42px;font-weight:800;color:${k.color};line-height:1">${k.value}</p>
-    </div>`).join('');
 }
 
 function renderDefects(defects){
@@ -474,6 +536,101 @@ function renderAssets(assets){
 }
 
 setDept('TMS');
+
+// \u2500\u2500 TMS Charts (init on window load) \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500
+window.addEventListener('load', function() {
+  // Bar Chart
+  (function(){
+    const canvas = document.getElementById('tmsBarChart');
+    if(!canvas) return;
+    const ctx = canvas.getContext('2d');
+    const days = ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
+    const vals = [3, 5, 4, 7, 6, 4, 4];
+    const W = canvas.offsetWidth || 520, H = 180;
+    canvas.width = W * (window.devicePixelRatio||1);
+    canvas.height = H * (window.devicePixelRatio||1);
+    ctx.scale(window.devicePixelRatio||1, window.devicePixelRatio||1);
+    const pad = {t:20, b:36, l:24, r:16};
+    const bw = (W - pad.l - pad.r) / days.length;
+    const maxV = Math.max(...vals);
+    const colors = vals.map(v => v >= 6 ? '#ba1a1a' : v >= 4 ? '#E8A33D' : '#14c9a0');
+    let progress = 0;
+    function drawBars(prog){
+      ctx.clearRect(0, 0, W, H);
+      ctx.strokeStyle = '#e8f0ea'; ctx.lineWidth = 1;
+      for(let i=0;i<=4;i++){
+        const y = pad.t + (H - pad.t - pad.b) * i / 4;
+        ctx.beginPath(); ctx.moveTo(pad.l, y); ctx.lineTo(W - pad.r, y); ctx.stroke();
+      }
+      vals.forEach((v, i)=>{
+        const x = pad.l + i * bw + bw * 0.15;
+        const bW = bw * 0.7;
+        const bH = Math.max(0, ((H - pad.t - pad.b) * (v / maxV)) * Math.min(prog, 1));
+        const y = H - pad.b - bH;
+        ctx.shadowColor = colors[i]; ctx.shadowBlur = 8;
+        const grad = ctx.createLinearGradient(0, y, 0, H - pad.b);
+        grad.addColorStop(0, colors[i]); grad.addColorStop(1, colors[i] + '55');
+        ctx.fillStyle = grad;
+        ctx.fillRect(x, y, bW, bH);
+        ctx.shadowBlur = 0;
+        if(prog > 0.8){
+          ctx.fillStyle = '#161d1a'; ctx.font = 'bold 11px sans-serif'; ctx.textAlign = 'center';
+          ctx.fillText(v, x + bW/2, y - 5);
+        }
+        ctx.fillStyle = '#6c7a74'; ctx.font = '11px sans-serif'; ctx.textAlign = 'center';
+        ctx.fillText(days[i], x + bW/2, H - pad.b + 16);
+      });
+    }
+    function animate(){
+      progress += 0.04;
+      drawBars(progress);
+      if(progress < 1) requestAnimationFrame(animate);
+      else drawBars(1);
+    }
+    animate();
+  })();
+
+  // Donut Chart
+  (function(){
+    const canvas = document.getElementById('tmsDonut');
+    if(!canvas) return;
+    const ctx = canvas.getContext('2d');
+    const data = [4, 5, 4, 3];
+    const colors = ['#ba1a1a','#E8A33D','#3b82f6','#14c9a0'];
+    const total = data.reduce((a,b)=>a+b,0);
+    const cx = 80, cy = 80, r = 64, ri = 42;
+    let progress = 0;
+    function drawDonut(prog){
+      ctx.clearRect(0,0,160,160);
+      let startAngle = -Math.PI/2;
+      data.forEach((val, i)=>{
+        const slice = (val/total) * Math.PI * 2 * Math.min(prog, 1);
+        ctx.beginPath();
+        ctx.moveTo(cx, cy);
+        ctx.arc(cx, cy, r, startAngle, startAngle + slice);
+        ctx.closePath();
+        ctx.fillStyle = colors[i];
+        ctx.shadowColor = colors[i]; ctx.shadowBlur = 8;
+        ctx.fill();
+        ctx.shadowBlur = 0;
+        startAngle += slice;
+      });
+      ctx.beginPath(); ctx.arc(cx, cy, ri, 0, Math.PI*2);
+      ctx.fillStyle = '#fff'; ctx.fill();
+      ctx.fillStyle = '#161d1a'; ctx.font = 'bold 20px sans-serif'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+      ctx.fillText(total, cx, cy - 6);
+      ctx.fillStyle = '#6c7a74'; ctx.font = '10px sans-serif';
+      ctx.fillText('Tasks', cx, cy + 10);
+    }
+    function animate(){
+      progress += 0.05;
+      drawDonut(progress);
+      if(progress < 1) requestAnimationFrame(animate);
+      else drawDonut(1);
+    }
+    animate();
+  })();
+});
 </script>
 
 <!-- New Request Modal -->

@@ -19,6 +19,7 @@ export default function App() {
         <Route path="/backlog"       element={<StaticRedirect to="/backlog.html" />} />
         <Route path="/planner"       element={<StaticRedirect to="/planner.html" />} />
         <Route path="/live"          element={<StaticRedirect to="/live.html" />} />
+        <Route path="/reports"       element={<StaticRedirect to="/reports.html" />} />
         {/* ── Dept Engineer pages ── */}
         <Route path="/eng-backlog"   element={<EngTaskBacklogPage />} />
         <Route path="*"              element={<Navigate to="/login" replace />} />

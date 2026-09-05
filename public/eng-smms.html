@@ -219,7 +219,93 @@ body { font-family: 'Geist', sans-serif; }
         </div>
       </section>
 
-      
+
+      <!-- KPI STAT CARDS -->
+      <section class="grid grid-cols-2 lg:grid-cols-4 gap-4">
+        <div class="bg-white rounded-2xl border border-[#bbcac2] shadow-sm p-5 flex flex-col gap-2 hover:shadow-md transition-shadow">
+          <div class="flex items-center justify-between">
+            <span class="text-[11px] font-bold text-[#6c7a74] uppercase tracking-wider">Critical Defects</span>
+            <div class="w-9 h-9 rounded-xl bg-[#ba1a1a]/10 flex items-center justify-center"><span class="material-symbols-outlined text-[#ba1a1a] text-lg mat-fill">crisis_alert</span></div>
+          </div>
+          <p class="text-4xl font-black text-[#ba1a1a] leading-none">5</p>
+          <p class="text-xs text-[#6c7a74]"><span class="text-[#ba1a1a] font-bold">&#x2191;1</span> vs last week</p>
+        </div>
+        <div class="bg-white rounded-2xl border border-[#bbcac2] shadow-sm p-5 flex flex-col gap-2 hover:shadow-md transition-shadow">
+          <div class="flex items-center justify-between">
+            <span class="text-[11px] font-bold text-[#6c7a74] uppercase tracking-wider">Pending Tasks</span>
+            <div class="w-9 h-9 rounded-xl bg-[#006b54]/10 flex items-center justify-center"><span class="material-symbols-outlined text-[#006b54] text-lg mat-fill">pending_actions</span></div>
+          </div>
+          <p class="text-4xl font-black text-[#006b54] leading-none">12</p>
+          <p class="text-xs text-[#6c7a74]"><span class="text-[#006b54] font-bold">&#x2193;2</span> resolved today</p>
+        </div>
+        <div class="bg-white rounded-2xl border border-[#bbcac2] shadow-sm p-5 flex flex-col gap-2 hover:shadow-md transition-shadow">
+          <div class="flex items-center justify-between">
+            <span class="text-[11px] font-bold text-[#6c7a74] uppercase tracking-wider">Overdue</span>
+            <div class="w-9 h-9 rounded-xl bg-[#E8A33D]/10 flex items-center justify-center"><span class="material-symbols-outlined text-[#C07A18] text-lg mat-fill">schedule_send</span></div>
+          </div>
+          <p class="text-4xl font-black text-[#C07A18] leading-none">2</p>
+          <p class="text-xs text-[#6c7a74]"><span class="text-[#C07A18] font-bold">SLA breach risk</span></p>
+        </div>
+        <div class="bg-white rounded-2xl border border-[#bbcac2] shadow-sm p-5 flex flex-col gap-2 hover:shadow-md transition-shadow">
+          <div class="flex items-center justify-between">
+            <span class="text-[11px] font-bold text-[#6c7a74] uppercase tracking-wider">Blocks Assigned</span>
+            <div class="w-9 h-9 rounded-xl bg-[#3b82f6]/10 flex items-center justify-center"><span class="material-symbols-outlined text-[#1d4ed8] text-lg mat-fill">calendar_month</span></div>
+          </div>
+          <p class="text-4xl font-black text-[#1d4ed8] leading-none">4</p>
+          <p class="text-xs text-[#6c7a74]"><span class="text-[#1d4ed8] font-bold">Next: Aug 23 02:00</span></p>
+        </div>
+      </section>
+
+      <!-- CHARTS ROW -->
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+
+        <!-- Signal Health Gauges -->
+        <div class="lg:col-span-2 bg-white rounded-2xl border border-[#bbcac2] shadow-sm overflow-hidden">
+          <div class="flex items-center justify-between px-6 py-4 border-b border-[#bbcac2] bg-[#eef5f0]">
+            <div class="flex items-center gap-3">
+              <span class="material-symbols-outlined text-[#006b54]">traffic</span>
+              <h3 class="font-bold text-[#161d1a] text-base">Signal Health Monitor</h3>
+            </div>
+            <span class="text-[11px] text-[#6c7a74] uppercase tracking-wider font-bold">AI-Scored</span>
+          </div>
+          <div class="p-6 grid grid-cols-3 gap-4">
+            <div class="flex flex-col items-center gap-1">
+              <canvas id="gaugeA" width="120" height="72"></canvas>
+              <p class="text-xs font-bold text-[#161d1a] text-center mt-1">Point Machine GWL-3</p>
+              <span style="font-size:10px;background:rgba(186,26,26,.1);color:#ba1a1a;padding:2px 8px;border-radius:999px;font-weight:700">CRITICAL</span>
+            </div>
+            <div class="flex flex-col items-center gap-1">
+              <canvas id="gaugeB" width="120" height="72"></canvas>
+              <p class="text-xs font-bold text-[#161d1a] text-center mt-1">Track Circuit JHS</p>
+              <span style="font-size:10px;background:rgba(232,163,61,.1);color:#C07A18;padding:2px 8px;border-radius:999px;font-weight:700">HIGH</span>
+            </div>
+            <div class="flex flex-col items-center gap-1">
+              <canvas id="gaugeC" width="120" height="72"></canvas>
+              <p class="text-xs font-bold text-[#161d1a] text-center mt-1">Relay Humidity BPL</p>
+              <span style="font-size:10px;background:rgba(59,130,246,.1);color:#1d4ed8;padding:2px 8px;border-radius:999px;font-weight:700">MEDIUM</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Crew Availability Pie -->
+        <div class="bg-white rounded-2xl border border-[#bbcac2] shadow-sm overflow-hidden">
+          <div class="flex items-center justify-between px-6 py-4 border-b border-[#bbcac2] bg-[#eef5f0]">
+            <div class="flex items-center gap-3">
+              <span class="material-symbols-outlined text-[#006b54]">group</span>
+              <h3 class="font-bold text-[#161d1a] text-base">Crew Status</h3>
+            </div>
+          </div>
+          <div class="p-5 flex flex-col items-center gap-4">
+            <canvas id="smmsCrewPie" width="160" height="160"></canvas>
+            <div class="grid grid-cols-2 gap-x-6 gap-y-2 w-full">
+              <div class="flex items-center gap-2"><span style="width:10px;height:10px;border-radius:50%;background:#14c9a0;display:inline-block"></span><span class="text-xs text-[#3c4a44]">Deployed <b>1</b></span></div>
+              <div class="flex items-center gap-2"><span style="width:10px;height:10px;border-radius:50%;background:#3b82f6;display:inline-block"></span><span class="text-xs text-[#3c4a44]">En Route <b>1</b></span></div>
+              <div class="flex items-center gap-2"><span style="width:10px;height:10px;border-radius:50%;background:#E8A33D;display:inline-block"></span><span class="text-xs text-[#3c4a44]">Standby <b>1</b></span></div>
+              <div class="flex items-center gap-2"><span style="width:10px;height:10px;border-radius:50%;background:#d1d5db;display:inline-block"></span><span class="text-xs text-[#3c4a44]">Off Duty <b>0</b></span></div>
+            </div>
+          </div>
+        </div>
+      </div>
 
       <!-- Two-column: Defects + Crew -->
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
@@ -394,12 +480,10 @@ let currentDept='TMS';
 function setDept(dept){
   currentDept=dept;
   const c=DEPT_CFG[dept];
-  document.getElementById('sidebar-role-label').textContent='Dept. Engineer - '+c.label;
   document.getElementById('header-role-label').textContent='Dept. Engineer - '+c.short;
   document.getElementById('banner-dept-pill').textContent=c.label;
   document.getElementById('banner-desc').textContent='Ground Maintenance Lead - '+c.label+'. Single-department operational view only.';
   document.getElementById('banner-icon').textContent=c.iconClass;
-  document.getElementById('kpi-dept-label').textContent=c.label;
   document.getElementById('defect-dept-label').textContent=c.short+' Only';
   document.getElementById('crew-dept-label').textContent=c.short+' Crews';
   document.getElementById('asset-dept-label').textContent=c.label;
@@ -410,14 +494,6 @@ function setDept(dept){
   renderDefects(c.defects);
   renderCrews(c.crews);
   renderAssets(c.assets);
-}
-
-">
-        <span class="material-symbols-outlined mat-fill text-xl" style="color:${k.color}">${k.icon}</span>
-      </div>
-      <p style="font-size:11px;color:#6c7a74;text-transform:uppercase;letter-spacing:.06em;font-weight:700">${k.label}</p>
-      <p style="font-size:42px;font-weight:800;color:${k.color};line-height:1">${k.value}</p>
-    </div>`).join('');
 }
 
 function renderDefects(defects){
@@ -474,6 +550,99 @@ function renderAssets(assets){
 }
 
 setDept('SMMS');
+
+// ── SMMS Gauge Charts (Signal Health) ──────────────────────────────────────────────
+// \u2500\u2500 SMMS Charts (init on window load) \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500
+window.addEventListener('load', function() {
+  function drawGauge(canvasId, value, color) {
+    const canvas = document.getElementById(canvasId);
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    const W = 120, H = 72;
+    const dpr = window.devicePixelRatio || 1;
+    canvas.width = W * dpr; canvas.height = H * dpr;
+    ctx.scale(dpr, dpr);
+    const cx = W / 2, cy = H - 8;
+    const r = 52;
+    let prog = 0;
+    function draw(p) {
+      ctx.clearRect(0, 0, W, H);
+      ctx.beginPath();
+      ctx.arc(cx, cy, r, Math.PI, 0);
+      ctx.lineWidth = 10;
+      ctx.strokeStyle = '#e8f0ea';
+      ctx.lineCap = 'round';
+      ctx.stroke();
+      const endAngle = Math.PI + (Math.PI * Math.min(p, 1));
+      ctx.beginPath();
+      ctx.arc(cx, cy, r, Math.PI, endAngle);
+      ctx.lineWidth = 10;
+      ctx.strokeStyle = color;
+      ctx.shadowColor = color; ctx.shadowBlur = 8;
+      ctx.lineCap = 'round';
+      ctx.stroke();
+      ctx.shadowBlur = 0;
+      ctx.fillStyle = '#161d1a';
+      ctx.font = 'bold 18px sans-serif';
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.fillText(Math.round(value * Math.min(p, 1)), cx, cy - 10);
+    }
+    function animate() {
+      prog += 0.04;
+      draw(prog);
+      if (prog < 1) requestAnimationFrame(animate);
+      else draw(1);
+    }
+    animate();
+  }
+
+  drawGauge('gaugeA', 88, '#ba1a1a');
+  drawGauge('gaugeB', 74, '#E8A33D');
+  drawGauge('gaugeC', 55, '#3b82f6');
+
+  // Crew Pie
+  (function(){
+    const canvas = document.getElementById('smmsCrewPie');
+    if(!canvas) return;
+    const ctx = canvas.getContext('2d');
+    const data = [1, 1, 1];
+    const colors = ['#14c9a0', '#3b82f6', '#E8A33D'];
+    const total = 3;
+    const cx = 80, cy = 80, r = 68, ri = 46;
+    let progress = 0;
+    function drawPie(prog) {
+      ctx.clearRect(0,0,160,160);
+      let startAngle = -Math.PI/2;
+      data.forEach((val, i) => {
+        const slice = (val/total) * Math.PI * 2 * Math.min(prog, 1);
+        ctx.beginPath();
+        ctx.moveTo(cx, cy);
+        ctx.arc(cx, cy, r, startAngle, startAngle + slice);
+        ctx.closePath();
+        ctx.fillStyle = colors[i];
+        ctx.shadowColor = colors[i]; ctx.shadowBlur = 10;
+        ctx.fill();
+        ctx.shadowBlur = 0;
+        startAngle += slice;
+      });
+      ctx.beginPath(); ctx.arc(cx, cy, ri, 0, Math.PI*2);
+      ctx.fillStyle = '#fff'; ctx.fill();
+      ctx.fillStyle = '#161d1a'; ctx.font = 'bold 16px sans-serif';
+      ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+      ctx.fillText('3', cx, cy - 7);
+      ctx.fillStyle = '#6c7a74'; ctx.font = '10px sans-serif';
+      ctx.fillText('Active', cx, cy + 8);
+    }
+    function animate() {
+      progress += 0.05;
+      drawPie(progress);
+      if(progress < 1) requestAnimationFrame(animate);
+      else drawPie(1);
+    }
+    animate();
+  })();
+});
 </script>
 
 <!-- New Request Modal -->

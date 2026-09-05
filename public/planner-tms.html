@@ -496,13 +496,15 @@
         </div>
         <div>
           <div class="flex justify-between items-center mb-1">
-            <label class="text-[11px] font-bold text-[#6c7a74] uppercase">AI Criticality (0-100%)</label>
-            <span id="critVal" class="text-xs font-bold text-[#ba1a1a]">85% (Critical)</span>
+            <label class="flex items-center gap-1.5 text-[11px] font-bold text-[#6c7a74] uppercase">
+              Human Criticality (1-10)
+            </label>
+            <span id="critVal" class="text-xs font-bold text-[#ba1a1a]">8 (Critical)</span>
           </div>
-          <input type="range" min="0" max="100" value="85" class="w-full accent-[#ba1a1a]" oninput="updateCrit(this.value)">
+          <input type="range" min="1" max="10" value="8" class="w-full accent-[#ba1a1a]" oninput="updateCrit(this.value)">
           <div class="flex justify-between text-[10px] text-[#6c7a74] mt-1">
-            <span>&lt;25 (Easy)</span>
-            <span>&gt;75 (Critical)</span>
+            <span>1 (Routine)</span>
+            <span>10 (Critical)</span>
           </div>
         </div>
       </div>
