@@ -165,7 +165,7 @@
       </a>
     </li>
     <li>
-      <a class="flex items-center justify-between px-4 py-3 text-[#5c6274] hover:bg-[#f4fbf6] rounded-xl font-medium transition-all duration-200 ml-1" href="/live.html">
+      <a class="flex items-center justify-between px-4 py-3 text-[#5c6274] hover:bg-[#f4fbf6] rounded-xl font-medium transition-all duration-200 ml-1" href="/live-smms.html">
         <div class="flex items-center gap-3">
           <span class="material-symbols-outlined text-[22px]">sensors</span>
           <span class="text-[15px]">Live Feed</span>
@@ -201,7 +201,7 @@
 <button onclick="openNewRequestModal()" class="bg-[#14c9a0] hover:bg-[#0fa682] text-white px-4 py-2 rounded-lg font-bold text-sm shadow-sm transition-colors flex items-center gap-2 mr-2">
         <span class="material-symbols-outlined text-lg">add</span> New Request
       </button>
-<button onclick="window.location.href='/live.html'" class="bg-[#14C9A0] text-white hover:bg-[#0fa682] px-4 py-1.5 rounded-full font-bold text-xs flex items-center gap-2 shadow-sm transition-colors shrink-0 mx-2"><span class="material-symbols-outlined text-sm">sensors</span>VIEW LIVE FEED</button>
+<button onclick="window.location.href='/live-smms.html'" class="bg-[#14C9A0] text-white hover:bg-[#0fa682] px-4 py-1.5 rounded-full font-bold text-xs flex items-center gap-2 shadow-sm transition-colors shrink-0 mx-2"><span class="material-symbols-outlined text-sm">sensors</span>VIEW LIVE FEED</button>
 <div class="relative group mr-1">
   <button class="relative p-2 text-[#6c7a74] hover:text-[#161d1a] transition-colors rounded-full hover:bg-black/5" title="Notifications">
     <span class="material-symbols-outlined">notifications</span>
@@ -764,10 +764,12 @@
         <div>
           <label class="block text-[11px] font-bold text-[#6c7a74] uppercase mb-1">Target Defect</label>
           <select class="w-full bg-[#f4fbf6] border border-[#bbcac2] rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-[#14c9a0]">
-            <option>Rail Fracture</option>
-            <option>Overdue Relay Inspection</option>
             <option>Point Machine Failure</option>
-            <option>OHE Mast Damage</option>
+            <option>Track Circuit Drop</option>
+            <option>Signal Aspect Failure</option>
+            <option>Axle Counter Error</option>
+            <option>Cable Fault</option>
+            <option>Data Logger Disconnection</option>
             <option>Routine Check</option>
           </select>
         </div>
@@ -815,9 +817,11 @@
         <div>
           <label class="block text-[11px] font-bold text-[#6c7a74] uppercase mb-1">Resource / Machinery</label>
           <select id="modalMachinery" class="w-full bg-[#f4fbf6] border border-[#bbcac2] rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-[#14c9a0]">
-            <option>Tamping Machine</option>
-            <option>Ballast Cleaner</option>
-            <option>Tower Wagon</option>
+            <option>Cable Fault Locator</option>
+            <option>Signal Testing Kit</option>
+            <option>Multimeter / Megger</option>
+            <option>Portable Generator</option>
+            <option>Splicing Machine</option>
             <option>None (Manual Labor)</option>
           </select>
         </div>
@@ -847,11 +851,15 @@
       <!-- 8. Damage Evidence -->
       <div>
         <label class="block text-[11px] font-bold text-[#6c7a74] uppercase mb-1">Damage Evidence (Photo)</label>
-        <div class="border-2 border-dashed border-[#bbcac2] rounded-xl p-6 flex flex-col items-center justify-center text-center bg-[#f4fbf6] cursor-pointer hover:bg-[#eef5f0] transition-colors">
-          <span class="material-symbols-outlined text-3xl text-[#6c7a74] mb-2">add_a_photo</span>
-          <p class="text-sm font-bold text-[#3c4a44]">Upload or Take Photo</p>
-          <p class="text-xs text-[#6c7a74] mt-1">Provide visual proof for predictive models</p>
-        </div>
+        <label for="photoInput" class="block border-2 border-dashed border-[#bbcac2] rounded-xl p-6 flex flex-col items-center justify-center text-center bg-[#f4fbf6] cursor-pointer hover:bg-[#eef5f0] transition-colors relative overflow-hidden">
+          <input type="file" id="photoInput" accept="image/*" class="hidden" onchange="previewPhoto(event)">
+          <div id="photoPlaceholder">
+            <span class="material-symbols-outlined text-3xl text-[#6c7a74] mb-2">add_a_photo</span>
+            <p class="text-sm font-bold text-[#3c4a44]">Upload or Take Photo</p>
+            <p class="text-xs text-[#6c7a74] mt-1">Provide visual proof for predictive models</p>
+          </div>
+          <img id="photoPreview" class="hidden absolute inset-0 w-full h-full object-cover">
+        </label>
       </div>
     </div>
 

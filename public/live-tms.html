@@ -1,0 +1,803 @@
+<!DOCTYPE html><html class="h-full" lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>RAIL-OPS - Live Opportunity Feed</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<style>
+        @import url('https://fonts.googleapis.com/css2?family=Geist:wght@400;600;700&display=swap');
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "surface-bright": "#f4fbf6",
+                      "outline-variant": "#bbcac2",
+                      "on-primary-fixed-variant": "#00513f",
+                      "tertiary-fixed-dim": "#c0c6db",
+                      "tertiary": "#585e70",
+                      "inverse-primary": "#3edeb4",
+                      "on-tertiary-fixed": "#151b2a",
+                      "on-secondary-fixed": "#141b2b",
+                      "on-tertiary-container": "#3e4455",
+                      "primary-fixed-dim": "#3edeb4",
+                      "on-surface": "#161d1a",
+                      "surface-container-low": "#eef5f0",
+                      "primary": "#006b54",
+                      "surface-tint": "#006b54",
+                      "surface-container-highest": "#dde4df",
+                      "tertiary-fixed": "#dce2f7",
+                      "on-background": "#161d1a",
+                      "tertiary-container": "#acb2c6",
+                      "on-primary": "#ffffff",
+                      "primary-fixed": "#63fbcf",
+                      "outline": "#6c7a74",
+                      "background": "#f4fbf6",
+                      "on-error-container": "#93000a",
+                      "surface-container-high": "#e2eae5",
+                      "on-primary-fixed": "#002118",
+                      "secondary-fixed-dim": "#c0c6db",
+                      "surface": "#f4fbf6",
+                      "surface-container-lowest": "#ffffff",
+                      "on-secondary-fixed-variant": "#404758",
+                      "on-tertiary": "#ffffff",
+                      "secondary": "#575e70",
+                      "inverse-on-surface": "#ebf3ed",
+                      "on-primary-container": "#004e3d",
+                      "secondary-container": "#d9dff5",
+                      "on-surface-variant": "#3c4a44",
+                      "on-tertiary-fixed-variant": "#404657",
+                      "surface-container": "#e8f0ea",
+                      "on-secondary-container": "#5c6274",
+                      "secondary-fixed": "#dce2f7",
+                      "surface-dim": "#d4dcd7",
+                      "error-container": "#ffdad6",
+                      "on-error": "#ffffff",
+                      "surface-variant": "#dde4df",
+                      "error": "#ba1a1a",
+                      "primary-container": "#14c9a0",
+                      "on-secondary": "#ffffff",
+                      "inverse-surface": "#2b322f"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "container-padding": "24px",
+                      "gutter": "16px",
+                      "lg": "24px",
+                      "xs": "4px",
+                      "xxl": "48px",
+                      "base": "4px",
+                      "md": "16px",
+                      "sm": "8px",
+                      "xl": "32px"
+              },
+              "fontFamily": {
+                      "body-md": [
+                              "Geist"
+                      ],
+                      "headline-lg-mobile": [
+                              "Geist"
+                      ],
+                      "headline-sm": [
+                              "Geist"
+                      ],
+                      "body-sm": [
+                              "Geist"
+                      ],
+                      "display": [
+                              "Geist"
+                      ],
+                      "headline-md": [
+                              "Geist"
+                      ],
+                      "label-md": [
+                              "Geist"
+                      ],
+                      "headline-lg": [
+                              "Geist"
+                      ],
+                      "body-lg": [
+                              "Geist"
+                      ]
+              },
+              "fontSize": {
+                      "body-md": [
+                              "16px",
+                              {
+                                      "lineHeight": "24px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "headline-lg-mobile": [
+                              "26px",
+                              {
+                                      "lineHeight": "32px",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "headline-sm": [
+                              "20px",
+                              {
+                                      "lineHeight": "28px",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "body-sm": [
+                              "14px",
+                              {
+                                      "lineHeight": "20px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "display": [
+                              "48px",
+                              {
+                                      "lineHeight": "56px",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "headline-md": [
+                              "24px",
+                              {
+                                      "lineHeight": "32px",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "label-md": [
+                              "12px",
+                              {
+                                      "lineHeight": "16px",
+                                      "letterSpacing": "0.02em",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "headline-lg": [
+                              "32px",
+                              {
+                                      "lineHeight": "40px",
+                                      "letterSpacing": "-0.01em",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "body-lg": [
+                              "18px",
+                              {
+                                      "lineHeight": "28px",
+                                      "fontWeight": "400"
+                              }
+                      ]
+              }
+      },
+          },
+        }
+    </script>
+
+<style>
+  .network-map:hover {
+    transform: perspective(1200px) rotateX(5deg) rotateY(0deg) scale(1.0) !important;
+  }
+</style>
+</head>
+<body class="bg-background text-on-background h-full font-body-md overflow-hidden flex">
+<!-- Role State Management -->
+<script>
+        const USER_ROLE = 'ENGINEER'; // Default: 'CONTROLLER', Set to 'ENGINEER' to see restricted state
+    </script>
+<!-- SideNavBar -->
+<nav class="fixed left-0 top-0 h-screen w-64 border-r border-[#E5E7EB] bg-white flex flex-col pt-8 pb-4 z-50">
+  <div class="px-6 mb-8 flex items-center gap-3">
+    <div class="w-10 h-10 rounded-xl bg-[#14c9a0] flex items-center justify-center shrink-0 shadow-sm">
+      <span class="material-symbols-outlined text-white text-[22px]" style="font-variation-settings:'FILL' 1,'wght' 400,'GRAD' 0,'opsz' 24">train</span>
+    </div>
+    <h1 class="text-xl font-bold text-[#161d1a] tracking-tight">RAIL-OPS</h1>
+  </div>
+  
+  <div class="px-4 mb-6">
+    <button onclick="typeof openNewRequestModal === 'function' ? openNewRequestModal() : window.location.href='/eng-tms.html'" class="w-full bg-[#14c9a0] hover:bg-[#0fa682] text-white py-2.5 rounded-xl font-bold text-sm shadow-sm transition-colors flex items-center justify-center gap-2">
+      <span class="material-symbols-outlined text-lg">add_box</span> New Request
+    </button>
+  </div>
+  <div class="flex-1 overflow-y-auto px-3">
+    <ul class="space-y-1.5">
+    <li>
+      <a class="flex items-center justify-between px-4 py-3 text-[#5c6274] hover:bg-[#f4fbf6] rounded-xl font-medium transition-all duration-200 ml-1" href="/eng-tms.html">
+        <div class="flex items-center gap-3">
+          <span class="material-symbols-outlined text-[22px]">dashboard</span>
+          <span class="text-[15px]">Dashboard</span>
+        </div>
+        
+      </a>
+    </li>
+    <li>
+      <a class="flex items-center justify-between px-4 py-3 text-[#5c6274] hover:bg-[#f4fbf6] rounded-xl font-medium transition-all duration-200 ml-1" href="/backlog-tms.html">
+        <div class="flex items-center gap-3">
+          <span class="material-symbols-outlined text-[22px]">list_alt</span>
+          <span class="text-[15px]">Task Log</span>
+        </div>
+        
+      </a>
+    </li>
+    <li>
+      <a class="flex items-center justify-between px-4 py-3 text-[#5c6274] hover:bg-[#f4fbf6] rounded-xl font-medium transition-all duration-200 ml-1" href="/planner-tms.html">
+        <div class="flex items-center gap-3">
+          <span class="material-symbols-outlined text-[22px]" style="font-variation-settings: 'FILL' 1;">calendar_today</span>
+          <span class="text-[15px]">Block Planner</span>
+        </div>
+        
+      </a>
+    </li>
+    <li>
+      <a class="flex items-center justify-between px-4 py-3 bg-[#eaf6f3] text-[#14C9A0] rounded-r-xl font-medium border-l-4 border-[#14C9A0] transition-all duration-200" href="/live-tms.html">
+        <div class="flex items-center gap-3">
+          <span class="material-symbols-outlined text-[22px]">sensors</span>
+          <span class="text-[15px]">Live Feed</span>
+        </div>
+        <span class="bg-[#d1f1e8] text-[#006b54] text-[10px] font-bold px-2 py-1 rounded tracking-wide">LIVE</span>
+      </a>
+    </li>
+    </ul>
+  </div>
+  
+  <div class="p-4 mt-auto">
+    <div class="bg-[#eff4f1] border border-[#bbcac2]/50 rounded-2xl p-4">
+      <p class="text-[10px] font-bold text-[#6c7a74] uppercase tracking-wider mb-1">LOGGED IN AS</p>
+      <p class="text-sm font-bold text-[#161d1a] truncate" id="sidebar-user-name">Ravi Kumar</p>
+      <p class="text-[11px] font-semibold text-[#006b54] truncate mt-0.5" id="sidebar-user-dept">Dept. Engineer - Track (TMS)</p>
+    </div>
+  </div>
+</nav>
+<!-- TopAppBar -->
+<header class="fixed top-0 right-0 left-64 h-16 z-40 bg-surface-container-lowest border-b border-outline-variant shadow-sm flex justify-between items-center px-lg w-[calc(100%-16rem)]" id="topbar"><div class="flex items-center gap-4"><h2 class="text-xl font-bold text-on-surface">Dashboard Overview</h2></div><div class="flex items-center gap-4"><div class="flex items-center gap-2 bg-surface-container px-3 py-1.5 rounded-lg border border-outline-variant/50 text-on-surface-variant"><span class="material-symbols-outlined text-sm">calendar_month</span><span class="text-xs font-medium">Aug 21, 2026 - Aug 29, 2026</span><span class="material-symbols-outlined text-sm">expand_more</span></div><button class="bg-primary text-on-primary px-4 py-1.5 rounded-full font-bold text-xs flex items-center gap-2 hover:bg-primary/90 transition-colors"><span class="material-symbols-outlined text-sm">sensors</span>VIEW LIVE FEED</button><div class="flex items-center gap-3 pl-4 border-l border-outline-variant"><div class="text-right"><p class="text-xs font-bold text-on-surface">Ravi Kumar</p><p class="text-[10px] text-on-surface-variant">Duty Engineer</p></div><div class="w-10 h-10 rounded-lg bg-gradient-to-br from-orange-400 to-red-500 flex items-center justify-center text-white font-bold">RK</div></div></div></header>
+<!-- Main Content Area -->
+<main class="ml-64 mt-16 p-lg h-[calc(100vh-4rem)] w-[calc(100%-16rem)] overflow-y-auto bg-background relative" id="main-content">
+<!-- RESTRICTED VIEW (Hidden by default, shown via JS if role='ENGINEER') -->
+<div class="hidden absolute inset-0 bg-surface-container-lowest z-30 flex flex-col items-center justify-center text-center p-8" id="restricted-view">
+<div class="w-24 h-24 bg-surface-container rounded-full flex items-center justify-center mb-6">
+<span class="material-symbols-outlined text-6xl text-outline">lock</span>
+</div>
+<h2 class="text-display font-display text-on-surface mb-4">Access Restricted</h2>
+<p class="text-body-lg font-body-lg text-on-surface-variant max-w-lg">
+                Cross-department block execution and live delay repacking is restricted to Chief Controllers.
+            </p>
+</div>
+<!-- ACTIVE VIEW (Shown if role='CONTROLLER') -->
+<div class="max-w-6xl mx-auto pb-32" id="active-view">
+
+
+<!-- Interactive Network Map Section -->
+<div class="mb-8">
+  <div class="bg-surface-container-lowest rounded-2xl border border-outline-variant shadow-sm overflow-hidden relative">
+    
+    <!-- Header & Tab Switcher -->
+    <div class="p-6 border-b border-outline-variant flex flex-col md:flex-row md:items-center justify-between gap-4 bg-white relative z-20">
+      <div>
+        <h2 class="text-xl font-bold text-on-surface tracking-wide">Railway Network View</h2>
+        <p class="text-sm text-on-surface-variant mt-1">Interactive network map and section status</p>
+      </div>
+      <div class="flex bg-surface-container-low p-1 rounded-lg border border-outline-variant/50">
+        <button onclick="switchMap('map-cr')" id="tab-cr" class="map-tab active-tab px-4 py-2 text-sm font-bold rounded-md bg-white text-primary shadow-sm transition-all">Pune - Mumbai</button>
+        <button onclick="switchMap('map-ncr')" id="tab-ncr" class="map-tab px-4 py-2 text-sm font-medium rounded-md text-on-surface-variant hover:text-on-surface transition-all">Gwalior - Jhansi</button>
+        <button onclick="switchMap('map-wcr')" id="tab-wcr" class="map-tab px-4 py-2 text-sm font-medium rounded-md text-on-surface-variant hover:text-on-surface transition-all">Bhopal - Itarsi</button>
+      </div>
+    </div>
+    
+    <div class="relative w-full h-[calc(100vh-16rem)] min-h-[600px] bg-slate-50">
+      <!-- Legend (Light Mode) -->
+      <div class="absolute top-6 left-6 bg-white/90 backdrop-blur-md border border-outline-variant rounded-xl p-4 w-52 z-10 shadow-sm">
+        <h3 class="text-xs font-bold text-on-surface-variant tracking-wider mb-3">LAYERS</h3>
+        <div class="space-y-2 mb-4">
+          <label class="flex items-center gap-2 text-sm text-on-surface cursor-pointer">
+            <input type="checkbox" checked class="rounded border-outline-variant text-primary focus:ring-primary w-4 h-4"> Traffic
+          </label>
+          <label class="flex items-center gap-2 text-sm text-on-surface cursor-pointer">
+            <input type="checkbox" checked class="rounded border-outline-variant text-primary focus:ring-primary w-4 h-4"> Maintenance
+          </label>
+          <label class="flex items-center gap-2 text-sm text-on-surface cursor-pointer">
+            <input type="checkbox" checked class="rounded border-outline-variant text-primary focus:ring-primary w-4 h-4"> Blocks
+          </label>
+        </div>
+        <div class="h-px bg-outline-variant/50 w-full mb-4"></div>
+        <div class="space-y-3">
+          <div class="flex items-center gap-3"><div class="w-6 h-0.5 bg-[#ef4444]"></div><span class="text-xs text-on-surface-variant">High traffic</span></div>
+          <div class="flex items-center gap-3"><div class="w-6 h-0.5 bg-[#f59e0b]"></div><span class="text-xs text-on-surface-variant">Med / Pending maint.</span></div>
+          <div class="flex items-center gap-3"><div class="w-6 h-0.5 bg-[#06b6d4]"></div><span class="text-xs text-on-surface-variant">Multi-sector ops</span></div>
+          <div class="flex items-center gap-3"><div class="w-6 h-0.5 bg-[#8b5cf6]"></div><span class="text-xs text-on-surface-variant">Scheduled block</span></div>
+        </div>
+      </div>
+
+      <!-- SVG Map 1: Pune-Mumbai (CR) -->
+      <svg id="map-cr" class="network-map w-full h-full" viewBox="0 0 1000 600" preserveAspectRatio="xMidYMid meet" style="transform: perspective(1200px) rotateX(15deg) rotateY(-5deg) scale(0.95); transform-style: preserve-3d; filter: drop-shadow(0 15px 15px rgba(0,0,0,0.1)); transition: transform 0.5s ease-in-out;">
+        <defs>
+          <pattern id="grid-light" width="40" height="40" patternUnits="userSpaceOnUse">
+            <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#e5e7eb" stroke-width="1" />
+          </pattern>
+          <filter id="glow-light">
+            <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+            <feMerge>
+              <feMergeNode in="coloredBlur"/>
+              <feMergeNode in="SourceGraphic"/>
+            </feMerge>
+          </filter>
+        </defs>
+        
+        <rect width="100%" height="100%" fill="url(#grid-light)" />
+
+        <!-- Base Lines -->
+        <path d="M 250,450 L 280,410 L 320,380 L 360,320 L 400,280 L 460,260 L 560,260 L 680,270 L 760,290 L 860,290" fill="none" stroke="#9ca3af" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" />
+        <path d="M 360,320 L 370,420 L 450,520" fill="none" stroke="#9ca3af" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" />
+        
+        <!-- Highlights -->
+        <path d="M 360,320 L 400,280 L 460,260 L 560,260 L 680,270" fill="none" stroke="#8b5cf6" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
+        <path d="M 360,320 L 370,420 L 450,520" fill="none" stroke="#8b5cf6" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
+        <path d="M 460,260 L 520,380 L 650,440 L 450,520" fill="none" stroke="#10b981" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+        <path d="M 360,320 L 400,280" fill="none" stroke="#f59e0b" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+        
+        <!-- Stations -->
+        <circle cx="250" cy="450" r="10" fill="#ffffff" stroke="#374151" stroke-width="3" />
+        <text x="270" y="455" fill="#374151" font-size="14" font-weight="bold">CSMT</text>
+        <circle cx="280" cy="410" r="10" fill="#ffffff" stroke="#374151" stroke-width="3" />
+        <text x="260" y="415" fill="#374151" font-size="14" font-weight="bold" text-anchor="end">DR</text>
+        <circle cx="320" cy="380" r="10" fill="#ffffff" stroke="#374151" stroke-width="3" />
+        <text x="340" y="385" fill="#374151" font-size="14" font-weight="bold">TNA</text>
+        <circle cx="360" cy="320" r="10" fill="#ffffff" stroke="#374151" stroke-width="3" />
+        <text x="380" y="325" fill="#374151" font-size="14" font-weight="bold">KYN</text>
+        <circle cx="400" cy="280" r="4" fill="#6b7280" />
+        <text x="415" y="285" fill="#4b5563" font-size="12">IGP</text>
+        <circle cx="460" cy="260" r="10" fill="#ffffff" stroke="#374151" stroke-width="3" />
+        <text x="480" y="255" fill="#374151" font-size="14" font-weight="bold">MMR</text>
+        <circle cx="560" cy="260" r="10" fill="#ffffff" stroke="#374151" stroke-width="3" />
+        <text x="580" y="265" fill="#374151" font-size="14" font-weight="bold">BSL</text>
+        <circle cx="680" cy="270" r="10" fill="#ffffff" stroke="#374151" stroke-width="3" />
+        <text x="700" y="275" fill="#374151" font-size="14" font-weight="bold">AK</text>
+        <circle cx="760" cy="290" r="4" fill="#6b7280" />
+        <text x="775" y="295" fill="#4b5563" font-size="12">WR</text>
+        <circle cx="860" cy="290" r="10" fill="#ffffff" stroke="#374151" stroke-width="3" />
+        <text x="880" y="295" fill="#374151" font-size="14" font-weight="bold">NGP</text>
+        <circle cx="450" cy="520" r="10" fill="#ffffff" stroke="#374151" stroke-width="3" />
+        <text x="470" y="525" fill="#374151" font-size="14" font-weight="bold">PUNE</text>
+        
+        <!-- Glowing Dot 1: Amber (Normal Work) -->
+        <g class="cursor-pointer" onclick="toggleWorkPopover(event, 'cr-1')">
+          <circle cx="380" cy="300" r="6" fill="#f59e0b" filter="url(#glow-light)" />
+          <circle cx="380" cy="300" r="6" fill="#f59e0b">
+            <animate attributeName="r" values="6;24" dur="2s" repeatCount="indefinite" />
+            <animate attributeName="opacity" values="0.6;0" dur="2s" repeatCount="indefinite" />
+          </circle>
+          <circle cx="380" cy="300" r="3" fill="#ffffff" />
+        </g>
+
+        <!-- Glowing Dot 2: Cyan (Multi-Sector) -->
+        <g class="cursor-pointer" onclick="toggleWorkPopover(event, 'cr-2')">
+          <circle cx="410" cy="470" r="6" fill="#06b6d4" filter="url(#glow-light)" />
+          <circle cx="410" cy="470" r="6" fill="#06b6d4">
+            <animate attributeName="r" values="6;24" dur="2s" repeatCount="indefinite" />
+            <animate attributeName="opacity" values="0.7;0" dur="2s" repeatCount="indefinite" />
+          </circle>
+          <circle cx="410" cy="470" r="3" fill="#ffffff" />
+        </g>
+      </svg>
+      
+      <!-- SVG Map 2: Gwalior-Jhansi (NCR) -->
+      <svg id="map-ncr" class="network-map hidden w-full h-full" viewBox="0 0 1000 600" preserveAspectRatio="xMidYMid meet" style="transform: perspective(1200px) rotateX(15deg) rotateY(-5deg) scale(0.95); transform-style: preserve-3d; filter: drop-shadow(0 15px 15px rgba(0,0,0,0.1)); transition: transform 0.5s ease-in-out;">
+        <rect width="100%" height="100%" fill="url(#grid-light)" />
+
+        <path d="M 300,100 L 400,250 L 500,400 L 600,550" fill="none" stroke="#9ca3af" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" />
+        <path d="M 300,100 L 400,250" fill="none" stroke="#8b5cf6" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
+        <path d="M 400,250 L 500,400" fill="none" stroke="#f59e0b" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
+        <path d="M 500,400 L 600,550" fill="none" stroke="#10b981" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+        
+        <circle cx="300" cy="100" r="10" fill="#ffffff" stroke="#374151" stroke-width="3" />
+        <text x="320" y="105" fill="#374151" font-size="14" font-weight="bold">GWL (Gwalior)</text>
+        <circle cx="400" cy="250" r="10" fill="#ffffff" stroke="#374151" stroke-width="3" />
+        <text x="420" y="255" fill="#374151" font-size="14" font-weight="bold">DBA (Dabra)</text>
+        <circle cx="500" cy="400" r="10" fill="#ffffff" stroke="#374151" stroke-width="3" />
+        <text x="520" y="405" fill="#374151" font-size="14" font-weight="bold">DAA (Datia)</text>
+        <circle cx="600" cy="550" r="10" fill="#ffffff" stroke="#374151" stroke-width="3" />
+        <text x="620" y="555" fill="#374151" font-size="14" font-weight="bold">JHS (Jhansi)</text>
+        
+        <g class="cursor-pointer" onclick="toggleWorkPopover(event, 'ncr-1')">
+          <circle cx="350" cy="175" r="6" fill="#8b5cf6" filter="url(#glow-light)" />
+          <circle cx="350" cy="175" r="6" fill="#8b5cf6">
+            <animate attributeName="r" values="6;24" dur="2s" repeatCount="indefinite" />
+            <animate attributeName="opacity" values="0.6;0" dur="2s" repeatCount="indefinite" />
+          </circle>
+          <circle cx="350" cy="175" r="3" fill="#ffffff" />
+        </g>
+        
+        <g class="cursor-pointer" onclick="toggleWorkPopover(event, 'ncr-2')">
+          <circle cx="550" cy="475" r="6" fill="#06b6d4" filter="url(#glow-light)" />
+          <circle cx="550" cy="475" r="6" fill="#06b6d4">
+            <animate attributeName="r" values="6;24" dur="2s" repeatCount="indefinite" />
+            <animate attributeName="opacity" values="0.7;0" dur="2s" repeatCount="indefinite" />
+          </circle>
+          <circle cx="550" cy="475" r="3" fill="#ffffff" />
+        </g>
+      </svg>
+      
+      <!-- SVG Map 3: Bhopal-Itarsi (WCR) -->
+      <svg id="map-wcr" class="network-map hidden w-full h-full" viewBox="0 0 1000 600" preserveAspectRatio="xMidYMid meet" style="transform: perspective(1200px) rotateX(15deg) rotateY(-5deg) scale(0.95); transform-style: preserve-3d; filter: drop-shadow(0 15px 15px rgba(0,0,0,0.1)); transition: transform 0.5s ease-in-out;">
+        <rect width="100%" height="100%" fill="url(#grid-light)" />
+
+        <path d="M 200,150 L 300,250 L 500,450 L 700,550" fill="none" stroke="#9ca3af" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" />
+        <path d="M 200,150 L 300,250" fill="none" stroke="#8b5cf6" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
+        <path d="M 300,250 L 500,450" fill="none" stroke="#f59e0b" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
+        <path d="M 500,450 L 700,550" fill="none" stroke="#10b981" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+        
+        <circle cx="200" cy="150" r="10" fill="#ffffff" stroke="#374151" stroke-width="3" />
+        <text x="220" y="155" fill="#374151" font-size="14" font-weight="bold">BPL (Bhopal)</text>
+        <circle cx="300" cy="250" r="10" fill="#ffffff" stroke="#374151" stroke-width="3" />
+        <text x="320" y="255" fill="#374151" font-size="14" font-weight="bold">HBJ (Habibganj)</text>
+        <circle cx="500" cy="450" r="10" fill="#ffffff" stroke="#374151" stroke-width="3" />
+        <text x="520" y="455" fill="#374151" font-size="14" font-weight="bold">HBD (Hoshangabad)</text>
+        <circle cx="700" cy="550" r="10" fill="#ffffff" stroke="#374151" stroke-width="3" />
+        <text x="720" y="555" fill="#374151" font-size="14" font-weight="bold">ET (Itarsi)</text>
+        
+        <g class="cursor-pointer" onclick="toggleWorkPopover(event, 'wcr-1')">
+          <circle cx="400" cy="350" r="6" fill="#f59e0b" filter="url(#glow-light)" />
+          <circle cx="400" cy="350" r="6" fill="#f59e0b">
+            <animate attributeName="r" values="6;24" dur="2s" repeatCount="indefinite" />
+            <animate attributeName="opacity" values="0.6;0" dur="2s" repeatCount="indefinite" />
+          </circle>
+          <circle cx="400" cy="350" r="3" fill="#ffffff" />
+        </g>
+        
+        <g class="cursor-pointer" onclick="toggleWorkPopover(event, 'wcr-2')">
+          <circle cx="250" cy="200" r="6" fill="#06b6d4" filter="url(#glow-light)" />
+          <circle cx="250" cy="200" r="6" fill="#06b6d4">
+            <animate attributeName="r" values="6;24" dur="2s" repeatCount="indefinite" />
+            <animate attributeName="opacity" values="0.7;0" dur="2s" repeatCount="indefinite" />
+          </circle>
+          <circle cx="250" cy="200" r="3" fill="#ffffff" />
+        </g>
+      </svg>
+      
+      <!-- Shared Popover -->
+      <div id="work-popover" class="hidden absolute bg-white/95 backdrop-blur shadow-2xl border border-outline-variant rounded-xl p-4 w-72 z-20 pointer-events-auto transition-opacity duration-300 opacity-0">
+        <div class="flex justify-between items-start mb-2">
+          <div class="flex items-center gap-2">
+            <span id="pop-status-color" class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+            <span id="pop-status-text" class="text-xs font-bold text-primary uppercase tracking-wider">Active Work</span>
+          </div>
+          <button onclick="closeWorkPopover()" class="text-on-surface-variant hover:text-on-surface transition-colors">
+            <span class="material-symbols-outlined text-sm">close</span>
+          </button>
+        </div>
+        <h4 id="pop-title" class="text-on-surface font-bold text-sm mb-1">OHE Maintenance</h4>
+        <p id="pop-section" class="text-xs text-on-surface-variant mb-3">Section: ...</p>
+        
+        <div class="space-y-2">
+          <div class="flex justify-between text-xs">
+            <span class="text-on-surface-variant">Department</span>
+            <span id="pop-dept" class="font-semibold text-on-surface">...</span>
+          </div>
+          <div class="flex justify-between text-xs">
+            <span class="text-on-surface-variant">Time Left</span>
+            <span id="pop-time" class="font-semibold text-on-surface">...</span>
+          </div>
+          <div class="flex justify-between text-xs">
+            <span class="text-on-surface-variant">Progress</span>
+            <span id="pop-progress" class="font-semibold text-on-surface">...</span>
+          </div>
+          
+          <div class="flex justify-between items-center text-xs mt-3 pt-3 border-t border-outline-variant/50">
+            <span class="text-on-surface-variant font-medium flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">speed</span> Work Efficiency</span>
+            <span id="pop-efficiency" class="font-extrabold text-primary bg-primary-container/30 px-2 py-0.5 rounded-full">...</span>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Bottom right badge -->
+      <div class="absolute bottom-4 right-4 bg-white/80 rounded-md border border-outline-variant px-3 py-1.5 text-[10px] text-on-surface-variant font-medium tracking-wide flex items-center gap-1.5 shadow-sm">
+        <span class="material-symbols-outlined text-[12px]">warning</span> Simulated map - Not real GIS data
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  const mapData = {
+    'cr-1': {
+      title: 'OHE Maintenance & Alignment',
+      section: 'KYN - IGP (Track 2)',
+      dept: 'TRD (Traction)',
+      time: '45 Mins',
+      progress: '65%',
+      efficiency: '88%',
+      isMulti: false
+    },
+    'cr-2': {
+      title: 'Bridge Expansion & Track Relay',
+      section: 'LNL - PUNE (Bridge 42)',
+      dept: 'ENG + S&T (Multi-Sector)',
+      time: '240 Mins',
+      progress: '42%',
+      efficiency: '95%',
+      isMulti: true
+    },
+    'ncr-1': {
+      title: 'Track Relaying Machine',
+      section: 'GWL - DBA (Main Line)',
+      dept: 'ENG (Engineering)',
+      time: '120 Mins',
+      progress: '30%',
+      efficiency: '76%',
+      isMulti: false
+    },
+    'ncr-2': {
+      title: 'Power Upgrade & Signal Test',
+      section: 'DAA - JHS (Sector B)',
+      dept: 'TRD + S&T (Multi-Sector)',
+      time: '90 Mins',
+      progress: '80%',
+      efficiency: '91%',
+      isMulti: true
+    },
+    'wcr-1': {
+      title: 'Signal Upgradation',
+      section: 'HBJ - HBD (Route Relay)',
+      dept: 'S&T (Signaling)',
+      time: '15 Mins',
+      progress: '90%',
+      efficiency: '98%',
+      isMulti: false
+    },
+    'wcr-2': {
+      title: 'Major Junction Overhaul',
+      section: 'BPL - HBJ (Platform 3/4)',
+      dept: 'TRD + ENG (Multi-Sector)',
+      time: '180 Mins',
+      progress: '55%',
+      efficiency: '94%',
+      isMulti: true
+    }
+  };
+
+  let currentMapId = 'map-cr';
+
+  function switchMap(mapId) {
+    document.querySelectorAll('.network-map').forEach(el => el.classList.add('hidden'));
+    document.getElementById(mapId).classList.remove('hidden');
+    
+    document.querySelectorAll('.map-tab').forEach(el => {
+      el.classList.remove('active-tab', 'bg-white', 'text-primary', 'shadow-sm', 'font-bold');
+      el.classList.add('text-on-surface-variant', 'font-medium');
+    });
+    
+    const activeTab = document.getElementById('tab-' + mapId.split('-')[1]);
+    activeTab.classList.remove('text-on-surface-variant', 'font-medium');
+    activeTab.classList.add('active-tab', 'bg-white', 'text-primary', 'shadow-sm', 'font-bold');
+    
+    closeWorkPopover();
+    currentMapId = mapId;
+  }
+
+  function toggleWorkPopover(e, dotId) {
+    const popover = document.getElementById('work-popover');
+    
+    const data = mapData[dotId];
+    if (!data) return;
+
+    document.getElementById('pop-title').innerText = data.title;
+    document.getElementById('pop-section').innerText = 'Section: ' + data.section;
+    document.getElementById('pop-dept').innerText = data.dept;
+    document.getElementById('pop-time').innerText = data.time;
+    document.getElementById('pop-progress').innerText = data.progress;
+    document.getElementById('pop-efficiency').innerText = data.efficiency;
+
+    const statusText = document.getElementById('pop-status-text');
+    const statusColor = document.getElementById('pop-status-color');
+    if (data.isMulti) {
+      statusText.innerText = 'Multi-Sector Ops';
+      statusText.className = 'text-xs font-bold text-[#06b6d4] uppercase tracking-wider';
+      statusColor.className = 'w-2 h-2 rounded-full bg-[#06b6d4] animate-pulse';
+    } else {
+      statusText.innerText = 'Active Work';
+      statusText.className = 'text-xs font-bold text-[#f59e0b] uppercase tracking-wider';
+      statusColor.className = 'w-2 h-2 rounded-full bg-[#f59e0b] animate-pulse';
+    }
+
+    // Force animation restart or display block
+    popover.classList.remove('hidden');
+    void popover.offsetWidth; // trigger reflow
+    popover.classList.remove('opacity-0');
+    
+    const container = popover.parentElement;
+    const rect = container.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    
+    let popLeft = x + 15;
+    let popTop = y - 50;
+
+    // Ensure it doesn't overflow bottom
+    const popHeight = popover.offsetHeight;
+    if (popTop + popHeight > rect.height - 10) {
+        popTop = rect.height - popHeight - 10;
+    }
+    
+    // Ensure it doesn't overflow right
+    const popWidth = popover.offsetWidth;
+    if (popLeft + popWidth > rect.width - 10) {
+        popLeft = x - popWidth - 15;
+    }
+    
+    popover.style.left = popLeft + 'px';
+    popover.style.top = popTop + 'px';
+  }
+
+  function closeWorkPopover() {
+    const popover = document.getElementById('work-popover');
+    popover.classList.add('opacity-0');
+    setTimeout(() => popover.classList.add('hidden'), 300);
+  }
+</script>
+<!-- Secondary Live Feed Updates -->
+<h4 class="text-title-lg font-bold text-on-surface mb-4 mt-8">Recent Live Updates</h4>
+<div class="flex flex-col gap-4 mb-8">
+  <!-- Card 1 -->
+  <div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-4 shadow-sm flex items-start gap-4 hover:shadow-md transition-shadow">
+    <div class="w-10 h-10 rounded-full bg-[#E8A33D]/20 flex items-center justify-center text-[#E8A33D] shrink-0">
+      <span class="material-symbols-outlined text-xl">schedule</span>
+    </div>
+    <div class="flex-1">
+      <div class="flex justify-between items-center mb-1">
+        <h4 class="text-label-lg font-bold text-on-surface">GWL-SF Express Delayed by 45 Mins</h4>
+        <span class="text-label-sm font-medium text-on-surface-variant">Just now</span>
+      </div>
+      <p class="text-body-sm text-on-surface-variant">Speed restriction en-route caused a cascading delay. Expected arrival adjusted.</p>
+    </div>
+  </div>
+
+  <!-- Card 2 -->
+  <div class="bg-surface-container-lowest border border-[#14C9A0]/30 rounded-xl p-4 shadow-sm flex items-start gap-4 hover:shadow-md transition-shadow">
+    <div class="w-10 h-10 rounded-full bg-[#14C9A0]/20 flex items-center justify-center text-[#006B54] shrink-0">
+      <span class="material-symbols-outlined text-xl">engineering</span>
+    </div>
+    <div class="flex-1">
+      <div class="flex justify-between items-center mb-1">
+        <h4 class="text-label-lg font-bold text-on-surface">Signal & Telecom (SMMS) Maintenance Extended</h4>
+        <span class="text-label-sm font-medium text-on-surface-variant">12 mins ago</span>
+      </div>
+      <p class="text-body-sm text-on-surface-variant">Working in GWL-ET section till 14:30 hrs. Block extended by 30 mins to resolve cable fault.</p>
+    </div>
+  </div>
+
+  <!-- Card 3 -->
+  <div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-4 shadow-sm flex items-start gap-4 hover:shadow-md transition-shadow">
+    <div class="w-10 h-10 rounded-full bg-blue-500/20 flex items-center justify-center text-blue-600 shrink-0">
+      <span class="material-symbols-outlined text-xl">bolt</span>
+    </div>
+    <div class="flex-1">
+      <div class="flex justify-between items-center mb-1">
+        <h4 class="text-label-lg font-bold text-on-surface">Traction (TDMS) OHE Inspection</h4>
+        <span class="text-label-sm font-medium text-on-surface-variant">28 mins ago</span>
+      </div>
+      <p class="text-body-sm text-on-surface-variant">Scheduled inspection at Sector 4 started on time. Estimated duration: 60 mins.</p>
+    </div>
+  </div>
+  
+  <!-- Card 4 -->
+  <div class="bg-surface-container-lowest border border-green-500/30 rounded-xl p-4 shadow-sm flex items-start gap-4 hover:shadow-md transition-shadow">
+    <div class="w-10 h-10 rounded-full bg-green-500/20 flex items-center justify-center text-green-700 shrink-0">
+      <span class="material-symbols-outlined text-xl">check_circle</span>
+    </div>
+    <div class="flex-1">
+      <div class="flex justify-between items-center mb-1">
+        <h4 class="text-label-lg font-bold text-on-surface">Track Relay (TMS) Completed Early</h4>
+        <span class="text-label-sm font-medium text-on-surface-variant">45 mins ago</span>
+      </div>
+      <p class="text-body-sm text-on-surface-variant">BPL-ET Mainline clear for dispatch. 20 mins of shadow block saved.</p>
+    </div>
+  </div>
+</div>
+</div>
+</div>
+</main>
+
+<!-- Interactive Logic Script -->
+<script>
+        document.addEventListener('DOMContentLoaded', () => {
+            
+            // --- Navigation State Logic ---
+            const navData = {"name": "SideNavBar", "num_tabs": 8, "tab_labels": ["Dashboard", "Live Feed", "Time Tracking", "Task List", "Lead Pipeline", "Estimates", "Invoices", "Reports"], "tab_icons": ["dashboard", "dynamic_feed", "schedule", "assignment", "analytics", "request_quote", "receipt_long", "bar_chart"]};
+            const navTabsContainer = document.getElementById('nav-tabs');
+            
+            navData.tab_labels.forEach((label, index) => {
+                const icon = navData.tab_icons[index];
+                const isActive = label === "Live Feed";
+                const li = document.createElement('li');
+                li.className = 'w-full px-2';
+                
+                const activeClasses = "flex items-center gap-3 px-4 py-3 bg-primary-container/10 text-primary border-l-4 border-primary font-bold rounded-r-lg w-full scale-[0.99] transition-transform";
+                const inactiveClasses = "flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:text-primary hover:bg-surface-container transition-all duration-200 rounded-lg w-full border-l-4 border-transparent";
+                
+                li.innerHTML = `
+                    <a href="#" class="${isActive ? activeClasses : inactiveClasses}">
+                        <span class="material-symbols-outlined" ${isActive ? 'style="font-variation-settings: \'FILL\' 1;"' : ''}>${icon}</span>
+                        <span class="text-body-md font-body-md ${isActive ? 'font-bold' : 'font-medium'}">${label}</span>
+                    </a>
+                `;
+                navTabsContainer.appendChild(li);
+            });
+
+            // --- RBAC Logic ---
+            if (USER_ROLE === 'ENGINEER') {
+                document.getElementById('active-view').classList.add('hidden');
+                document.getElementById('execution-footer').classList.add('hidden');
+                document.getElementById('restricted-view').classList.remove('hidden');
+            }
+
+            // --- Interactive Sandbox Logic ---
+            const MAX_MINS = 180;
+            const toggles = document.querySelectorAll('.task-toggle');
+            const currentMinsEl = document.getElementById('current-mins');
+            const barEl = document.getElementById('utilization-bar');
+            const dispatchBtn = document.getElementById('dispatch-btn');
+            const dispatchText = document.getElementById('dispatch-text');
+
+            function calculateUtilization() {
+                let total = 0;
+                toggles.forEach(t => {
+                    if (t.checked) {
+                        total += parseInt(t.dataset.duration);
+                    }
+                });
+
+                // Update text
+                currentMinsEl.textContent = total;
+                
+                // Update bar percentage
+                const percentage = Math.min((total / MAX_MINS) * 100, 100);
+                barEl.style.width = `${percentage}%`;
+
+                // Status logic
+                if (total > MAX_MINS) {
+                    // Overbooked state
+                    currentMinsEl.classList.remove('text-primary');
+                    currentMinsEl.classList.add('text-[#C13B3B]');
+                    barEl.classList.remove('bg-primary-container');
+                    barEl.classList.add('bg-[#C13B3B]');
+                    
+                    // Disable button
+                    dispatchBtn.classList.remove('bg-primary', 'text-on-primary', 'hover:bg-surface-tint', 'shadow-sm', 'hover:shadow-md');
+                    dispatchBtn.classList.add('bg-surface-container-highest', 'text-on-surface-variant', 'cursor-not-allowed');
+                    dispatchBtn.disabled = true;
+                    dispatchText.textContent = "Resolve Conflict to Dispatch";
+                    dispatchBtn.querySelector('.material-symbols-outlined').textContent = 'warning';
+                } else {
+                    // Valid state
+                    currentMinsEl.classList.remove('text-[#C13B3B]');
+                    currentMinsEl.classList.add('text-primary');
+                    barEl.classList.remove('bg-[#C13B3B]');
+                    barEl.classList.add('bg-primary-container');
+                    
+                    // Enable button
+                    dispatchBtn.classList.add('bg-primary', 'text-on-primary', 'hover:bg-surface-tint', 'shadow-sm', 'hover:shadow-md');
+                    dispatchBtn.classList.remove('bg-surface-container-highest', 'text-on-surface-variant', 'cursor-not-allowed');
+                    dispatchBtn.disabled = false;
+                    dispatchText.textContent = "Accept Plan & Dispatch Crews";
+                    dispatchBtn.querySelector('.material-symbols-outlined').textContent = 'send';
+                }
+            }
+
+            // Bind events
+            toggles.forEach(t => {
+                t.addEventListener('change', calculateUtilization);
+            });
+
+            // Initial calculation
+            calculateUtilization();
+        });
+    </script>
+
+
+</body></html>
