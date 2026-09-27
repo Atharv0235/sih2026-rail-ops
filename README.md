@@ -35,38 +35,33 @@ RAIL-OPS
 ## 📁 Project Structure
 
 ```
-ai-block-planner/
-├── public/                         # Static HTML pages (prototype views)
-│   ├── dashboard.html              # Chief Controller — Operational Dashboard
-│   ├── backlog.html                # Chief Controller — Task Registry
-│   ├── planner.html                # Chief Controller — AI Block Planner
-│   ├── live.html                   # Chief Controller — Live Opportunity Feed
-│   ├── eng-dashboard.html          # Dept. Engineer — Dashboard (Mode 2b)
-│   ├── eng-backlog.html            # Dept. Engineer — Filtered Task Backlog
-│   ├── eng-planner.html            # Dept. Engineer — Block Planner (Read-Only)
-│   └── eng-livefeed.html           # Dept. Engineer — Live Feed (Restricted)
-│
-├── src/
-│   ├── components/
-│   │   ├── dashboard/              # KPI grid, sidebar, header, controller dashboard
-│   │   ├── engineer/               # EngTaskBacklog — Dept Engineer task view
-│   │   ├── rail/                   # App shell, task-backlog, block-planner (React)
-│   │   ├── planner/                # Block inspector drawer
-│   │   └── ui/                     # shadcn/ui primitives (button, input, etc.)
-│   ├── pages/                      # Route-level page components
-│   ├── store/                      # Zustand auth store (role, department)
-│   ├── types/                      # Shared TypeScript types & entities
-│   ├── mocks/                      # Mock data (defects, KPIs, delays, blocks)
-│   └── api/                        # API hook stubs (ready for backend integration)
-│
-├── docs/                           # Reference designs & documentation
-│   ├── designs/                    # Per-page design references (HTML + screenshots)
-│   └── architecture/               # System design docs
-│
-├── package.json
-├── vite.config.ts
-├── tailwind.config.js
-└── tsconfig.json
+rail-ops/
+├── FRONTEND/                       # React 18 + Vite Frontend Application
+│   ├── public/                     # Static HTML pages (prototype views)
+│   │   ├── dashboard.html          # Chief Controller — Operational Dashboard
+│   │   ├── backlog.html            # Chief Controller — Task Registry
+│   │   ├── planner.html            # Chief Controller — AI Block Planner
+│   │   ├── live.html               # Chief Controller — Live Opportunity Feed
+│   │   ├── eng-dashboard.html      # Dept. Engineer — Dashboard (Mode 2b)
+│   │   ├── eng-backlog.html        # Dept. Engineer — Filtered Task Backlog
+│   │   ├── eng-planner.html        # Dept. Engineer — Block Planner (Read-Only)
+│   │   └── eng-livefeed.html       # Dept. Engineer — Live Feed (Restricted)
+│   │
+│   ├── src/
+│   │   ├── api/                    # API hook stubs & services
+│   │   ├── components/             # React components
+│   │   ├── contexts/               # React contexts
+│   │   ├── hooks/                  # Custom React hooks
+│   │   ├── pages/                  # Route-level page components
+│   │   ├── services/               # External service integrations
+│   │   ├── store/                  # Zustand auth store (role, department)
+│   │   └── types/                  # Shared TypeScript types & entities
+│   │
+│   ├── tests/                      # Unit and integration tests
+│   ├── docs/                       # Reference designs & documentation
+│   ├── package.json
+│   ├── vite.config.ts
+│   └── tsconfig.json
 ```
 
 ---
@@ -105,6 +100,9 @@ ai-block-planner/
 ## 🚀 Getting Started
 
 ```bash
+# Navigate to the frontend application
+cd FRONTEND
+
 # Install dependencies
 npm install
 
