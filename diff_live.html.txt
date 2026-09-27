@@ -1,0 +1,20 @@
+--- 
+
++++ 
+
+@@ -190,12 +190,5 @@
+
+ <body class="bg-background text-on-background h-full font-body-md overflow-hidden flex">
+-<!-- Role State Management — detect from localStorage -->
++<!-- Role State Management -->
+ <script>
+-    var USER_ROLE = 'CONTROLLER'; // Default
+-    try {
+-        var _auth = JSON.parse(localStorage.getItem('rail-ops-auth') || '{}');
+-        var _state = _auth.state || _auth;
+-        if (_state.role && _state.role.startsWith('ENGINEER')) {
+-            USER_ROLE = 'ENGINEER';
+-        }
+-    } catch(e) {}
++        const USER_ROLE = 'CONTROLLER'; // Default: 'CONTROLLER', Set to 'ENGINEER' to see restricted state
+     </script>

@@ -1,0 +1,18 @@
+--- 
++++ 
+@@ -842,2 +842,15 @@
+ 
++<!-- ═══ RAIL-OPS: Backend Integration (Pending Requests) ═══ -->
++<script>
++(function() {
++  // Store controller role for live.html nav detection
++  try {
++    var auth = JSON.parse(localStorage.getItem('rail-ops-auth') || '{}');
++    if (!auth.state) auth = {state: auth};
++    auth.state.role = auth.state.role || 'CONTROLLER';
++    localStorage.setItem('rail-ops-auth', JSON.stringify(auth));
++  } catch(e) {}
++})();
++</script>
++
+ </body></html>

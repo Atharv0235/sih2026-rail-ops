@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - RAIL-OPS</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #f1f5f9; }
+    </style>
+</head>
+<body class="min-h-screen flex items-center justify-center bg-[#f8fafc]">
+
+<div class="bg-white p-8 rounded-2xl shadow-sm border border-gray-100 max-w-md w-full">
+    <div class="flex items-center gap-3 justify-center mb-8">
+        <div class="w-12 h-12 rounded-xl bg-[#14c9a0] flex items-center justify-center shadow-sm">
+            <span class="material-symbols-outlined text-white text-[28px]">domain</span>
+        </div>
+        <h1 class="text-3xl font-bold tracking-tight text-[#161d1a]">RAIL-OPS</h1>
+    </div>
+
+    <h2 class="text-xl font-semibold text-center mb-6 text-gray-800">Select your Role</h2>
+
+    <div class="space-y-4">
+        <!-- Chief Controller -->
+        <a href="/dashboard.html" class="flex items-center p-4 border border-gray-200 rounded-xl hover:border-[#14c9a0] hover:bg-[#eaf6f3] transition-all group">
+            <div class="w-10 h-10 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center mr-4 group-hover:bg-[#14c9a0] group-hover:text-white transition-colors">
+                <span class="material-symbols-outlined">admin_panel_settings</span>
+            </div>
+            <div>
+                <h3 class="font-bold text-gray-900">Chief Controller (HQ)</h3>
+                <p class="text-sm text-gray-500">Full corridor overview & approval</p>
+            </div>
+        </a>
+
+        <!-- TMS Engineer -->
+        <a href="/eng-tms.html" class="flex items-center p-4 border border-gray-200 rounded-xl hover:border-[#14c9a0] hover:bg-[#eaf6f3] transition-all group">
+            <div class="w-10 h-10 rounded-full bg-purple-100 text-purple-600 flex items-center justify-center mr-4 group-hover:bg-[#14c9a0] group-hover:text-white transition-colors">
+                <span class="material-symbols-outlined">train</span>
+            </div>
+            <div>
+                <h3 class="font-bold text-gray-900">TMS Engineer</h3>
+                <p class="text-sm text-gray-500">Track & Civil Maintenance</p>
+            </div>
+        </a>
+
+        <!-- TDMS Engineer -->
+        <a href="/eng-tdms.html" class="flex items-center p-4 border border-gray-200 rounded-xl hover:border-[#14c9a0] hover:bg-[#eaf6f3] transition-all group">
+            <div class="w-10 h-10 rounded-full bg-orange-100 text-orange-600 flex items-center justify-center mr-4 group-hover:bg-[#14c9a0] group-hover:text-white transition-colors">
+                <span class="material-symbols-outlined">electrical_services</span>
+            </div>
+            <div>
+                <h3 class="font-bold text-gray-900">TDMS Engineer</h3>
+                <p class="text-sm text-gray-500">Traction Distribution (OHE)</p>
+            </div>
+        </a>
+
+        <!-- SMMS Engineer -->
+        <a href="/eng-smms.html" class="flex items-center p-4 border border-gray-200 rounded-xl hover:border-[#14c9a0] hover:bg-[#eaf6f3] transition-all group">
+            <div class="w-10 h-10 rounded-full bg-teal-100 text-teal-600 flex items-center justify-center mr-4 group-hover:bg-[#14c9a0] group-hover:text-white transition-colors">
+                <span class="material-symbols-outlined">sensors</span>
+            </div>
+            <div>
+                <h3 class="font-bold text-gray-900">SMMS Engineer</h3>
+                <p class="text-sm text-gray-500">Signals & Telecom</p>
+            </div>
+        </a>
+    </div>
+</div>
+
+</body>
+</html>

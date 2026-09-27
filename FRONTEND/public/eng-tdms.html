@@ -903,11 +903,30 @@ function updateCrit(val) {
 }
 
 function submitNewRequest() {
-  alert('Maintenance Request successfully sent to Chief Controller queue for AI clustering.');
+  const tbody = document.getElementById('defect-tbody');
+  const newId = 'OHE-' + Math.floor(Math.random()*9000+1000);
+  const newRow = document.createElement('tr');
+  newRow.className = 'hover:bg-[#eef5f0] transition-colors';
+  newRow.style.background = 'rgba(20,201,160,.08)';
+  newRow.innerHTML = `
+    <td class="py-3 px-4 font-bold text-[#161d1a]">${newId}</td>
+    <td class="py-3 px-4 text-[#3c4a44] text-xs">New Request</td>
+    <td class="py-3 px-4"><span style="font-weight:800;font-size:14px;color:#ba1a1a">Pending AI</span></td>
+    <td class="py-3 px-4">
+      <span style="display:inline-flex;align-items:center;gap:5px;padding:3px 9px;border-radius:999px;font-size:11px;font-weight:700;background:rgba(232,163,61,.10);color:#C07A18;border:1px solid rgba(232,163,61,.2)">
+        <span style="width:6px;height:6px;border-radius:50%;background:#C07A18"></span>SUBMITTED
+      </span>
+    </td>`;
+  tbody.insertBefore(newRow, tbody.firstChild);
   closeNewRequestModal();
+  const toast = document.createElement('div');
+  toast.className = 'fixed bottom-6 right-6 bg-[#006b54] text-white px-6 py-4 rounded-xl shadow-xl z-[200] flex items-center gap-3';
+  toast.innerHTML = '<span class="material-symbols-outlined">check_circle</span><div><p class="font-bold text-sm">Request Submitted!</p><p class="text-xs opacity-80">Sent to Chief Controller for AI clustering</p></div>';
+  document.body.appendChild(toast);
+  setTimeout(() => toast.remove(), 4000);
 }
 </script>
-</body>
+<script src="/rail-ops-api.js?v=2"></script></body>
 
 </html>
 

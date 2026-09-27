@@ -1,0 +1,117 @@
+--- 
++++ 
+@@ -577,114 +577,2 @@
+ 
+-<!-- ═══ RAIL-OPS: Backend Integration (Controller Dashboard) ═══ -->
+-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+-<script>
+-(function() {
+-  var API = '/api';
+-
+-  // ── 1. Fetch KPIs and update cards ──
+-  async function loadKPIs() {
+-    try {
+-      var res = await fetch(API+'/dashboard/kpis');
+-      if (!res.ok) return;
+-      var kpi = await res.json();
+-
+-      // Update KPI cards (the 4 cards in the grid)
+-      var grid = document.querySelector('[data-purpose="kpi-grid"]');
+-      if (!grid) return;
+-      var cards = grid.querySelectorAll('.bg-white, .bg-gradient-to-br');
+-
+-      // Card 1: Total Tasks — update the 22.42k / 15.52k numbers
+-      if (cards[0]) {
+-        var nums = cards[0].querySelectorAll('.text-2xl');
+-        if (nums[0]) nums[0].textContent = (kpi.blocks_this_week || 0).toLocaleString();
+-        if (nums[1]) nums[1].textContent = (kpi.critical_defects_pending || 0).toLocaleString();
+-      }
+-
+-      // Card 4: Critical Defects (gradient card)
+-      var gradientCard = grid.querySelector('.bg-gradient-to-br');
+-      if (gradientCard) {
+-        var bigNum = gradientCard.querySelector('.text-5xl');
+-        if (bigNum) bigNum.textContent = kpi.critical_defects_pending || 0;
+-      }
+-    } catch(e) { console.warn('[RAIL-OPS] KPI fetch failed:', e); }
+-  }
+-
+-  // ── 2. Fetch defects and populate the table ──
+-  async function loadDefectTable() {
+-    try {
+-      var res = await fetch(API+'/defects?page_size=5');
+-      if (!res.ok) return;
+-      var defects = await res.json();
+-
+-      var tbody = document.querySelector('[data-purpose="data-table-container"] tbody');
+-      if (!tbody || !defects.length) return;
+-
+-      var STATUS_STYLES = {
+-        critical:  {cls:'bg-red-100 text-red-800',    label:'Critical'},
+-        high:      {cls:'bg-amber-100 text-amber-800', label:'High'},
+-        medium:    {cls:'bg-blue-100 text-blue-800',   label:'Medium'},
+-        low:       {cls:'bg-emerald-100 text-emerald-800', label:'Low'},
+-        open:      {cls:'bg-amber-100 text-amber-800', label:'Pending'},
+-        pending:   {cls:'bg-amber-100 text-amber-800', label:'Pending'},
+-        completed: {cls:'bg-emerald-100 text-emerald-800', label:'Completed'},
+-      };
+-
+-      var GRADIENTS = [
+-        'from-pink-400 to-purple-500',
+-        'from-orange-400 to-red-500',
+-        'from-blue-400 to-cyan-500',
+-        'from-yellow-400 to-orange-500',
+-        'from-indigo-400 to-purple-500',
+-      ];
+-
+-      tbody.innerHTML = defects.map(function(d, i) {
+-        var st = STATUS_STYLES[d.severity] || STATUS_STYLES[d.status] || STATUS_STYLES.low;
+-        var grad = GRADIENTS[i % GRADIENTS.length];
+-        var score = d.criticality ? Math.round(d.criticality.overall) : 0;
+-        return '<tr class="hover:bg-slate-50 transition-colors">'
+-          +'<td class="px-6 py-4"><input class="custom-checkbox" type="checkbox"/></td>'
+-          +'<td class="px-6 py-4 font-medium text-slate-900">'+d.id+'</td>'
+-          +'<td class="px-6 py-4"><div class="flex items-center space-x-3">'
+-          +'<div class="w-8 h-8 rounded-full bg-gradient-to-tr '+grad+'"></div>'
+-          +'<div><div class="font-medium text-slate-900">'+d.department+'</div>'
+-          +'<div class="text-xs text-slate-500">Score: '+score+'</div></div></div></td>'
+-          +'<td class="px-6 py-4">'+d.corridor_section_id+'</td>'
+-          +'<td class="px-6 py-4">'+d.defect_type+'</td>'
+-          +'<td class="px-6 py-4"><span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium '+st.cls+'">'+st.label+'</span></td>'
+-          +'<td class="px-6 py-4">'+new Date(d.reported_at).toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'})+'</td>'
+-          +'<td class="px-6 py-4 text-right"><button class="px-3 py-1 bg-brand-mint text-white rounded text-xs font-medium hover:bg-brand-mint-hover transition-colors">View</button></td>'
+-          +'</tr>';
+-      }).join('');
+-
+-      // Update the tab badge count
+-      var badge = document.querySelector('[data-purpose="data-table-container"] .bg-brand-mint\\/10');
+-      if (badge) badge.textContent = defects.length;
+-    } catch(e) { console.warn('[RAIL-OPS] Table fetch failed:', e); }
+-  }
+-
+-  // ── 3. Load user name from localStorage ──
+-  function applyUserInfo() {
+-    try {
+-      var auth = JSON.parse(localStorage.getItem('rail-ops-auth') || '{}');
+-      var state = auth.state || auth;
+-      if (state.displayName) {
+-        var nameEl = document.getElementById('sidebar-user-name');
+-        if (nameEl) nameEl.textContent = state.displayName;
+-      }
+-      // Store role for nav detection
+-      if (!state.role) {
+-        state.role = 'CONTROLLER';
+-        localStorage.setItem('rail-ops-auth', JSON.stringify(auth.state ? auth : {state:state}));
+-      }
+-    } catch(e) {}
+-  }
+-
+-  // ── Init ──
+-  applyUserInfo();
+-  loadKPIs();
+-  loadDefectTable();
+-})();
+-</script>
+-
+ </body></html>
+-

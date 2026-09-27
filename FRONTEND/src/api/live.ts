@@ -1,84 +1,118 @@
 import type { DelayEvent, BlockWindow } from '../types';
-import { delayEvents as mockDelayEvents } from '../mocks/delays';
-import { injectMockOpportunisticBlock } from './blocks';
 
-const delay = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
+const API_BASE = 'http://localhost:8000';
+const WS_BASE = 'ws://localhost:8000';
 
-// Keep a mutable state for the session
-let liveEventsState = [...mockDelayEvents];
+// WebSocket connection for real-time push
+let ws: WebSocket | null = null;
+let wsListeners: Array<(events: DelayEvent[]) => void> = [];
 
+export function connectLiveWebSocket(onUpdate: (events: DelayEvent[]) => void): () => void {
+  wsListeners.push(onUpdate);
+
+  if (!ws || ws.readyState === WebSocket.CLOSED) {
+    ws = new WebSocket(`${WS_BASE}/api/live/ws`);
+
+    ws.onmessage = (event) => {
+      try {
+        const data = JSON.parse(event.data);
+        if (data.type === 'initial') {
+          wsListeners.forEach(cb => cb(data.events));
+        } else if (data.type === 'event_accepted' || data.type === 'event_dismissed' || data.type === 'event_reopened') {
+          // Refresh on any update
+          getLiveOpportunities().then(events => {
+            wsListeners.forEach(cb => cb(events));
+          });
+        }
+      } catch (e) {
+        console.error('[Live WS] Parse error:', e);
+      }
+    };
+
+    ws.onclose = () => {
+      console.log('[Live WS] Disconnected, will retry in 5s');
+      setTimeout(() => {
+        if (wsListeners.length > 0) {
+          connectLiveWebSocket(onUpdate);
+        }
+      }, 5000);
+    };
+
+    ws.onerror = (e) => {
+      console.error('[Live WS] Error:', e);
+    };
+
+    // Keepalive ping every 30s
+    const pingInterval = setInterval(() => {
+      if (ws && ws.readyState === WebSocket.OPEN) {
+        ws.send('ping');
+      } else {
+        clearInterval(pingInterval);
+      }
+    }, 30000);
+  }
+
+  // Return cleanup function
+  return () => {
+    wsListeners = wsListeners.filter(cb => cb !== onUpdate);
+    if (wsListeners.length === 0 && ws) {
+      ws.close();
+      ws = null;
+    }
+  };
+}
+
+// REST fallback
 export async function getLiveOpportunities(): Promise<DelayEvent[]> {
-  // TODO(backend): replace mock polling with real WebSocket/SSE connection
-  await delay(300);
-  // Only return open events or recently dismissed/accepted ones (for the undo toast or animations)
-  return liveEventsState.sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime());
+  try {
+    const response = await fetch(`${API_BASE}/api/live`);
+    if (!response.ok) throw new Error(`API error: ${response.status}`);
+
+    const data: DelayEvent[] = await response.json();
+    return data.sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime());
+  } catch (error) {
+    console.error('[Live API] Failed to fetch opportunities:', error);
+    return [];
+  }
 }
 
 export async function acceptOpportunity(id: string): Promise<DelayEvent> {
-  // TODO(backend): replace with POST /api/live/:id/accept
-  await delay(400);
-  
-  const eventIndex = liveEventsState.findIndex(e => e.id === id);
-  if (eventIndex === -1) throw new Error('Event not found');
-
-  const updated = {
-    ...liveEventsState[eventIndex],
-    status: 'accepted' as const,
-    accepted_at: new Date().toISOString()
-  };
-  
-  liveEventsState[eventIndex] = updated;
-
-  // Simulate the backend adding this block to the schedule
-  const newBlock: BlockWindow = {
-    id: `BLK-OPP-${Date.now()}`,
-    corridor_section_id: updated.corridor_section_id,
-    corridor_section_name: updated.corridor_section_name,
-    corridor_key: updated.corridor_key,
-    start_time: updated.window_start,
-    end_time: new Date(new Date(updated.window_start).getTime() + updated.window_opened_mins * 60000).toISOString(),
-    duration_mins: updated.window_opened_mins,
-    packed_tasks: updated.suggested_tasks,
-    shadow_multiplier: updated.suggested_tasks.length, // simple mock math
-    status: 'pending',
-    view: 'weekly',
-    is_opportunistic: true
-  };
-  
-  injectMockOpportunisticBlock(newBlock);
-
-  return updated;
+  const response = await fetch(`${API_BASE}/api/live/${id}/accept`, {
+    method: 'POST',
+  });
+  if (!response.ok) throw new Error(`Failed to accept: ${response.status}`);
+  return response.json();
 }
 
 export async function dismissOpportunity(id: string): Promise<DelayEvent> {
-  // TODO(backend): replace with POST /api/live/:id/dismiss
-  await delay(300);
-  
-  const eventIndex = liveEventsState.findIndex(e => e.id === id);
-  if (eventIndex === -1) throw new Error('Event not found');
-
-  const updated = {
-    ...liveEventsState[eventIndex],
-    status: 'dismissed' as const,
-    dismissed_at: new Date().toISOString()
-  };
-  
-  liveEventsState[eventIndex] = updated;
-  return updated;
+  const response = await fetch(`${API_BASE}/api/live/${id}/dismiss`, {
+    method: 'POST',
+  });
+  if (!response.ok) throw new Error(`Failed to dismiss: ${response.status}`);
+  return response.json();
 }
 
 export async function undoDismiss(id: string): Promise<DelayEvent> {
-  // TODO(backend): replace with POST /api/live/:id/undo
-  await delay(200);
-  const eventIndex = liveEventsState.findIndex(e => e.id === id);
-  if (eventIndex === -1) throw new Error('Event not found');
+  const response = await fetch(`${API_BASE}/api/live/${id}/undo`, {
+    method: 'POST',
+  });
+  if (!response.ok) throw new Error(`Failed to undo: ${response.status}`);
+  return response.json();
+}
 
-  const updated = {
-    ...liveEventsState[eventIndex],
-    status: 'open' as const,
-    dismissed_at: undefined
-  };
-  
-  liveEventsState[eventIndex] = updated;
-  return updated;
+// Reschedule API
+export async function triggerReschedule(params: {
+  train_id: string;
+  train_name?: string;
+  delay_mins: number;
+  section_id: string;
+  planned_time_mins?: number;
+}): Promise<any> {
+  const response = await fetch(`${API_BASE}/api/reschedule`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(params),
+  });
+  if (!response.ok) throw new Error(`Reschedule failed: ${response.status}`);
+  return response.json();
 }

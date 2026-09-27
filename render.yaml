@@ -1,0 +1,17 @@
+# render.yaml — Render Infrastructure-as-Code
+# Place this at the repo root. Render auto-detects it.
+
+services:
+  - type: web
+    name: rail-ops-api
+    runtime: python
+    region: singapore          # closest to India
+    plan: free                 # free tier for hackathon
+    rootDir: backend
+    buildCommand: bash build.sh
+    startCommand: uvicorn main:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: PYTHON_VERSION
+        value: "3.11.9"
+      - key: CORS_ORIGINS
+        value: "https://YOUR-SITE.netlify.app"   # ← Replace with your Netlify URL
