@@ -211,6 +211,20 @@
         .open + .task-row-details .row-expand-icon {
             transform: rotate(180deg);
         }
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fade-in {
+            animation: slideIn 0.4s ease-out;
+        }
+        .animate-spin {
+            animation: spin 0.8s linear infinite;
+        }
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
     </style>
 </head>
 <body class="text-on-background bg-background h-screen overflow-hidden flex">
@@ -368,8 +382,8 @@
 <h4 class="text-[12px] font-bold text-[#5c6274] mb-2 uppercase tracking-wider">AI Assessment</h4>
 <p class="text-[14px] text-[#3c4a44] mb-4 bg-white p-4 rounded-lg border border-outline-variant shadow-sm">High risk rail fracture reported by Track Engineer. Immediate shadow block clustering recommended.</p>
 <div class="flex gap-4 mt-6">
-<button onclick="alert('Running AI Optimization Engine... Suggesting optimal schedule block based on criticality and clustering.')" class="bg-[#7c3aed] text-white px-6 py-3 rounded-xl text-[14px] font-bold hover:bg-[#6d28d9] transition-all shadow-md flex items-center gap-2"><span class="material-symbols-outlined text-sm">auto_awesome</span> Search AI for best suited time</button>
-<button onclick="alert('Request Approved! The block has been successfully scheduled.'); let d = this.closest('.task-row-details'); let p = d.previousElementSibling; d.remove(); p.remove();" class="bg-[#14c9a0] text-white px-8 py-3 rounded-xl text-[14px] font-bold hover:bg-[#12b590] transition-all shadow-md">Approve</button>
+<button onclick="searchBestTime('row1', this)" class="bg-[#7c3aed] text-white px-6 py-3 rounded-xl text-[14px] font-bold hover:bg-[#6d28d9] transition-all shadow-md flex items-center gap-2"><span class="material-symbols-outlined text-sm">auto_awesome</span> Search AI for best suited time</button>
+<button onclick="approveBlock('row1', this)" class="bg-[#14c9a0] text-white px-8 py-3 rounded-xl text-[14px] font-bold hover:bg-[#12b590] transition-all shadow-md">Approve</button>
 </div>
 </div>
 </div>
@@ -401,8 +415,8 @@
 <h4 class="text-[12px] font-bold text-[#5c6274] mb-2 uppercase tracking-wider">AI Assessment</h4>
 <p class="text-[14px] text-[#3c4a44] mb-4 bg-white p-4 rounded-lg border border-outline-variant shadow-sm">Routine relay inspection. Can be clustered with high-priority track maintenance in the same geographic corridor.</p>
 <div class="flex gap-4 mt-6">
-<button onclick="alert('Running AI Optimization Engine... Suggesting optimal schedule block based on criticality and clustering.')" class="bg-[#7c3aed] text-white px-6 py-3 rounded-xl text-[14px] font-bold hover:bg-[#6d28d9] transition-all shadow-md flex items-center gap-2"><span class="material-symbols-outlined text-sm">auto_awesome</span> Search AI for best suited time</button>
-<button onclick="alert('Request Approved! The block has been successfully scheduled.'); let d = this.closest('.task-row-details'); let p = d.previousElementSibling; d.remove(); p.remove();" class="bg-[#14c9a0] text-white px-8 py-3 rounded-xl text-[14px] font-bold hover:bg-[#12b590] transition-all shadow-md">Approve</button>
+<button onclick="searchBestTime('row2', this)" class="bg-[#7c3aed] text-white px-6 py-3 rounded-xl text-[14px] font-bold hover:bg-[#6d28d9] transition-all shadow-md flex items-center gap-2"><span class="material-symbols-outlined text-sm">auto_awesome</span> Search AI for best suited time</button>
+<button onclick="approveBlock('row2', this)" class="bg-[#14c9a0] text-white px-8 py-3 rounded-xl text-[14px] font-bold hover:bg-[#12b590] transition-all shadow-md">Approve</button>
 </div>
 </div>
 </div>
@@ -434,8 +448,8 @@
 <h4 class="text-[12px] font-bold text-[#5c6274] mb-2 uppercase tracking-wider">AI Assessment</h4>
 <p class="text-[14px] text-[#3c4a44] mb-4 bg-white p-4 rounded-lg border border-outline-variant shadow-sm">Preventative maintenance for dropper alignment. Highly compatible with other blocks in this block section.</p>
 <div class="flex gap-4 mt-6">
-<button onclick="alert('Running AI Optimization Engine... Suggesting optimal schedule block based on criticality and clustering.')" class="bg-[#7c3aed] text-white px-6 py-3 rounded-xl text-[14px] font-bold hover:bg-[#6d28d9] transition-all shadow-md flex items-center gap-2"><span class="material-symbols-outlined text-sm">auto_awesome</span> Search AI for best suited time</button>
-<button onclick="alert('Request Approved! The block has been successfully scheduled.'); let d = this.closest('.task-row-details'); let p = d.previousElementSibling; d.remove(); p.remove();" class="bg-[#14c9a0] text-white px-8 py-3 rounded-xl text-[14px] font-bold hover:bg-[#12b590] transition-all shadow-md">Approve</button>
+<button onclick="searchBestTime('row3', this)" class="bg-[#7c3aed] text-white px-6 py-3 rounded-xl text-[14px] font-bold hover:bg-[#6d28d9] transition-all shadow-md flex items-center gap-2"><span class="material-symbols-outlined text-sm">auto_awesome</span> Search AI for best suited time</button>
+<button onclick="approveBlock('row3', this)" class="bg-[#14c9a0] text-white px-8 py-3 rounded-xl text-[14px] font-bold hover:bg-[#12b590] transition-all shadow-md">Approve</button>
 </div>
 </div>
 </div>
@@ -830,6 +844,145 @@ function sortTable(sortBy) {
     tbody.appendChild(pair.main);
     tbody.appendChild(pair.details);
   });
+}
+
+// ── AI SEARCH BEST TIME ──────────────────────────────────────
+// Pre-computed "AI recommendations" per row (simulates ML output)
+const AI_RECOMMENDATIONS = {
+  row1: { dept: 'TMS', defect: 'Rail Fracture', loc: 'GWL Yard', zone: 'Zone A', start: '06:30', end: '08:30', dur: '120 min', shadow: 'SIG-882 (Relay Cal.)', saving: '42%', ganttLeft: '3%', ganttWidth: '12%', color: '#3b82f6', track: 0 },
+  row2: { dept: 'SMMS', defect: 'Relay Inspection', loc: 'Km 140-145', zone: 'Mainline North', start: '14:00', end: '15:30', dur: '90 min', shadow: 'TRK-9021 (Rail Fracture)', saving: '35%', ganttLeft: '50%', ganttWidth: '9%', color: '#14c9a0', track: 0 },
+  row3: { dept: 'TDMS', defect: 'OHE Dropper', loc: 'Km 140-145', zone: 'Mainline North', start: '18:00', end: '21:00', dur: '180 min', shadow: 'SIG-330 (Pt. Machine)', saving: '28%', ganttLeft: '75%', ganttWidth: '18%', color: '#f59e0b', track: 1 }
+};
+
+function searchBestTime(rowId, btn) {
+  const rec = AI_RECOMMENDATIONS[rowId];
+  if (!rec) return;
+
+  // Find the container (flex div with buttons)
+  const container = btn.closest('.flex.gap-4') || btn.parentElement;
+
+  // Check if recommendation already shown
+  if (container.parentElement.querySelector('.ai-time-card')) {
+    container.parentElement.querySelector('.ai-time-card').classList.toggle('hidden');
+    return;
+  }
+
+  // Simulate brief loading
+  btn.disabled = true;
+  btn.innerHTML = '<span class="material-symbols-outlined text-sm animate-spin">autorenew</span> Searching...';
+
+  setTimeout(() => {
+    // Restore button
+    btn.disabled = false;
+    btn.innerHTML = '<span class="material-symbols-outlined text-sm">auto_awesome</span> Search AI for best suited time';
+
+    // Insert AI recommendation card right after the buttons
+    const card = document.createElement('div');
+    card.className = 'ai-time-card mt-4 bg-gradient-to-r from-[#7c3aed]/5 to-[#14c9a0]/5 border border-[#7c3aed]/20 rounded-xl p-5 animate-fade-in';
+    card.innerHTML = `
+      <div class="flex items-center gap-2 mb-3">
+        <span class="material-symbols-outlined text-[#7c3aed]">auto_awesome</span>
+        <h5 class="text-[13px] font-bold text-[#7c3aed] uppercase tracking-wider">AI Recommended Slot</h5>
+        <span class="ml-auto text-[11px] bg-[#14c9a0]/15 text-[#006b54] px-2 py-0.5 rounded-full font-bold">Optimal</span>
+      </div>
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-3">
+        <div class="bg-white rounded-lg p-3 border border-gray-100 shadow-sm">
+          <p class="text-[10px] text-[#5c6274] uppercase font-bold mb-1">Time Window</p>
+          <p class="text-[16px] font-bold text-[#161d1a]">${rec.start} – ${rec.end}</p>
+        </div>
+        <div class="bg-white rounded-lg p-3 border border-gray-100 shadow-sm">
+          <p class="text-[10px] text-[#5c6274] uppercase font-bold mb-1">Duration</p>
+          <p class="text-[16px] font-bold text-[#161d1a]">${rec.dur}</p>
+        </div>
+        <div class="bg-white rounded-lg p-3 border border-gray-100 shadow-sm">
+          <p class="text-[10px] text-[#5c6274] uppercase font-bold mb-1">Shadow Block With</p>
+          <p class="text-[14px] font-bold text-[#7c3aed]">${rec.shadow}</p>
+        </div>
+        <div class="bg-white rounded-lg p-3 border border-gray-100 shadow-sm">
+          <p class="text-[10px] text-[#5c6274] uppercase font-bold mb-1">Downtime Saving</p>
+          <p class="text-[16px] font-bold text-[#14c9a0]">${rec.saving}</p>
+        </div>
+      </div>
+      <p class="text-[12px] text-[#5c6274] flex items-center gap-1">
+        <span class="material-symbols-outlined text-[14px]">info</span>
+        Low-traffic window. No conflicting blocks. ${rec.dept} crew available. Click <b>Approve</b> to schedule.
+      </p>
+    `;
+    container.parentElement.appendChild(card);
+  }, 800);
+}
+
+// ── APPROVE & ADD TO GANTT ──────────────────────────────────
+function approveBlock(rowId, btn) {
+  const rec = AI_RECOMMENDATIONS[rowId];
+  if (!rec) return;
+
+  // 1. Add block to the Gantt chart
+  const ganttTracks = document.querySelectorAll('#view-planner .gantt-track');
+  const targetTrack = ganttTracks[rec.track] || ganttTracks[0];
+
+  if (targetTrack) {
+    const newBlock = document.createElement('div');
+    newBlock.className = 'absolute top-4 h-12 bg-white border-2 border-[#14c9a0] rounded-lg shadow-md flex overflow-hidden z-10 block-item cursor-pointer hover:scale-105 hover:shadow-lg hover:z-20 transition-all duration-300';
+    newBlock.style.left = rec.ganttLeft;
+    newBlock.style.width = rec.ganttWidth;
+    newBlock.style.animation = 'slideIn 0.5s ease-out';
+    newBlock.onclick = () => openDrawer('approved-' + rowId);
+    newBlock.innerHTML = `
+      <div class="w-2 h-full" style="background:${rec.color}"></div>
+      <div class="flex-1 p-2 flex flex-col justify-center bg-[#14c9a0]/5">
+        <span class="text-[12px] font-bold leading-tight text-[#006b54]">${rec.dept}: ${rec.defect}</span>
+        <span class="text-[10px] text-[#5c6274]">${rec.start}–${rec.end} • Approved</span>
+      </div>
+    `;
+    targetTrack.appendChild(newBlock);
+  }
+
+  // 2. Remove the row from pending table
+  const detailsRow = btn.closest('.task-row-details');
+  const mainRow = detailsRow ? detailsRow.previousElementSibling : null;
+
+  // 3. Show toast
+  const toast = document.createElement('div');
+  toast.className = 'fixed bottom-6 right-6 bg-[#006b54] text-white px-6 py-4 rounded-xl shadow-xl z-[200] flex items-center gap-3';
+  toast.style.animation = 'slideIn 0.3s ease-out';
+  toast.innerHTML = `
+    <span class="material-symbols-outlined text-[#14c9a0]">check_circle</span>
+    <div>
+      <p class="font-bold text-sm">Block Approved & Scheduled!</p>
+      <p class="text-xs opacity-80">${rec.dept} ${rec.defect} → ${rec.start}–${rec.end} at ${rec.loc}</p>
+    </div>
+  `;
+  document.body.appendChild(toast);
+  setTimeout(() => toast.remove(), 5000);
+
+  // 4. Animate row removal
+  if (mainRow) {
+    mainRow.style.transition = 'opacity 0.4s, transform 0.4s';
+    mainRow.style.opacity = '0';
+    mainRow.style.transform = 'translateX(50px)';
+  }
+  if (detailsRow) {
+    detailsRow.style.transition = 'opacity 0.4s, transform 0.4s';
+    detailsRow.style.opacity = '0';
+    detailsRow.style.transform = 'translateX(50px)';
+  }
+  setTimeout(() => {
+    if (detailsRow) detailsRow.remove();
+    if (mainRow) mainRow.remove();
+  }, 400);
+
+  // 5. Auto-switch to planner view after short delay so user sees the block
+  setTimeout(() => {
+    switchView('planner');
+    // Flash the new block
+    const blocks = document.querySelectorAll('.block-item');
+    const lastBlock = blocks[blocks.length - 1];
+    if (lastBlock) {
+      lastBlock.style.boxShadow = '0 0 0 3px rgba(20,201,160,0.5)';
+      setTimeout(() => { lastBlock.style.boxShadow = ''; }, 2000);
+    }
+  }, 1500);
 }
 </script>
 
